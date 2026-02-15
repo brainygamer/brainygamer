@@ -30,5 +30,3 @@ I have a long-standing history in the gaming community, formerly hosting **The B
 
 > "The arts are not a luxury, but a necessity for a well-rounded life."
 
-
--->
