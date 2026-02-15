@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oberlin College & Conservatory — Institutional Analysis 2025–2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --crimson: #8B1A2B;
+    --crimson-light: #A8293D;
+    --gold: #C9A84C;
+    --gold-pale: #F0E6C8;
+    --ink: #1A1A1F;
+    --ink-soft: #3A3A42;
+    --paper: #FAF8F4;
+    --paper-warm: #F5F0E8;
+    --slate: #6B6B78;
+    --border: #DDD8CE;
+    --highlight: #FFF8E7;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+    --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
+    --shadow-lg: 0 8px 32px rgba(0,0,0,0.1);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    scroll-behavior: smooth;
+    font-size: 17px;
+  }
+
+  body {
+    font-family: 'Source Sans 3', Georgia, serif;
+    color: var(--ink);
+    background: var(--paper);
+    line-height: 1.72;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── HEADER ── */
+  .site-header {
+    background: var(--crimson);
+    color: white;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .site-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 4px;
+    background: var(--gold);
+  }
+
+  .header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3.5rem 2rem 3rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .header-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin-bottom: 1rem;
+  }
+
+  .header-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 0.6rem;
+  }
+
+  .header-subtitle {
+    font-size: 1.1rem;
+    font-weight: 300;
+    opacity: 1;
+    max-width: 620px;
+    color: var(--gold-pale);
+  }
+
+  .header-pattern {
+    position: absolute;
+    top: 0; right: 0; bottom: 0;
+    width: 40%;
+    opacity: 0.06;
+    background: repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 20px,
+      white 20px,
+      white 21px
+    );
+  }
+
+  /* ── LAYOUT ── */
+  .layout {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 0;
+    min-height: 100vh;
+  }
+
+  /* ── SIDEBAR NAV ── */
+  .sidebar {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    border-right: 1px solid var(--border);
+    padding: 2rem 0;
+    background: var(--paper);
+    z-index: 10;
+  }
+
+  .sidebar::-webkit-scrollbar { width: 3px; }
+  .sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+  .nav-group {
+    padding: 0 1.25rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .nav-link {
+    display: block;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.82rem;
+    color: var(--slate);
+    text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.2s;
+    line-height: 1.4;
+    border-left: 2px solid transparent;
+  }
+
+  .nav-link:hover {
+    color: var(--crimson);
+    background: var(--paper-warm);
+  }
+
+  .nav-link.active {
+    color: var(--crimson);
+    background: rgba(139, 26, 43, 0.06);
+    border-left-color: var(--crimson);
+    font-weight: 600;
+  }
+
+  .nav-section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--slate);
+    padding: 1.25rem 0.75rem 0.4rem;
+    opacity: 0.65;
+  }
+
+  .nav-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--gold);
+    margin-right: 0.4rem;
+    font-weight: 500;
+  }
+
+  /* ── MAIN CONTENT ── */
+  .main {
+    padding: 2.5rem 3rem 5rem;
+    max-width: 820px;
+  }
+
+  /* Sections */
+  .section {
+    margin-bottom: 3.5rem;
+    opacity: 0;
+    transform: translateY(12px);
+    animation: fadeUp 0.5s ease forwards;
+  }
+
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .section:nth-child(1) { animation-delay: 0.05s; }
+  .section:nth-child(2) { animation-delay: 0.1s; }
+  .section:nth-child(3) { animation-delay: 0.15s; }
+
+  .section-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--gold-pale);
+    line-height: 1;
+    margin-bottom: -0.5rem;
+    user-select: none;
+  }
+
+  h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.85rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 1.25rem;
+    line-height: 1.25;
+  }
+
+  h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--crimson);
+    margin: 2rem 0 0.75rem;
+    line-height: 1.3;
+  }
+
+  h4 {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--ink-soft);
+    margin: 1.5rem 0 0.5rem;
+    letter-spacing: 0.01em;
+  }
+
+  p {
+    margin-bottom: 1rem;
+    color: var(--ink-soft);
+  }
+
+  .lead-p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--ink);
+  }
+
+  /* ── CALLOUT BOXES ── */
+  .callout {
+    background: var(--highlight);
+    border-left: 3px solid var(--gold);
+    padding: 1.1rem 1.4rem;
+    margin: 1.5rem 0;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .callout p {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+  }
+
+  .callout strong {
+    color: var(--ink);
+  }
+
+  .callout-crimson {
+    background: rgba(139, 26, 43, 0.05);
+    border-left-color: var(--crimson);
+  }
+
+  /* ── TABLES ── */
+  .table-wrap {
+    overflow-x: auto;
+    margin: 1.5rem 0;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+  }
+
+  thead {
+    background: var(--crimson);
+    color: white;
+  }
+
+  th {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.78rem;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+  }
+
+  td {
+    padding: 0.65rem 1rem;
+    border-bottom: 1px solid #EEEAE3;
+    color: var(--ink-soft);
+  }
+
+  tbody tr:last-child td { border-bottom: none; }
+
+  tbody tr:nth-child(even) { background: rgba(245, 240, 232, 0.5); }
+
+  tbody tr:hover { background: var(--highlight); }
+
+  td:first-child {
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .highlight-row {
+    background: rgba(139, 26, 43, 0.04) !important;
+  }
+  .highlight-row td { font-weight: 600; color: var(--ink); }
+
+  /* ── STAT CARDS ── */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+
+  .stat-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.2rem;
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .stat-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--crimson);
+    line-height: 1.2;
+  }
+
+  .stat-label {
+    font-size: 0.78rem;
+    color: var(--slate);
+    margin-top: 0.25rem;
+    line-height: 1.35;
+  }
+
+  /* ── SWOT ── */
+  .swot-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+
+  .swot-card {
+    border-radius: 10px;
+    padding: 1.3rem;
+    border: 1px solid;
+  }
+
+  .swot-card h4 {
+    margin: 0 0 0.6rem;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .swot-s { background: #F0F7F0; border-color: #B8D8B8; }
+  .swot-s h4 { color: #2D6A2D; }
+  .swot-w { background: #FFF5F0; border-color: #E8C4B8; }
+  .swot-w h4 { color: #8B4513; }
+  .swot-o { background: #F0F5FF; border-color: #B8CCE8; }
+  .swot-o h4 { color: #2D4A8B; }
+  .swot-t { background: #FFF8F0; border-color: #E8D8B8; }
+  .swot-t h4 { color: #8B6914; }
+
+  .swot-card ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .swot-card li {
+    font-size: 0.88rem;
+    color: var(--ink-soft);
+    padding: 0.3rem 0;
+    padding-left: 1.1rem;
+    position: relative;
+    line-height: 1.5;
+  }
+
+  .swot-card li::before {
+    content: '›';
+    position: absolute;
+    left: 0;
+    font-weight: 700;
+    color: inherit;
+    opacity: 0.5;
+  }
+
+  /* ── DIVIDERS ── */
+  .section-divider {
+    border: none;
+    height: 1px;
+    background: linear-gradient(to right, var(--border), transparent);
+    margin: 3rem 0;
+  }
+
+  /* ── BACK TO TOP ── */
+  .back-to-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 42px;
+    height: 42px;
+    background: var(--crimson);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-md);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s;
+    z-index: 50;
+    font-size: 1.1rem;
+  }
+
+  .back-to-top.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .back-to-top:hover {
+    background: var(--crimson-light);
+    transform: translateY(-2px);
+  }
+
+  /* ── MOBILE NAV ── */
+  .mobile-nav-toggle {
+    display: none;
+    position: fixed;
+    bottom: 2rem;
+    left: 2rem;
+    width: 46px;
+    height: 46px;
+    background: var(--crimson);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: var(--shadow-lg);
+    z-index: 100;
+    font-size: 1.2rem;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ── RESPONSIVE: TABLET ── */
+  @media (max-width: 900px) {
+    .layout {
+      grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+      position: fixed;
+      left: -300px;
+      top: 0;
+      width: 280px;
+      height: 100vh;
+      box-shadow: var(--shadow-lg);
+      transition: left 0.3s ease;
+      z-index: 99;
+    }
+
+    .sidebar.open { left: 0; }
+
+    .mobile-nav-toggle { display: flex; }
+
+    .main {
+      padding: 2rem 1.5rem 4rem;
+      max-width: 100%;
+    }
+
+    .swot-grid { grid-template-columns: 1fr; }
+
+    .stat-grid { grid-template-columns: 1fr 1fr; }
+
+    table { font-size: 0.85rem; }
+    th, td { padding: 0.6rem 0.75rem; }
+  }
+
+  /* ── RESPONSIVE: PHONE ── */
+  @media (max-width: 600px) {
+    html { font-size: 18px; }
+
+    .header-inner { padding: 2.5rem 1.25rem 2rem; }
+    .header-label { font-size: 0.72rem; }
+    .header-subtitle { font-size: 1.05rem; }
+
+    .main {
+      padding: 1.75rem 1.15rem 4rem;
+    }
+
+    h2 { font-size: 1.55rem; }
+    h3 { font-size: 1.2rem; }
+
+    p, .lead-p {
+      font-size: 1rem;
+      line-height: 1.75;
+    }
+
+    .callout {
+      padding: 1rem 1.1rem;
+    }
+    .callout p { font-size: 0.95rem; }
+
+    .section-number { font-size: 2.8rem; }
+
+    .stat-grid { grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+    .stat-card { padding: 1rem; }
+    .stat-value { font-size: 1.5rem; }
+    .stat-label { font-size: 0.78rem; }
+
+    .swot-card { padding: 1.1rem; }
+    .swot-card li { font-size: 0.92rem; line-height: 1.55; }
+
+    /* Table: card-style layout on small screens */
+    .table-wrap {
+      border: none;
+      box-shadow: none;
+      border-radius: 0;
+    }
+
+    table, thead, tbody, th, td, tr {
+      display: block;
+    }
+
+    thead {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+    }
+
+    tbody tr {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin-bottom: 0.85rem;
+      padding: 0.75rem 1rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    tbody tr:hover { background: white; }
+
+    td {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 0.4rem 0;
+      border-bottom: 1px solid #F0ECE4;
+      font-size: 0.92rem;
+    }
+
+    td:last-child { border-bottom: none; }
+
+    td::before {
+      content: attr(data-label);
+      font-weight: 600;
+      color: var(--slate);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      flex-shrink: 0;
+      margin-right: 1rem;
+    }
+
+    td:first-child {
+      background: var(--paper-warm);
+      margin: -0.75rem -1rem 0.25rem;
+      padding: 0.6rem 1rem;
+      border-radius: 10px 10px 0 0;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--crimson);
+      display: block;
+    }
+
+    td:first-child::before { display: none; }
+
+    .highlight-row { background: white !important; }
+
+    .section-divider { margin: 2.25rem 0; }
+  }
+
+  /* ── RESPONSIVE: SMALL PHONE ── */
+  @media (max-width: 380px) {
+    html { font-size: 17px; }
+    .stat-grid { grid-template-columns: 1fr; }
+    .main { padding: 1.5rem 1rem 4rem; }
+  }
+
+  /* ── PRINT ── */
+  @media print {
+    .sidebar, .back-to-top, .mobile-nav-toggle { display: none !important; }
+    .layout { grid-template-columns: 1fr; }
+    .main { padding: 0; max-width: 100%; }
+    .section { opacity: 1; transform: none; animation: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header" id="top">
+  <div class="header-pattern"></div>
+  <div class="header-inner">
+    <div class="header-label">Institutional Analysis Report</div>
+    <h1 class="header-title">Oberlin College &amp; Conservatory</h1>
+    <p class="header-subtitle">A Comprehensive Report on Standing, Strategy, and Future Outlook — 2025–2026</p>
+  </div>
+</header>
+
+<!-- MAIN LAYOUT -->
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <nav class="sidebar" id="sidebar">
+    <div class="nav-group">
+      <div class="nav-section-label">Contents</div>
+      <a href="#sec1" class="nav-link"><span class="nav-num">01</span> Executive Introduction</a>
+      <a href="#sec2" class="nav-link"><span class="nav-num">02</span> Market Position</a>
+      <a href="#sec3" class="nav-link"><span class="nav-num">03</span> Academic Ecosystem</a>
+      <a href="#sec4" class="nav-link"><span class="nav-num">04</span> Financial Health</a>
+      <a href="#sec5" class="nav-link"><span class="nav-num">05</span> Student Life &amp; Culture</a>
+      <a href="#sec6" class="nav-link"><span class="nav-num">06</span> Town-Gown Relations</a>
+      <a href="#sec7" class="nav-link"><span class="nav-num">07</span> Outcomes &amp; Alumni</a>
+      <a href="#sec8" class="nav-link"><span class="nav-num">08</span> SWOT Analysis</a>
+      <a href="#sec9" class="nav-link"><span class="nav-num">09</span> Conclusion</a>
+    </div>
+    <div class="nav-group">
+      <div class="nav-section-label">Quick Stats</div>
+      <a href="#metrics-table" class="nav-link">Comparative Metrics</a>
+      <a href="#swot-chart" class="nav-link">Opportunities &amp; Challenges</a>
+    </div>
+  </nav>
+
+  <!-- CONTENT -->
+  <main class="main">
+
+    <!-- §1 EXECUTIVE INTRODUCTION -->
+    <section class="section" id="sec1">
+      <div class="section-number">01</div>
+      <h2>Executive Introduction: The Oberlin Paradox</h2>
+      <p class="lead-p">Oberlin College and Conservatory stands at a defining precipice in the landscape of American higher education as it navigates the mid-2020s. Founded in 1833 on the radical premise of coeducation and racial inclusion, the institution has long functioned as a bellwether for progressive academia.</p>
+      <p>In the current era, however, Oberlin faces the complex challenge of reconciling its historic identity as a cradle of social idealism with the pragmatic exigencies of financial sustainability, demographic shifts, and heightened market competition.</p>
+
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-value">1833</div>
+          <div class="stat-label">Year Founded</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">~2,900</div>
+          <div class="stat-label">Total Enrollment</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">$1.27B</div>
+          <div class="stat-label">Endowment (2024)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">Top 5</div>
+          <div class="stat-label">PhD Feeder Rank</div>
+        </div>
+      </div>
+
+      <p>The 2025–2026 academic year marks the culmination of several aggressive corrective measures undertaken by the administration to stabilize the college's structural deficit. The data indicates that while Oberlin has achieved significant successes—most notably the stabilization of the Oberlin Student Cooperative Association (OSCA) and the nearing of carbon neutrality via a massive geothermal infrastructure overhaul—it remains vulnerable to systemic headwinds.</p>
+
+      <div class="callout">
+        <p><strong>The Core Tension:</strong> The college's endowment, though substantial, trails the per-capita wealth of its closest competitors such as Grinnell College and Pomona College. This "wealth gap" constrains Oberlin's ability to offer the same level of aggressive financial aid, directly impacting its admissions yield and market position.</p>
+      </div>
+
+      <p>Furthermore, the institution operates within a unique "dual-core" academic model, balancing a top-tier liberal arts college with a world-renowned conservatory. This structure is both its greatest market differentiator and a source of operational complexity.</p>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- §2 MARKET POSITION -->
+    <section class="section" id="sec2">
+      <div class="section-number">02</div>
+      <h2>Market Position &amp; Comparative Standing</h2>
+
+      <h3>2.1 — The "Sweet 16" and the Midwest Triumvirate</h3>
+      <p>Oberlin's market position is best understood through its relationship with a specific cohort of peer institutions, often referred to as the "Sweet 16" of private liberal arts colleges. Within this group, Oberlin forms a distinct "Midwest Triumvirate" alongside Carleton College and Grinnell College, with Kenyon College serving as its primary in-state competitor.</p>
+      <p>The competitive landscape in 2025 is defined by a sharp divergence in financial resources, which has begun to stratify this historically tight-knit peer group.</p>
+
+      <div class="table-wrap" id="metrics-table">
+        <table>
+          <thead>
+            <tr>
+              <th>Metric</th>
+              <th>Oberlin</th>
+              <th>Carleton</th>
+              <th>Grinnell</th>
+              <th>Kenyon</th>
+              <th>Reed</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Location</td>
+              <td data-label="Oberlin">Oberlin, OH</td>
+              <td data-label="Carleton">Northfield, MN</td>
+              <td data-label="Grinnell">Grinnell, IA</td>
+              <td data-label="Kenyon">Gambier, OH</td>
+              <td data-label="Reed">Portland, OR</td>
+            </tr>
+            <tr class="highlight-row">
+              <td>Total Enrollment</td>
+              <td data-label="Oberlin">~2,900</td>
+              <td data-label="Carleton">~2,100</td>
+              <td data-label="Grinnell">~1,700</td>
+              <td data-label="Kenyon">~1,800</td>
+              <td data-label="Reed">~1,500</td>
+            </tr>
+            <tr>
+              <td>Endowment (Total)</td>
+              <td data-label="Oberlin">~$1.27B</td>
+              <td data-label="Carleton">~$1.24B</td>
+              <td data-label="Grinnell">~$2.67B</td>
+              <td data-label="Kenyon">~$680M</td>
+              <td data-label="Reed">~$830M</td>
+            </tr>
+            <tr class="highlight-row">
+              <td>Endowment / Student</td>
+              <td data-label="Oberlin">~$437K</td>
+              <td data-label="Carleton">~$590K</td>
+              <td data-label="Grinnell">~$1.57M</td>
+              <td data-label="Kenyon">~$377K</td>
+              <td data-label="Reed">~$553K</td>
+            </tr>
+            <tr>
+              <td>Acceptance Rate</td>
+              <td data-label="Oberlin">~34.2%</td>
+              <td data-label="Carleton">~18–20%</td>
+              <td data-label="Grinnell">~11%</td>
+              <td data-label="Kenyon">~34%</td>
+              <td data-label="Reed">~30–40%</td>
+            </tr>
+            <tr>
+              <td>Yield Rate</td>
+              <td data-label="Oberlin">~19.5%</td>
+              <td data-label="Carleton">~42%</td>
+              <td data-label="Grinnell">~30%</td>
+              <td data-label="Kenyon">~25%</td>
+              <td data-label="Reed">~22%</td>
+            </tr>
+            <tr>
+              <td>PhD Feeder Rank</td>
+              <td data-label="Oberlin">Top 5</td>
+              <td data-label="Carleton">Top 5</td>
+              <td data-label="Grinnell">Top 10</td>
+              <td data-label="Kenyon">Top 20</td>
+              <td data-label="Reed">Top 5</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout callout-crimson">
+        <p><strong>Critical Vulnerability — Yield:</strong> With a yield rate hovering near 19.5%, Oberlin must admit more than five students to secure one enrollment. Carleton and Grinnell command significantly higher yields. Oberlin often loses admitted students to institutions with greater financial aid flexibility or perceived higher selectivity.</p>
+      </div>
+
+      <h3>2.2 — Rankings Volatility</h3>
+      <p>The 2024–2025 rankings cycle introduced significant volatility due to methodological changes in U.S. News &amp; World Report. The removal of metrics such as "alumni giving rate" and "high school class standing"—areas where Oberlin historically excelled—caused the college to fluctuate within the top 30–40 range of National Liberal Arts Colleges.</p>
+
+      <h4>The PhD Powerhouse</h4>
+      <p>When adjusted for institutional size, Oberlin remains the premier institution of origin for future PhDs, particularly in the sciences and music. This "output" metric is often cited by the administration as a more accurate reflection of academic rigor than the input metrics used by commercial rankings.</p>
+
+      <h3>2.3 — Cross-Application Competitors</h3>
+      <p>Admissions data indicates that Oberlin shares its applicant pool with a diverse set of institutions reflecting its dual identity: the "Little Ivies" (Wesleyan, Vassar, Hamilton), the "Intellectual Counter-Culture" (Reed, Bard, Hampshire), and "Conservatory" cross-apps (Eastman, Peabody, Jacobs). Oberlin's advantage over standalone conservatories is the seamless integration of a top-tier liberal arts college—a combination that is extremely difficult to replicate.</p>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- §3 ACADEMIC ECOSYSTEM -->
+    <section class="section" id="sec3">
+      <div class="section-number">03</div>
+      <h2>The Academic Ecosystem: A Dual-Core Processor</h2>
+      <p>Oberlin's academic identity is defined by the coexistence of two distinct but permeable divisions: The College of Arts and Sciences and the Conservatory of Music. This "dual-core" structure differentiates the institution from every other liberal arts college in the nation.</p>
+
+      <h3>3.1 — College of Arts &amp; Sciences</h3>
+      <p>Serving approximately 2,300 students, the College focuses on a rigorous, writing-intensive liberal arts curriculum. Oberlin eschews a rigid "core curriculum" in favor of distribution requirements that encourage breadth across natural sciences, social sciences, and humanities.</p>
+
+      <div class="callout">
+        <p><strong>STEM Strength:</strong> Contrary to its "artsy" stereotype, Oberlin is a heavyweight in the sciences. The completion of the Science Center has cemented its status as a top producer of STEM PhDs. The Neuroscience program—one of the first undergraduate programs of its kind—remains a flagship major.</p>
+      </div>
+
+      <h3>3.2 — Conservatory of Music</h3>
+      <p>The Conservatory is not merely a department; it is an accredited professional school with its own admissions process, faculty, and facilities. Under the "One Oberlin" plan, enrollment was reduced by approximately 100 students (to ~500 total) to improve the student-faculty ratio and reduce heavy financial aid discounting. The TIMARA (Technology in Music and Related Arts) department is a global leader in electronic music, while the Jazz Studies program rivals those in major metropolitan hubs.</p>
+
+      <h3>3.3 — The Double Degree Program</h3>
+      <p>The "Double Degree" is Oberlin's flagship offering. Approximately 40 students per year enter this five-year track, earning both a B.A. and a B.M. Students must complete ~214 credits, requiring distinct majors in both divisions. This cohort typically represents the highest academic tier of the incoming class.</p>
+
+      <div class="callout callout-crimson">
+        <p><strong>Strategic Moat:</strong> A student admitted to Yale might have access to a music school, but they cannot easily earn a B.M. alongside their B.A. A student at Juilliard cannot earn a rigorous liberal arts B.A. Oberlin captures the demographic that refuses to compromise on either front.</p>
+      </div>
+
+      <h3>3.4 — Integrative Concentrations &amp; Winter Term</h3>
+      <p>Oberlin has introduced Integrative Concentrations—interdisciplinary tracks such as Global Health, Business, Journalism, and Arts Administration—that combine coursework with experiential learning. The four-week January "Winter Term" has been pivoted toward employability, with curated "Career Communities" and funded internships.</p>
+      <p>The Experimental College (ExCo) remains a unique feature, allowing students, administrators, and community members to teach for-credit courses on topics ranging from steel drum politics to Krav Maga, allowing the curriculum to adapt faster than faculty governance typically permits.</p>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- §4 FINANCIAL HEALTH -->
+    <section class="section" id="sec4">
+      <div class="section-number">04</div>
+      <h2>Financial Health &amp; Institutional Strategy</h2>
+      <p>The narrative of Oberlin's finances in the 2020s is one of disciplined recovery. Following a period of structural deficits in the late 2010s, the "One Oberlin" strategic plan successfully realigned the college's operating model.</p>
+
+      <h3>4.1 — The "One Oberlin" Turnaround</h3>
+      <p>The plan focused on "shifting the mix" of students (more College, fewer Conservatory) to optimize net tuition revenue. It also involved operational cuts, including the outsourcing of some custodial and dining services and wage freezes for faculty. By the 2024–2025 fiscal year, the college reported balanced budgets and a stable bond rating.</p>
+
+      <h3>4.2 — The Wealth Gap</h3>
+      <p>Oberlin's endowment covers approximately 11–15% of its operating budget. To bridge the gap, it must maintain a high tuition sticker price (Cost of Attendance &gt;$85,000) and can only be "need-aware" for a portion of its applicant pool. This financial reality is the primary driver of the yield gap. Investment returns have been healthy (+5.9% in 2024) with a strictly disciplined draw rate to ensure intergenerational equity.</p>
+
+      <h3>4.3 — Sustainable Infrastructure Program (SIP)</h3>
+      <p>The most visible financial commitment of the decade is the $175 million capital project to convert the campus heating system to geothermal energy, involving ~850 geothermal wells and replacing century-old steam pipes. As of 2025, the system is online and the college is nearing its goal of carbon neutrality—serving as both a hedge against future energy costs and a powerful recruitment tool for climate-conscious students.</p>
+
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-value">$175M</div>
+          <div class="stat-label">Geothermal Investment</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">~850</div>
+          <div class="stat-label">Geothermal Wells</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">+5.9%</div>
+          <div class="stat-label">Endowment Return (2024)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">>$85K</div>
+          <div class="stat-label">Cost of Attendance</div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- §5 STUDENT LIFE -->
+    <section class="section" id="sec5">
+      <div class="section-number">05</div>
+      <h2>Student Life &amp; Campus Culture</h2>
+      <p>Oberlin's campus culture is intense, politically active, and deeply community-oriented. The student body is self-selecting: those who choose Oberlin often do so because of its reputation for activism and individuality.</p>
+
+      <h3>5.1 — OSCA: The Co-Op Renaissance</h3>
+      <p>The Oberlin Student Cooperative Association is arguably the most significant non-academic institution on campus. It is a student-owned non-profit that houses and feeds approximately 600 students—nearly 20% of the student body.</p>
+      <p>After a pandemic-era crisis that threatened its existence (rent hikes, building closures, deficits), OSCA has returned to solvency. A new agreement with the college and the introduction of "dining-only" memberships have stabilized the relationship. OSCA remains the beating heart of Oberlin's counter-culture, teaching governance, budgeting, and communal living.</p>
+
+      <h3>5.2 — Housing &amp; Dining</h3>
+      <p>Outside of OSCA, student satisfaction with campus services is a friction point. Third-party reviews consistently grade dorms and dining at "C" or lower, with students citing aging infrastructure and mediocre food quality. The opening of a new 400-bed residence hall in Fall 2025 is a direct response, though the on-campus living requirement exacerbates frustration when facilities are viewed as subpar relative to cost.</p>
+
+      <h3>5.3 — Activism &amp; Political Climate</h3>
+      <p>Oberlin remains a hotbed of political activism. The campus frequently appears low on "Free Speech" rankings, which reflects a tension between values-based community standards and broader First Amendment norms. The Student Senate and ad-hoc committees actively push the administration on divestment and curriculum decolonization.</p>
+
+      <h3>5.4 — Athletics</h3>
+      <p>As a Division III school, athletics play a strategic enrollment role. The "One Oberlin" plan emphasized scholar-athlete recruitment; athletes tend to have higher retention rates and often pay higher net tuition. The historical divide between "athletes" and "artists" has blurred, with more students participating in both varsity sports and musical ensembles.</p>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- §6 TOWN-GOWN -->
+    <section class="section" id="sec6">
+      <div class="section-number">06</div>
+      <h2>Town-Gown Relations: The Shadow of Gibson's</h2>
+
+      <h3>6.1 — The Litigation &amp; Its Aftermath</h3>
+      <p>The Gibson's Bakery v. Oberlin College case—stemming from a 2016 shoplifting incident that escalated into protests and a defamation lawsuit—concluded with the college paying $36.59 million to the Gibson family in 2022. The college managed the payout through insurance coverage and financial planning, avoiding a catastrophic endowment drawdown. However, the case caused severe reputational damage in national media, a narrative that continues to affect recruitment in conservative and centrist demographics.</p>
+
+      <h3>6.2 — The "Good Neighbor" Strategy</h3>
+      <p>Post-settlement, the college has launched aggressive repair initiatives: the "Good Neighbor" service plan, "All In For Oberlin" community events, and an emphasis on buying local. The college remains the largest employer and economic engine of the town, with geothermal and construction projects providing significant local contracts. While legal hostilities have ceased, an underlying wariness persists between the progressive campus and surrounding rural Lorain County.</p>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- §7 OUTCOMES -->
+    <section class="section" id="sec7">
+      <div class="section-number">07</div>
+      <h2>Outcomes: Career Readiness &amp; Alumni</h2>
+
+      <h3>7.1 — Internship+ &amp; Career Communities</h3>
+      <p>The Internship+ program provides up to $5,000 for every student to complete a summer internship, research project, or performance opportunity—a critical lifeline for low-income students who cannot afford unpaid internships in expensive cities. The Career Development Center has organized "communities" (Law &amp; Public Policy, Arts &amp; Creative Professions, etc.) connecting students with alumni mentors.</p>
+
+      <h3>7.2 — Post-Graduate Statistics</h3>
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-value">69%</div>
+          <div class="stat-label">Employed within 6 months</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">20–30%</div>
+          <div class="stat-label">Entering Graduate School</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">$5,000</div>
+          <div class="stat-label">Internship+ Funding</div>
+        </div>
+      </div>
+      <p>Top employers include Google, Epic Systems, Teach for America, and major cultural institutions (Smithsonian, Lincoln Center). Oberlin remains a top feeder for elite law and medical schools, with its per-capita PhD production rate among the highest in the nation.</p>
+
+      <h3>7.3 — Alumni Sentiment</h3>
+      <p>Oberlin alumni are notoriously loyal but critical. Alumni giving rates have fluctuated due to dissatisfaction with aspects of the "One Oberlin" plan (viewed by some as corporatization) and the Gibson's verdict. The "Oberlin Mafia" in arts and entertainment provides a powerful network for graduates seeking entry into creative fields.</p>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- §8 SWOT -->
+    <section class="section" id="sec8">
+      <div class="section-number">08</div>
+      <h2>Strategic Opportunities &amp; Challenges</h2>
+
+      <div class="swot-grid" id="swot-chart">
+        <div class="swot-card swot-s">
+          <h4>Strengths</h4>
+          <ul>
+            <li>Unrivaled dual-degree (B.A. + B.M.) program</li>
+            <li>Top-5 PhD feeder nationally</li>
+            <li>Near carbon-neutral campus via geothermal</li>
+            <li>Vibrant co-op culture (OSCA) and community</li>
+          </ul>
+        </div>
+        <div class="swot-card swot-w">
+          <h4>Weaknesses</h4>
+          <ul>
+            <li>Sub-20% yield rate and enrollment inefficiency</li>
+            <li>Endowment lags peer group per-student</li>
+            <li>Aging residential infrastructure</li>
+            <li>Reputational drag from Gibson's litigation</li>
+          </ul>
+        </div>
+        <div class="swot-card swot-o">
+          <h4>Opportunities</h4>
+          <ul>
+            <li>"Climate campus" branding for Gen Alpha</li>
+            <li>Interdisciplinary growth (AI & Music, Acoustics)</li>
+            <li>Midwest cost-of-living arbitrage</li>
+            <li>Expanded South / West coast recruitment</li>
+          </ul>
+        </div>
+        <div class="swot-card swot-t">
+          <h4>Threats</h4>
+          <ul>
+            <li>Demographic cliff in Midwest / Northeast</li>
+            <li>Wealthier competitors capturing yield</li>
+            <li>Political polarization affecting brand</li>
+            <li>Tuition dependence with rising costs</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- §9 CONCLUSION -->
+    <section class="section" id="sec9">
+      <div class="section-number">09</div>
+      <h2>Conclusion</h2>
+      <p class="lead-p">Oberlin College in 2025 is an institution in the midst of a successful, albeit painful, correction. The "One Oberlin" plan has effectively averted financial disaster and modernized the curriculum to better suit the 21st-century economy.</p>
+      <p>The college remains a powerhouse in undergraduate teaching and PhD production, and its Conservatory remains unrivaled in the liberal arts space. However, the "Oberlin" identity is under pressure. The administration must navigate the delicate balance of professionalizing operations—to survive the demographic cliff—without sanitizing the radical, creative spirit that makes the college unique.</p>
+      <p>The path forward lies in leveraging its specific strengths—sustainability, musical excellence, and rigorous undergraduate research—to justify its premium price tag, while actively healing the local relationships that ground it in Ohio.</p>
+
+      <div class="callout">
+        <p><strong>The Verdict:</strong> For the prospective student, investor, or academic observer, Oberlin represents a "high-beta" institution: it offers higher highs (transformative, unique experiences) and lower lows (administrative friction, facility challenges) than its wealthier, more homogenous peers. It remains, unequivocally, a singular place in American higher education—a laboratory for the mind and spirit that is constantly experimenting with its own future.</p>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- BACK TO TOP -->
+<button class="back-to-top" id="backToTop" title="Back to top" aria-label="Back to top">↑</button>
+
+<!-- MOBILE NAV TOGGLE -->
+<button class="mobile-nav-toggle" id="navToggle" title="Toggle navigation" aria-label="Toggle navigation">☰</button>
+
+<script>
+  // Active nav highlighting on scroll
+  const sections = document.querySelectorAll('.section');
+  const navLinks = document.querySelectorAll('.nav-link[href^="#sec"]');
+
+  const observerOpts = { rootMargin: '-20% 0px -75% 0px' };
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(l => l.classList.remove('active'));
+        const id = entry.target.id;
+        const activeLink = document.querySelector(`.nav-link[href="#${id}"]`);
+        if (activeLink) activeLink.classList.add('active');
+      }
+    });
+  }, observerOpts);
+
+  sections.forEach(sec => observer.observe(sec));
+
+  // Back to top button
+  const btn = document.getElementById('backToTop');
+  window.addEventListener('scroll', () => {
+    btn.classList.toggle('visible', window.scrollY > 400);
+  });
+  btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  // Mobile nav toggle
+  const sidebar = document.getElementById('sidebar');
+  const toggle = document.getElementById('navToggle');
+  toggle.addEventListener('click', () => {
+    sidebar.classList.toggle('open');
+    toggle.textContent = sidebar.classList.contains('open') ? '✕' : '☰';
+  });
+
+  // Close sidebar on nav click (mobile)
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 900) {
+        sidebar.classList.remove('open');
+        toggle.textContent = '☰';
+      }
+    });
+  });
+</script>
+</body>
+</html>
