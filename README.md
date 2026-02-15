@@ -18,7 +18,7 @@ I am a **Professor of Theater** and **Chair of the Music Department** at **Wabas
 
 ### 🎙️ Beyond the Classroom
 
-I have a long-standing history in the gaming community, formerly hosting **The Brainy Gamer** podcast. When I’m not in a rehearsal hall or a lecture hall, you can usually find me at a baseball game, traveling, or exploring the cultural significance of play.
+I have a long-standing history in the gaming community, formerly hosting **The Brainy Gamer** blog and podcast. When I’m not in a rehearsal hall or a lecture hall, you can usually find me at a baseball game, traveling, or composing music.
 
 ---
 
