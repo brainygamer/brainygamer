@@ -24,7 +24,7 @@ I have a long-standing history in the gaming community, formerly hosting **The B
 
 ### 📫 Connect with me
 
-* **Music Portfolio:** [SoundCloud] ( https://soundcloud.com/michaelabbott-723532162 )
+* **Music Portfolio:** [SoundCloud]( https://soundcloud.com/michaelabbott-723532162 )
 * **Institutional Profile:** [Wabash College Faculty Page](https://www.wabash.edu/aboutwabash/directories/staff/list?search=michael+abbott&dept=)
 * **Gaming:** [Steam/PSN Links]
 
