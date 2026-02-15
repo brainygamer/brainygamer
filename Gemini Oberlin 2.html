@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Institutional Analysis: Oberlin College & Conservatory</title>
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* Custom scrollbar for sidebar */
+        aside::-webkit-scrollbar {
+            width: 6px;
+        }
+        aside::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        aside::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 3px;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body class="bg-slate-100 font-sans text-slate-800">
+
+    <!-- Mobile Header -->
+    <header class="lg:hidden fixed top-0 left-0 right-0 bg-red-900 text-white p-4 z-50 flex items-center justify-between shadow-md">
+        <h1 class="text-lg font-serif font-bold truncate pr-4">Oberlin Analysis 2025-26</h1>
+        <button id="mobile-menu-btn" class="p-1 hover:bg-red-800 rounded">
+            <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+    </header>
+
+    <!-- Sidebar Navigation -->
+    <aside id="sidebar" class="fixed inset-y-0 left-0 z-40 w-80 bg-slate-900 text-white transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out shadow-2xl overflow-y-auto">
+        <div class="p-6 border-b border-slate-700 bg-red-900">
+            <div class="flex items-center space-x-2 mb-2">
+                <div class="w-8 h-8 bg-amber-400 rounded-full flex items-center justify-center font-serif font-bold text-red-900 text-xl">O</div>
+                <span class="text-xl font-serif font-bold text-amber-50">Oberlin Analysis</span>
+            </div>
+            <p class="text-xs text-red-100 opacity-80 uppercase tracking-widest mt-2">Institutional Report</p>
+        </div>
+
+        <nav class="p-4 space-y-1" id="nav-links">
+            <!-- Navigation items will be highlighted via JS -->
+            <a href="#executive-intro" class="nav-item group w-full flex items-center space-x-3 px-4 py-3 rounded-lg transition-all duration-200 text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white">
+                <i data-lucide="book-open" class="w-5 h-5 group-[.active]:text-slate-900"></i>
+                <span class="line-clamp-2">1. Executive Introduction</span>
+                <i data-lucide="chevron-right" class="ml-auto w-4 h-4 opacity-0 group-[.active]:opacity-50"></i>
+            </a>
+
+            <a href="#market-position" class="nav-item group w-full flex items-center space-x-3 px-4 py-3 rounded-lg transition-all duration-200 text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white">
+                <i data-lucide="trending-up" class="w-5 h-5 group-[.active]:text-slate-900"></i>
+                <span class="line-clamp-2">2. Market Position</span>
+                <i data-lucide="chevron-right" class="ml-auto w-4 h-4 opacity-0 group-[.active]:opacity-50"></i>
+            </a>
+
+            <a href="#academic-ecosystem" class="nav-item group w-full flex items-center space-x-3 px-4 py-3 rounded-lg transition-all duration-200 text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white">
+                <i data-lucide="graduation-cap" class="w-5 h-5 group-[.active]:text-slate-900"></i>
+                <span class="line-clamp-2">3. Academic Ecosystem</span>
+                <i data-lucide="chevron-right" class="ml-auto w-4 h-4 opacity-0 group-[.active]:opacity-50"></i>
+            </a>
+
+            <a href="#financial-health" class="nav-item group w-full flex items-center space-x-3 px-4 py-3 rounded-lg transition-all duration-200 text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white">
+                <i data-lucide="dollar-sign" class="w-5 h-5 group-[.active]:text-slate-900"></i>
+                <span class="line-clamp-2">4. Financial Health</span>
+                <i data-lucide="chevron-right" class="ml-auto w-4 h-4 opacity-0 group-[.active]:opacity-50"></i>
+            </a>
+
+            <a href="#student-life" class="nav-item group w-full flex items-center space-x-3 px-4 py-3 rounded-lg transition-all duration-200 text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white">
+                <i data-lucide="users" class="w-5 h-5 group-[.active]:text-slate-900"></i>
+                <span class="line-clamp-2">5. Student Life</span>
+                <i data-lucide="chevron-right" class="ml-auto w-4 h-4 opacity-0 group-[.active]:opacity-50"></i>
+            </a>
+
+            <a href="#town-gown" class="nav-item group w-full flex items-center space-x-3 px-4 py-3 rounded-lg transition-all duration-200 text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white">
+                <i data-lucide="building" class="w-5 h-5 group-[.active]:text-slate-900"></i>
+                <span class="line-clamp-2">6. Town-Gown Relations</span>
+                <i data-lucide="chevron-right" class="ml-auto w-4 h-4 opacity-0 group-[.active]:opacity-50"></i>
+            </a>
+
+            <a href="#outcomes" class="nav-item group w-full flex items-center space-x-3 px-4 py-3 rounded-lg transition-all duration-200 text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white">
+                <i data-lucide="briefcase" class="w-5 h-5 group-[.active]:text-slate-900"></i>
+                <span class="line-clamp-2">7. Outcomes</span>
+                <i data-lucide="chevron-right" class="ml-auto w-4 h-4 opacity-0 group-[.active]:opacity-50"></i>
+            </a>
+
+            <a href="#swot" class="nav-item group w-full flex items-center space-x-3 px-4 py-3 rounded-lg transition-all duration-200 text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white">
+                <i data-lucide="map-pin" class="w-5 h-5 group-[.active]:text-slate-900"></i>
+                <span class="line-clamp-2">8. SWOT Analysis</span>
+                <i data-lucide="chevron-right" class="ml-auto w-4 h-4 opacity-0 group-[.active]:opacity-50"></i>
+            </a>
+
+            <a href="#conclusion" class="nav-item group w-full flex items-center space-x-3 px-4 py-3 rounded-lg transition-all duration-200 text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white">
+                <i data-lucide="alert-circle" class="w-5 h-5 group-[.active]:text-slate-900"></i>
+                <span class="line-clamp-2">9. Conclusion</span>
+                <i data-lucide="chevron-right" class="ml-auto w-4 h-4 opacity-0 group-[.active]:opacity-50"></i>
+            </a>
+
+             <a href="#works-cited" class="nav-item group w-full flex items-center space-x-3 px-4 py-3 rounded-lg transition-all duration-200 text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white">
+                <i data-lucide="book-open" class="w-5 h-5 group-[.active]:text-slate-900"></i>
+                <span class="line-clamp-2">Works Cited</span>
+                <i data-lucide="chevron-right" class="ml-auto w-4 h-4 opacity-0 group-[.active]:opacity-50"></i>
+            </a>
+        </nav>
+
+        <div class="absolute bottom-0 left-0 right-0 p-6 bg-slate-900 border-t border-slate-800">
+            <p class="text-xs text-slate-500">
+                © 2026 Comprehensive Analysis.<br/>
+                Based on provided institutional data.
+            </p>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="lg:ml-80 pt-16 lg:pt-0 min-h-screen transition-all duration-300">
+
+        <!-- Hero Section -->
+        <div class="bg-white border-b border-slate-200 p-8 lg:p-16 mb-8">
+            <div class="max-w-4xl mx-auto">
+                <span class="inline-block px-3 py-1 bg-red-100 text-red-800 text-xs font-bold uppercase tracking-widest rounded-full mb-6">Confidential Report</span>
+                <h1 class="text-4xl lg:text-6xl font-serif font-bold text-slate-900 mb-6 leading-tight">
+                    Institutional Analysis: Oberlin College & Conservatory
+                </h1>
+                <p class="text-xl lg:text-2xl text-slate-600 font-light leading-relaxed">
+                    A Comprehensive Report on Standing, Strategy, and Future Outlook (2025–2026)
+                </p>
+            </div>
+        </div>
+
+        <!-- Content Container -->
+        <div class="max-w-4xl mx-auto px-6 lg:px-12 pb-24 space-y-16">
+
+            <!-- Section 1 -->
+            <section id="executive-intro" class="scroll-mt-24 lg:scroll-mt-12 bg-white rounded-xl shadow-sm border border-slate-200 p-8 lg:p-12 transition-all hover:shadow-md">
+                <div class="flex items-center space-x-4 mb-8 pb-4 border-b border-slate-100">
+                    <div class="p-3 bg-red-50 text-red-900 rounded-lg">
+                        <i data-lucide="book-open" class="w-6 h-6"></i>
+                    </div>
+                    <h2 class="text-2xl lg:text-3xl font-serif font-bold text-slate-900">
+                        1. Executive Introduction: The Oberlin Paradox
+                    </h2>
+                </div>
+                <div class="prose prose-lg prose-slate max-w-none text-slate-700 leading-relaxed">
+                    <p class="mb-4">
+                        Oberlin College and Conservatory stands at a defining precipice in the landscape of American higher education as it navigates the mid-2020s. Founded in 1833 on the radical premise of coeducation and racial inclusion, the institution has long functioned as a bellwether for progressive academia. In the current era, however, Oberlin faces the complex challenge of reconciling its historic identity as a cradle of social idealism with the pragmatic exigencies of financial sustainability, demographic shifts, and heightened market competition. This report provides an exhaustive analysis of the college’s institutional health, academic standing, and strategic trajectory following the implementation of the "One Oberlin" strategic plan and the conclusion of the tumultuous Gibson’s Bakery litigation.
+                    </p>
+                    <p class="mb-4">
+                        The 2025–2026 academic year marks the culmination of several aggressive corrective measures undertaken by the administration to stabilize the college’s structural deficit. The data indicates that while Oberlin has achieved significant successes—most notably the stabilization of the Oberlin Student Cooperative Association (OSCA) and the nearing of carbon neutrality via a massive geothermal infrastructure overhaul—it remains vulnerable to systemic headwinds. The college’s endowment, valued at approximately $1.27 billion as of June 2024, though substantial, trails the per-capita wealth of its closest competitors such as Grinnell College and Pomona College. This disparity creates a "wealth gap" that constrains Oberlin’s ability to offer the same level of aggressive financial aid as its peers, directly impacting its admissions yield and market position.
+                    </p>
+                    <p>
+                        Furthermore, the institution operates within a unique "dual-core" academic model, balancing a top-tier liberal arts college with a world-renowned conservatory. This structure is both its greatest market differentiator and a source of operational complexity. The analysis that follows dissects these dynamics, offering a granular view of Oberlin’s standing relative to the "Sweet 16" peer group, the efficacy of its curriculum, and the evolving sentiment of its stakeholders.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Section 2 -->
+            <section id="market-position" class="scroll-mt-24 lg:scroll-mt-12 bg-white rounded-xl shadow-sm border border-slate-200 p-8 lg:p-12 transition-all hover:shadow-md">
+                <div class="flex items-center space-x-4 mb-8 pb-4 border-b border-slate-100">
+                    <div class="p-3 bg-red-50 text-red-900 rounded-lg">
+                        <i data-lucide="trending-up" class="w-6 h-6"></i>
+                    </div>
+                    <h2 class="text-2xl lg:text-3xl font-serif font-bold text-slate-900">
+                        2. Market Position and Comparative Standing
+                    </h2>
+                </div>
+                <div class="text-slate-700 leading-relaxed">
+                    <h3 class="text-2xl font-serif font-bold text-slate-900 mt-8 mb-4">2.1 The "Sweet 16" and the Midwest Liberal Arts Triumvirate</h3>
+                    <p class="mb-4">
+                        Oberlin’s market position is best understood through its relationship with a specific cohort of peer institutions, often colloquially referred to as the "Sweet 16" of private liberal arts colleges. Within this group, Oberlin forms a distinct "Midwest Triumvirate" alongside Carleton College (Northfield, MN) and Grinnell College (Grinnell, IA), with Kenyon College (Gambier, OH) serving as its primary in-state competitor.
+                    </p>
+                    <p class="mb-6">
+                        The competitive landscape in 2025 is defined by a sharp divergence in financial resources, which has begun to stratify this historically tight-knit peer group. While Oberlin maintains parity in academic reputation—evidenced by its consistent ranking in the top tier for "Undergraduate Teaching" and "Innovation"—it faces a structural disadvantage in endowment-per-student ratios. This metric is the single strongest predictor of an institution's long-term capacity to weather demographic declines and offer need-blind admissions.
+                    </p>
+
+                    <div class="overflow-x-auto my-8 border border-slate-200 rounded-lg shadow-sm">
+                        <table class="w-full text-left border-collapse">
+                            <thead class="bg-slate-50 border-b border-slate-200">
+                                <tr>
+                                    <th class="p-4 text-sm font-semibold text-slate-900 uppercase tracking-wider">Metric</th>
+                                    <th class="p-4 text-sm font-semibold text-red-900 bg-red-50 uppercase tracking-wider border-l border-r border-red-100">Oberlin College</th>
+                                    <th class="p-4 text-sm font-semibold text-slate-900 uppercase tracking-wider">Carleton College</th>
+                                    <th class="p-4 text-sm font-semibold text-slate-900 uppercase tracking-wider">Grinnell College</th>
+                                    <th class="p-4 text-sm font-semibold text-slate-900 uppercase tracking-wider">Kenyon College</th>
+                                    <th class="p-4 text-sm font-semibold text-slate-900 uppercase tracking-wider">Reed College</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-200 bg-white text-sm">
+                                <tr>
+                                    <td class="p-4 font-medium text-slate-900">Location</td>
+                                    <td class="p-4 bg-red-50/30 border-l border-r border-red-50">Oberlin, OH (Rural/Exurban)</td>
+                                    <td class="p-4">Northfield, MN (Rural)</td>
+                                    <td class="p-4">Grinnell, IA (Rural)</td>
+                                    <td class="p-4">Gambier, OH (Rural)</td>
+                                    <td class="p-4">Portland, OR (Urban)</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-4 font-medium text-slate-900">Total Enrollment</td>
+                                    <td class="p-4 bg-red-50/30 border-l border-r border-red-50">~2,900</td>
+                                    <td class="p-4">~2,100</td>
+                                    <td class="p-4">~1,700</td>
+                                    <td class="p-4">~1,800</td>
+                                    <td class="p-4">~1,500</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-4 font-medium text-slate-900">Endowment</td>
+                                    <td class="p-4 bg-red-50/30 border-l border-r border-red-50">~$1.27 Billion</td>
+                                    <td class="p-4">~$1.24 Billion</td>
+                                    <td class="p-4">~$2.67 Billion</td>
+                                    <td class="p-4">~$680 Million</td>
+                                    <td class="p-4">~$830 Million</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-4 font-medium text-slate-900">Endowment/Student</td>
+                                    <td class="p-4 bg-red-50/30 border-l border-r border-red-50">~$437,000</td>
+                                    <td class="p-4">~$590,000</td>
+                                    <td class="p-4">~$1.57 Million</td>
+                                    <td class="p-4">~$377,000</td>
+                                    <td class="p-4">~$553,000</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-4 font-medium text-slate-900">Acceptance Rate</td>
+                                    <td class="p-4 bg-red-50/30 border-l border-r border-red-50">~34.2%</td>
+                                    <td class="p-4">~18-20%</td>
+                                    <td class="p-4">~11%</td>
+                                    <td class="p-4">~34%</td>
+                                    <td class="p-4">~30-40%</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-4 font-medium text-slate-900">Yield Rate</td>
+                                    <td class="p-4 bg-red-50/30 border-l border-r border-red-50">~19.5%</td>
+                                    <td class="p-4">~42%</td>
+                                    <td class="p-4">~30%</td>
+                                    <td class="p-4">~25%</td>
+                                    <td class="p-4">~22%</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-4 font-medium text-slate-900">PhD Feeder Rank</td>
+                                    <td class="p-4 bg-red-50/30 border-l border-r border-red-50">Top 5 (Baccalaureate)</td>
+                                    <td class="p-4">Top 5</td>
+                                    <td class="p-4">Top 10</td>
+                                    <td class="p-4">Top 20</td>
+                                    <td class="p-4">Top 5</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="bg-slate-50 p-6 rounded-lg border-l-4 border-red-800 mb-8">
+                        <h4 class="font-bold text-slate-900 text-lg mb-2">Analytical Insight: The Yield Vulnerability</h4>
+                        <p>
+                            The data reveals a critical vulnerability for Oberlin: <strong>Yield</strong>. With a yield rate hovering near 19.5%, Oberlin must admit more than five students to secure one enrollment. In contrast, Carleton and Grinnell command significantly higher yields. This discrepancy suggests that while Oberlin attracts a high volume of applicants (~10,500 in 2024–2025), it often loses admitted students to institutions with greater financial aid flexibility (Grinnell) or perceived higher selectivity (Carleton, Williams, Amherst). The "One Oberlin" strategy has attempted to mitigate this by freezing tuition growth and enhancing career programming, yet the yield challenge persists as a primary strategic concern.
+                        </p>
+                    </div>
+
+                    <h3 class="text-2xl font-serif font-bold text-slate-900 mt-8 mb-4">2.2 Rankings Volatility and the "U.S. News" Effect</h3>
+                    <p class="mb-4">
+                        The 2024–2025 rankings cycle introduced significant volatility for Oberlin and its peers due to methodological changes in the <em>U.S. News & World Report</em> algorithms. The removal of metrics such as "alumni giving rate" and "high school class standing"—areas where Oberlin historically excelled—caused the college to fluctuate within the top 30-40 range of National Liberal Arts Colleges.
+                    </p>
+                    <p class="mb-4">
+                        President Carmen Twillie Ambar has publicly critiqued these shifts, arguing that the new methodology’s emphasis on graduation rate performance and social mobility, while important, fails to capture the distinct value of Oberlin’s dual-degree nature and its PhD production rate.
+                    </p>
+                    <ul class="list-disc pl-6 mb-6 space-y-2">
+                        <li><strong>The PhD Powerhouse:</strong> When adjusted for institutional size, Oberlin remains the premier institution of origin for future PhDs, particularly in the sciences and music. This "output" metric is often cited by the administration as a more accurate reflection of academic rigor than the input metrics used by commercial rankings.</li>
+                        <li><strong>The "Reed Effect":</strong> Like Reed College, which famously withdrew from rankings, Oberlin’s student body largely dismisses commercial rankings. However, the administration recognizes their impact on international recruitment and bond ratings, necessitating a careful balancing act of public critique and private optimization of reportable data.</li>
+                    </ul>
+
+                    <h3 class="text-2xl font-serif font-bold text-slate-900 mt-8 mb-4">2.3 The "Cross-App" Competitors</h3>
+                    <p class="mb-4">Admissions data indicates that Oberlin shares its applicant pool with a diverse set of institutions, reflecting its dual identity.</p>
+                    <ul class="list-disc pl-6 mb-6 space-y-2">
+                        <li><strong>The "Little Ivies":</strong> Wesleyan, Vassar, and Hamilton are common cross-apps. Students choosing these schools over Oberlin often cite geographic preference (East Coast) or perceived prestige.</li>
+                        <li><strong>The "Intellectual Counter-Culture":</strong> Reed, Bard, and Hampshire share Oberlin’s reputation for quirkiness and activism. Oberlin typically wins against Bard and Hampshire on financial stability and facility quality but battles Reed for the "pure intellectual" demographic.</li>
+                        <li><strong>The "Conservatory" Cross-Apps:</strong> For dual-degree students, Oberlin competes with Eastman (University of Rochester), Peabody (Johns Hopkins), and Jacobs (Indiana University). Oberlin’s advantage here is the seamless integration of a top-tier liberal arts college, which standalone conservatories or large state universities struggle to replicate.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section 3 -->
+            <section id="academic-ecosystem" class="scroll-mt-24 lg:scroll-mt-12 bg-white rounded-xl shadow-sm border border-slate-200 p-8 lg:p-12 transition-all hover:shadow-md">
+                <div class="flex items-center space-x-4 mb-8 pb-4 border-b border-slate-100">
+                    <div class="p-3 bg-red-50 text-red-900 rounded-lg">
+                        <i data-lucide="graduation-cap" class="w-6 h-6"></i>
+                    </div>
+                    <h2 class="text-2xl lg:text-3xl font-serif font-bold text-slate-900">
+                        3. The Academic Ecosystem
+                    </h2>
+                </div>
+                <div class="text-slate-700 leading-relaxed">
+                    <p class="mb-4">
+                        Oberlin’s academic identity is defined by the coexistence of two distinct but permeable divisions: The College of Arts and Sciences and the Conservatory of Music. This structure creates a "dual-core" processing power that differentiates the institution from every other liberal arts college in the nation.
+                    </p>
+
+                    <h3 class="text-2xl font-serif font-bold text-slate-900 mt-8 mb-4">3.1 The College of Arts and Sciences</h3>
+                    <p class="mb-4">Serving approximately 2,300 students, the College focuses on a rigorous, writing-intensive liberal arts curriculum.</p>
+                    <ul class="list-disc pl-6 mb-6 space-y-2">
+                        <li><strong>Curricular Philosophy:</strong> Oberlin eschews a rigid "core curriculum" in favor of distribution requirements that encourage breadth across natural sciences, social sciences, and humanities. This flexibility aligns with the "learning for learning's sake" ethos valued by the student body.</li>
+                        <li><strong>STEM Strength:</strong> Contrary to its "artsy" stereotype, Oberlin is a heavyweight in the sciences. The completion of the Science Center (a unified complex for Biology, Chemistry, and Physics) has cemented its status as a top producer of STEM PhDs. The Neuroscience program, one of the first undergraduate programs of its kind in the country, remains a flagship major.</li>
+                    </ul>
+
+                    <h3 class="text-2xl font-serif font-bold text-slate-900 mt-8 mb-4">3.2 The Conservatory of Music</h3>
+                    <p class="mb-4">The Conservatory is not merely a department; it is an accredited professional school with its own admissions process, faculty, and facilities.</p>
+                    <ul class="list-disc pl-6 mb-6 space-y-2">
+                        <li><strong>Enrollment Strategy:</strong> Under the "One Oberlin" plan, the administration made a strategic decision to <em>reduce</em> Conservatory enrollment by approximately 100 students (to ~500 total) while expanding the College. This "right-sizing" was intended to improve the student-faculty ratio in the Conservatory and reduce the heavy financial aid discounting required to attract top musical talent.</li>
+                        <li><strong>Innovation:</strong> The Conservatory has aggressively modernized its curriculum. The TIMARA (Technology in Music and Related Arts) department is a global leader in electronic music, while the Jazz Studies program rivals those in major metropolitan hubs. New initiatives include a minor in African American Music and enhanced focus on music pedagogy and arts advocacy.</li>
+                    </ul>
+
+                    <h3 class="text-2xl font-serif font-bold text-slate-900 mt-8 mb-4">3.3 The Double Degree Program</h3>
+                    <p class="mb-4">The "Double Degree" is Oberlin’s flagship offering. Approximately 40 students per year enter this grueling five-year track, earning both a B.A. and a B.M.</p>
+                    <ul class="list-disc pl-6 mb-6 space-y-2">
+                        <li><strong>The Workload:</strong> Students must complete ~214 credits, requiring distinct majors in both divisions. This cohort typically represents the highest academic tier of the incoming class—students who scored in the top percentiles of SAT/ACTs and have conservatory-level musical proficiency.</li>
+                        <li><strong>Strategic Moat:</strong> This program serves as a competitive "moat." A student admitted to Yale might have access to a music school, but they cannot easily earn a B.M. alongside their B.A. A student at Juilliard cannot earn a rigorous liberal arts B.A. Oberlin captures the demographic that refuses to compromise on either front.</li>
+                    </ul>
+
+                    <h3 class="text-2xl font-serif font-bold text-slate-900 mt-8 mb-4">3.4 Integrative Concentrations and "Winter Term"</h3>
+                    <ul class="list-disc pl-6 mb-6 space-y-2">
+                        <li><strong>Concept:</strong> These are interdisciplinary tracks—such as Global Health, Business, Journalism, and Arts Administration—that combine coursework with experiential learning. They are not majors, but rather "lenses" through which students apply their liberal arts training to real-world sectors.</li>
+                        <li><strong>Winter Term:</strong> The four-week January term is a hallmark of the Oberlin calendar. Historically used for unstructured exploration, the "One Oberlin" plan has pivoted Winter Term toward employability. The administration now curates "Career Communities" and funded internships during this period.</li>
+                        <li><strong>The Experimental College (ExCo):</strong> A unique vestige of 1960s educational reform, ExCo allows students, administrators, and community members to teach for-credit courses. Topics range from "The Politics of Steel Drums" to "Introduction to Krav Maga". ExCo serves a vital pedagogical function: it allows the curriculum to adapt to student interests faster than the slow machinery of faculty governance permits.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section 4 -->
+            <section id="financial-health" class="scroll-mt-24 lg:scroll-mt-12 bg-white rounded-xl shadow-sm border border-slate-200 p-8 lg:p-12 transition-all hover:shadow-md">
+                <div class="flex items-center space-x-4 mb-8 pb-4 border-b border-slate-100">
+                    <div class="p-3 bg-red-50 text-red-900 rounded-lg">
+                        <i data-lucide="dollar-sign" class="w-6 h-6"></i>
+                    </div>
+                    <h2 class="text-2xl lg:text-3xl font-serif font-bold text-slate-900">
+                        4. Financial Health
+                    </h2>
+                </div>
+                <div class="text-slate-700 leading-relaxed">
+                    <p class="mb-4">
+                        The narrative of Oberlin’s finances in the 2020s is one of disciplined recovery. Following a period of structural deficits in the late 2010s, the "One Oberlin" strategic plan (2018–2023/24) successfully realigned the college’s operating model.
+                    </p>
+
+                    <h3 class="text-2xl font-serif font-bold text-slate-900 mt-8 mb-4">4.1 The "One Oberlin" Turnaround</h3>
+                    <ul class="list-disc pl-6 mb-6 space-y-2">
+                        <li><strong>The Mechanism:</strong> The plan focused on "shifting the mix" of students (more College, fewer Conservatory) to optimize net tuition revenue. It also involved painful operational cuts, including the outsourcing of some custodial and dining services and wage freezes for faculty.</li>
+                        <li><strong>The Outcome:</strong> By the 2024–2025 fiscal year, the college reported balanced budgets and a stable bond rating. The "structural deficit" that plagued the institution in 2018 has largely been closed, though the college remains highly dependent on tuition revenue.</li>
+                    </ul>
+
+                    <h3 class="text-2xl font-serif font-bold text-slate-900 mt-8 mb-4">4.2 Endowment Analysis: The Wealth Gap</h3>
+                    <p class="mb-4">Oberlin’s endowment, valued at $1.27 billion in 2024, is substantial by national standards but modest relative to its specific peer group.</p>
+                    <ul class="list-disc pl-6 mb-6 space-y-2">
+                        <li><strong>Comparative Analysis:</strong> Grinnell College: With an endowment of $2.67 billion for a smaller student body, Grinnell essentially operates as a hedge fund with a college attached. This allows Grinnell to be need-blind for international students and offer loan-free packages.</li>
+                        <li><strong>Oberlin’s Constraint:</strong> Oberlin’s endowment covers approximately 11–15% of its operating budget. To bridge the gap, it must maintain a higher tuition sticker price (Cost of Attendance &gt;$85,000) and can only be "need-aware" for a portion of its applicant pool. This financial reality is the primary driver of the yield gap discussed in Section 2.1.</li>
+                        <li><strong>Investment Strategy:</strong> The endowment has posted healthy returns (+5.9% in 2024), but the college’s draw rate (the amount spent annually) remains under strict discipline to ensure intergenerational equity.</li>
+                    </ul>
+
+                    <h3 class="text-2xl font-serif font-bold text-slate-900 mt-8 mb-4">4.3 The Sustainable Infrastructure Program (SIP)</h3>
+                    <p class="mb-4">The most visible financial commitment of the decade is the Sustainable Infrastructure Program, a $175 million capital project to convert the campus heating system to geothermal energy.</p>
+                    <ul class="list-disc pl-6 mb-6 space-y-2">
+                        <li><strong>Technical Scope:</strong> The project involves drilling ~850 geothermal wells and replacing century-old steam pipes with a district hot water system.</li>
+                        <li><strong>Strategic Bet:</strong> While expensive, this project hedges the college against future volatility in natural gas prices. It also serves as a powerful recruitment tool, validating the college’s commitment to climate action—a top priority for the demographic of students Oberlin recruits. As of 2025, the system is online, and the college is nearing its goal of carbon neutrality.</li>
+                    </ul>
+                </div>
+            </section>
+
+             <!-- Section 5 -->
+            <section id="student-life" class="scroll-mt-24 lg:scroll-mt-12 bg-white rounded-xl shadow-sm border border-slate-200 p-8 lg:p-12 transition-all hover:shadow-md">
+                <div class="flex items-center space-x-4 mb-8 pb-4 border-b border-slate-100">
+                    <div class="p-3 bg-red-50 text-red-900 rounded-lg">
+                        <i data-lucide="users" class="w-6 h-6"></i>
+                    </div>
+                    <h2 class="text-2xl lg:text-3xl font-serif font-bold text-slate-900">
+                        5. Student Life and Campus Culture
+                    </h2>
+                </div>
+                <div class="text-slate-700 leading-relaxed">
+                    <p class="mb-4">
+                        Oberlin’s campus culture is intense, politically active, and deeply community-oriented. The student body is self-selecting: those who choose Oberlin often do so <em>because</em> of its reputation for activism and "quirkiness."
+                    </p>
+
+                    <h3 class="text-2xl font-serif font-bold text-slate-900 mt-8 mb-4">5.1 The Oberlin Student Cooperative Association (OSCA)</h3>
+                    <p class="mb-4">OSCA is arguably the most significant non-academic institution on campus. It is a student-owned and operated non-profit corporation that houses and feeds approximately 600 students (nearly 20% of the student body).</p>
+                    <ul class="list-disc pl-6 mb-6 space-y-2">
+                        <li><strong>The Crisis (2020–2023):</strong> The pandemic and subsequent lease renegotiations with the college threatened OSCA’s existence. Rent hikes and the closure of several co-op buildings led to deficits and fears that the administration sought to dissolve the co-ops to force students into college-owned dining halls (to capture revenue).</li>
+                        <li><strong>The Renaissance (2024–2025):</strong> Recent reports indicate OSCA has returned to solvency ("in the black"). A new agreement with the college has stabilized the relationship. The introduction of "dining-only" memberships has allowed Conservatory students (who often lack time for full co-op duties) to participate. OSCA remains the beating heart of Oberlin’s counter-culture, teaching students governance, budgeting, and communal living skills.</li>
+                    </ul>
+
+                    <h3 class="text-2xl font-serif font-bold text-slate-900 mt-8 mb-4">5.2 Housing and Dining Satisfaction</h3>
+                    <p class="mb-4">Outside of OSCA, student satisfaction with campus services is a friction point.</p>
+                    <ul class="list-disc pl-6 mb-6 space-y-2">
+                        <li><strong>The "C" Grade:</strong> Third-party reviews and student polls consistently grade Oberlin’s dorms and dining halls as "C" or lower. Students cite aging infrastructure in dorms (lack of AC, deferred maintenance) and mediocre food quality from the contract provider, AVI Foodsystems.</li>
+                        <li><strong>Administrative Response:</strong> The opening of a new 400-bed residence hall in Fall 2025 is a direct response to these complaints. However, the requirement for students to live on campus for most of their tenure exacerbates frustration when facilities are viewed as subpar relative to the cost of attendance.</li>
+                    </ul>
+
+                    <h3 class="text-2xl font-serif font-bold text-slate-900 mt-8 mb-4">5.3 Activism and Political Climate</h3>
+                    <p class="mb-4">Oberlin remains a hotbed of political activism. The campus climate in 2024–2025 has been characterized by active protests regarding global geopolitical issues, including the conflict in Gaza.</p>
+                    <ul class="list-disc pl-6 mb-6 space-y-2">
+                        <li><strong>Free Speech Rankings:</strong> Oberlin frequently appears low on "Free Speech" rankings produced by organizations like FIRE. Critics argue the campus culture enforces ideological conformity. Proponents argue that the community prioritizes "inclusive speech" and that the low rankings reflect a misunderstanding of the college’s values-based community standards.</li>
+                        <li><strong>Student Governance:</strong> The Student Senate and various ad-hoc committees are highly active, often pushing the administration on divestment and curriculum decolonization.</li>
+                    </ul>
+
+                    <h3 class="text-2xl font-serif font-bold text-slate-900 mt-8 mb-4">5.4 Athletics: The "Yeomen" Identity</h3>
+                    <ul class="list-disc pl-6 mb-6 space-y-2">
+                        <li><strong>Recruitment:</strong> The "One Oberlin" plan emphasized the recruitment of scholar-athletes to bolster enrollment numbers. Athletes at Oberlin tend to have higher retention rates and often pay higher net tuition.</li>
+                        <li><strong>Cultural Integration:</strong> Historically, there was a divide between "athletes" and "artists." In recent years, this has blurred, with more students participating in both varsity sports and musical ensembles.</li>
+                    </ul>
+                </div>
+            </section>
+
+             <!-- Section 6 -->
+            <section id="town-gown" class="scroll-mt-24 lg:scroll-mt-12 bg-white rounded-xl shadow-sm border border-slate-200 p-8 lg:p-12 transition-all hover:shadow-md">
+                <div class="flex items-center space-x-4 mb-8 pb-4 border-b border-slate-100">
+                    <div class="p-3 bg-red-50 text-red-900 rounded-lg">
+                        <i data-lucide="building" class="w-6 h-6"></i>
+                    </div>
+                    <h2 class="text-2xl lg:text-3xl font-serif font-bold text-slate-900">
+                        6. Town-Gown Relations: The Shadow of Gibson’s
+                    </h2>
+                </div>
+                <div class="text-slate-700 leading-relaxed">
+                    <p class="mb-4">The relationship between the College and the City of Oberlin is complex, historically symbiotic, and recently traumatized by the <em>Gibson’s Bakery v. Oberlin College</em> litigation.</p>
+
+                    <h3 class="text-2xl font-serif font-bold text-slate-900 mt-8 mb-4">6.1 The Litigation and Its Aftermath</h3>
+                    <p class="mb-4">The case, stemming from a 2016 shoplifting incident that escalated into protests and a defamation lawsuit, concluded with the college paying <strong>$36.59 million</strong> to the Gibson family in 2022.</p>
+                    <ul class="list-disc pl-6 mb-6 space-y-2">
+                        <li><strong>Financial Impact:</strong> The college managed the payout through insurance coverage and financial planning, avoiding a catastrophic drawdown of the endowment.</li>
+                        <li><strong>Reputational Damage:</strong> The case caused severe reputational damage in national media, painting the administration as enabling mob rule and bullying a local family business. This narrative continues to haunt the college in conservative and centrist circles, potentially affecting recruitment in those demographics.</li>
+                    </ul>
+
+                    <h3 class="text-2xl font-serif font-bold text-slate-900 mt-8 mb-4">6.2 The "Good Neighbor" Strategy (2025)</h3>
+                    <ul class="list-disc pl-6 mb-6 space-y-2">
+                        <li><strong>Integration:</strong> The "Good Neighbor" service plan and "All In For Oberlin" events are designed to integrate students into the local economy respectfully.</li>
+                        <li><strong>Economic Interdependence:</strong> The college remains the largest employer and economic engine of the town. The geothermal project and other construction have provided significant local contracts.</li>
+                        <li><strong>Current Status:</strong> While legal hostilities have ceased, an underlying wariness remains. The "One Oberlin" plan emphasizes "buying local," but the cultural divide between the progressive college bubble and the surrounding rural Lorain County persists.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section 7 -->
+            <section id="outcomes" class="scroll-mt-24 lg:scroll-mt-12 bg-white rounded-xl shadow-sm border border-slate-200 p-8 lg:p-12 transition-all hover:shadow-md">
+                <div class="flex items-center space-x-4 mb-8 pb-4 border-b border-slate-100">
+                    <div class="p-3 bg-red-50 text-red-900 rounded-lg">
+                        <i data-lucide="briefcase" class="w-6 h-6"></i>
+                    </div>
+                    <h2 class="text-2xl lg:text-3xl font-serif font-bold text-slate-900">
+                        7. Outcomes: Career Readiness and Alumni
+                    </h2>
+                </div>
+                <div class="text-slate-700 leading-relaxed">
+                    <p class="mb-4">The narrative that "liberal arts graduates can't find jobs" is one the Oberlin administration fights aggressively with data and new programming.</p>
+
+                    <h3 class="text-2xl font-serif font-bold text-slate-900 mt-8 mb-4">7.1 "Internship+" and Career Communities</h3>
+                    <p class="mb-4">The <strong>Internship+</strong> program is a direct intervention in the career trajectory of students.</p>
+                    <ul class="list-disc pl-6 mb-6 space-y-2">
+                        <li><strong>The Guarantee:</strong> The college provides up to <strong>$5,000</strong> for every student to complete a summer internship, research project, or performance opportunity. This funding is critical for low-income students who cannot afford unpaid internships in expensive cities like New York or D.C.</li>
+                        <li><strong>Career Communities:</strong> The Career Development Center has organized "communities" (e.g., Law & Public Policy, Arts & Creative Professions) connecting students with alumni mentors.</li>
+                    </ul>
+
+                    <h3 class="text-2xl font-serif font-bold text-slate-900 mt-8 mb-4">7.2 Post-Graduate Statistics</h3>
+                    <ul class="list-disc pl-6 mb-6 space-y-2">
+                        <li><strong>Employment Rate:</strong> Approximately <strong>69%</strong> of the Class of 2024 was employed within six months of graduation, with another <strong>20–30%</strong> entering graduate school.</li>
+                        <li><strong>Top Employers:</strong> Major employers include Google, Epic Systems, Teach for America, and major cultural institutions (Smithsonian, Lincoln Center).</li>
+                        <li><strong>Graduate School:</strong> Oberlin remains a top feeder for elite law schools (Harvard, Yale) and medical schools. Its PhD production rate, particularly in the sciences, is among the highest in the nation per capita.</li>
+                    </ul>
+
+                    <h3 class="text-2xl font-serif font-bold text-slate-900 mt-8 mb-4">7.3 Alumni Sentiment</h3>
+                    <ul class="list-disc pl-6 mb-6 space-y-2">
+                        <li><strong>Engagement:</strong> Alumni giving rates are historically high, though they have fluctuated due to dissatisfaction with the "One Oberlin" plan (viewed by some older alumni as corporatization) and the Gibson’s verdict.</li>
+                        <li><strong>Network:</strong> The "Oberlin Mafia" in the arts and entertainment industries (e.g., Lena Dunham, Ed Helms, high-profile showrunners) provides a powerful network for graduates seeking entry into creative fields.</li>
+                    </ul>
+                </div>
+            </section>
+
+             <!-- Section 8 -->
+            <section id="swot" class="scroll-mt-24 lg:scroll-mt-12 bg-white rounded-xl shadow-sm border border-slate-200 p-8 lg:p-12 transition-all hover:shadow-md">
+                <div class="flex items-center space-x-4 mb-8 pb-4 border-b border-slate-100">
+                    <div class="p-3 bg-red-50 text-red-900 rounded-lg">
+                        <i data-lucide="map-pin" class="w-6 h-6"></i>
+                    </div>
+                    <h2 class="text-2xl lg:text-3xl font-serif font-bold text-slate-900">
+                        8. Strategic Opportunities and Challenges (SWOT)
+                    </h2>
+                </div>
+                <div class="text-slate-700 leading-relaxed">
+                    <h3 class="text-2xl font-serif font-bold text-slate-900 mt-8 mb-4">8.1 Opportunities</h3>
+                    <ul class="list-disc pl-6 mb-6 space-y-2">
+                        <li><strong>The "Climate" Niche:</strong> With the completion of the geothermal project, Oberlin can legitimately market itself as the most sustainable campus in America. This is a powerful differentiator for the climate-conscious Generation Alpha.</li>
+                        <li><strong>Interdisciplinary Dominance:</strong> The Interdivisional Minors (e.g., Music & Cognition) create academic products that no other LAC can offer. Expanding these intersections (e.g., AI & Music, Acoustics) is a growth frontier.</li>
+                        <li><strong>Midwest Price Arbitrage:</strong> As coastal cities become prohibitively expensive, Oberlin’s location offers a lower cost of living for faculty and students, potentially allowing for a higher quality of life.</li>
+                    </ul>
+
+                    <h3 class="text-2xl font-serif font-bold text-slate-900 mt-8 mb-4">8.2 Challenges</h3>
+                    <ul class="list-disc pl-6 mb-6 space-y-2">
+                        <li><strong>The Demographic Cliff:</strong> The pool of college-aged students in the Midwest and Northeast is shrinking. Oberlin must recruit aggressively from the West and South, where its brand is less established.</li>
+                        <li><strong>The Yield Crisis:</strong> A sub-20% yield rate represents a massive inefficiency. The college spends immense resources recruiting students who ultimately choose wealthier competitors. Closing the "wealth gap" in the endowment is the only long-term fix for this.</li>
+                        <li><strong>Political Polarization:</strong> The college’s brand as an activist hub is a double-edged sword. It attracts passionate students but alienates moderate families who fear the "cancel culture" reputation associated with the Gibson’s incident.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Conclusion -->
+            <section id="conclusion" class="scroll-mt-24 lg:scroll-mt-12 bg-white rounded-xl shadow-sm border border-slate-200 p-8 lg:p-12 transition-all hover:shadow-md">
+                <div class="flex items-center space-x-4 mb-8 pb-4 border-b border-slate-100">
+                    <div class="p-3 bg-red-50 text-red-900 rounded-lg">
+                        <i data-lucide="alert-circle" class="w-6 h-6"></i>
+                    </div>
+                    <h2 class="text-2xl lg:text-3xl font-serif font-bold text-slate-900">
+                        9. Conclusion
+                    </h2>
+                </div>
+                <div class="text-slate-700 leading-relaxed">
+                    <p class="mb-4">
+                        Oberlin College in 2025 is an institution in the midst of a successful, albeit painful, correction. The "One Oberlin" plan has effectively averted financial disaster and modernized the curriculum to better suit the 21st-century economy. The college remains a powerhouse in undergraduate teaching and PhD production, and its Conservatory remains unrivaled in the liberal arts space.
+                    </p>
+                    <p class="mb-4">
+                        However, the "Oberlin" identity is under pressure. The administration must navigate the delicate balance of professionalizing operations (to survive the demographic cliff) without sanitizing the radical, creative spirit that makes the college unique. The path forward lies in leveraging its specific strengths—sustainability, musical excellence, and rigorous undergraduate research—to justify its premium price tag, while actively healing the local relationships that ground it in Ohio.
+                    </p>
+                    <p>
+                        For the prospective student, investor, or academic observer, Oberlin represents a "high-beta" institution: it offers higher highs (transformative, unique experiences) and lower lows (administrative friction, facility challenges) than its wealthier, more homogenous peers. It remains, unequivocally, a singular place in American higher education—a laboratory for the mind and spirit that is constantly experimenting with its own future.
+                    </p>
+                </div>
+            </section>
+
+             <!-- Works Cited -->
+            <section id="works-cited" class="scroll-mt-24 lg:scroll-mt-12 bg-white rounded-xl shadow-sm border border-slate-200 p-8 lg:p-12 transition-all hover:shadow-md">
+                <div class="flex items-center space-x-4 mb-8 pb-4 border-b border-slate-100">
+                    <div class="p-3 bg-red-50 text-red-900 rounded-lg">
+                        <i data-lucide="book-open" class="w-6 h-6"></i>
+                    </div>
+                    <h2 class="text-2xl lg:text-3xl font-serif font-bold text-slate-900">
+                       Works Cited
+                    </h2>
+                </div>
+                 <div class="text-sm text-slate-600 space-y-2 font-mono">
+                    <p>[1] OSCA No Longer Operating in Deficit For First Time Since Pandemic ..., accessed February 15, 2026</p>
+                    <p>[2] Oberlin's Sustainable Infrastructure Program Reaches Major Milestone, accessed February 15, 2026</p>
+                    <p>[3] Assets and Performance | Oberlin College and Conservatory, accessed February 15, 2026</p>
+                    <p>[4] Oberlin Least Financially Accessible Among Peers, accessed February 15, 2026</p>
+                    <p>[5] Pitzer Rises in Annual Ranking of Top Liberal Arts Colleges, accessed February 15, 2026</p>
+                    <p>[6] Enrollment and Student Outcomes Data | Oberlin College and Conservatory, accessed February 15, 2026</p>
+                    <p>[7] 20 Best Liberal Arts Colleges in the U.S. | CollegeVine Blog, accessed February 15, 2026</p>
+                    <p>[8] Grinnell by the Numbers, accessed February 15, 2026</p>
+                    <p>[9] US News Rankings Liberal Arts Colleges Through 2025 | PDF, accessed February 15, 2026</p>
+                    <p>[10] Comparator Schools - Institutional Research - Reed College, accessed February 15, 2026</p>
+                    <p>[11] Endowment – Business Office - Carleton College, accessed February 15, 2026</p>
+                    <p>[12] Grinnell College Announces Fiscal Year 2024 Endowment Results, accessed February 15, 2026</p>
+                    <p>[13] Endowment Giving | Kenyon College, accessed February 15, 2026</p>
+                    <p>[14] Reed College Endowment Report, accessed February 15, 2026</p>
+                    <p>[15] How Oberlin's Acceptance Rate Changed Over Time - College Tuition Compare, accessed February 15, 2026</p>
+                    <p>[16] US News Ranking: T10 Liberal Arts : r/ApplyingToCollege - Reddit, accessed February 15, 2026</p>
+                    <p>[17] U.S. News & World Report Rankings Fail to Recognize Excellence, accessed February 15, 2026</p>
+                    <p>[18] Oberlin College Graduation Rate, Employment & Alumni Outcomes 2026 | Research.com, accessed February 15, 2026</p>
+                    <p>[19] One Oberlin - The Academic & Administrative Program Review [AAPR] Final Report, accessed February 15, 2026</p>
+                    <p>[20] The Double Degree Program | Oberlin College and Conservatory, accessed February 15, 2026</p>
+                    <p>[21] Double Degree FAQ | Oberlin College and Conservatory, accessed February 15, 2026</p>
+                    <p>[22] Double Degree Program Degree Requirements - Oberlin College and Conservatory, accessed February 15, 2026</p>
+                    <p>[23] One Oberlin – Strengthening Oberlin: Today and Tomorrow, accessed February 15, 2026</p>
+                    <p>[24] Oberlin ExCo, accessed February 15, 2026</p>
+                    <p>[25] Oberlin Student Cooperative Association (OSCA), accessed February 15, 2026</p>
+                    <p>[26] Oberlin College - Niche, accessed February 15, 2026</p>
+                    <p>[27] Two Students Go on Hunger Strike to Raise Money for Family in Gaza - The Oberlin Review, accessed February 15, 2026</p>
+                    <p>[28] SJP hunger strikers pressures University to divest from arms manufacturers - The Cougar, accessed February 15, 2026</p>
+                    <p>[29] 2026 College Free Speech Rankings | The Foundation for Individual Rights and Expression, accessed February 15, 2026</p>
+                    <p>[30] College to Pay $36M, Concluding Gibson's Litigation – The Oberlin ..., accessed February 15, 2026</p>
+                    <p>[31] Oberlin College to begin 'good neighbor' service plan for students, accessed February 15, 2026</p>
+                    <p>[32] Underrated colleges/universities? : r/ApplyingToCollege - Reddit, accessed February 15, 2026</p>
+                    <p>[33] 300 Best Colleges in the U.S. - 2024, accessed February 15, 2026</p>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Mobile Menu Logic
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const sidebar = document.getElementById('sidebar');
+        let isMenuOpen = false;
+
+        mobileMenuBtn.addEventListener('click', () => {
+            isMenuOpen = !isMenuOpen;
+            if (isMenuOpen) {
+                sidebar.classList.remove('-translate-x-full');
+            } else {
+                sidebar.classList.add('-translate-x-full');
+            }
+        });
+
+        // Close sidebar when clicking a link on mobile
+        const navLinks = document.querySelectorAll('#nav-links a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth < 1024) { // lg breakpoint
+                    sidebar.classList.add('-translate-x-full');
+                    isMenuOpen = false;
+                }
+            });
+        });
+
+        // Scroll Spy Logic for Sidebar Highlighting
+        const sections = document.querySelectorAll('section');
+        const navItems = document.querySelectorAll('.nav-item');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '-20% 0px -60% 0px', // Trigger when section is near top
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Remove active class from all
+                    navItems.forEach(item => {
+                        item.classList.remove('bg-amber-500', 'text-slate-900', 'shadow-md', 'active');
+                        item.classList.add('text-slate-300', 'hover:bg-slate-800', 'hover:text-white');
+
+                        // Handle icon colors inside
+                        const icon = item.querySelector('[data-lucide]');
+                        if(icon) icon.classList.remove('text-slate-900');
+                    });
+
+                    // Add active class to current
+                    const activeLink = document.querySelector(`a[href="#${entry.target.id}"]`);
+                    if (activeLink) {
+                        activeLink.classList.remove('text-slate-300', 'hover:bg-slate-800', 'hover:text-white');
+                        activeLink.classList.add('bg-amber-500', 'text-slate-900', 'shadow-md', 'active');
+
+                        // Force icon color update
+                        const icon = activeLink.querySelector('[data-lucide]');
+                        if(icon) icon.classList.add('text-slate-900');
+                    }
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
