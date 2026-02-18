@@ -8,7 +8,7 @@ I am a **Professor of Theater** and **Chair of the Music Department** at **Wabas
 
 * **Interactive Narrative:** Researching the evolution of storytelling and player agency within Role-Playing Games (RPGs).
 * **Film & Media:** Analyzing the impact of film scores and global cinema trends.
-* **Theater & Performance:** Writing and developing new works for the stage and exploring the future of the arts in higher education.
+* **Composition:** Writing new music and sound design for the stage, film, and video games.
 
 ### 🔭 Currently Working On
 
