@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Composer's Migration: PC to Mac</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+        :root {
+            --bg-dark: #020617;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --accent: #38bdf8;
+            --accent-glow: rgba(56, 189, 248, 0.4);
+            --success: #10b981;
+            --violet: #8b5cf6;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: #f1f5f9;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-image: 
+                radial-gradient(circle at 0% 0%, rgba(56, 189, 248, 0.08) 0%, transparent 35%),
+                radial-gradient(circle at 100% 100%, rgba(139, 92, 246, 0.08) 0%, transparent 35%);
+            background-attachment: fixed;
+        }
+
+        .hero-gradient {
+            background: linear-gradient(to bottom, rgba(2, 6, 23, 0.4), var(--bg-dark)),
+                        url('https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .glass-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.5);
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(56, 189, 248, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 25px 60px -12px rgba(0, 0, 0, 0.6);
+        }
+
+        .checkbox-container input:checked ~ .text-content {
+            opacity: 0.4;
+            text-decoration: line-through;
+            filter: grayscale(1);
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), var(--violet));
+            box-shadow: 0 0 20px var(--accent-glow);
+            transition: width 0.8s cubic-bezier(0.65, 0, 0.35, 1);
+        }
+
+        .step-number {
+            background: linear-gradient(135deg, var(--accent), var(--violet));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+            display: inline-block;
+            padding-right: 0.25em; /* Increased fix for italic clipping */
+        }
+
+        .phase-img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            opacity: 0.8;
+            filter: saturate(0.8) contrast(1.1);
+            transition: all 0.5s ease;
+            background-color: #1e293b; /* Fallback color */
+        }
+
+        .glass-card:hover .phase-img {
+            opacity: 1;
+            filter: saturate(1.1);
+            transform: scale(1.02);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .floating { animation: float 6s ease-in-out infinite; }
+
+        .pro-tip {
+            border-left: 4px solid var(--accent);
+            background: linear-gradient(90deg, rgba(56, 189, 248, 0.1), transparent);
+        }
+
+        /* Custom Checkbox */
+        .custom-check {
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 6px;
+            background: rgba(15, 23, 42, 0.5);
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s;
+        }
+
+        .custom-check:checked {
+            background: var(--success);
+            border-color: var(--success);
+        }
+
+        .custom-check:checked::after {
+            content: "\f00c";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            color: white;
+            font-size: 12px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+<body class="min-h-screen pb-32">
+
+    <!-- Hero Section -->
+    <header class="relative hero-gradient h-[60vh] flex flex-col items-center justify-center text-center px-6 border-b border-white/5">
+        <div class="absolute inset-0 bg-black/40"></div>
+        
+        <div class="relative z-10 max-w-4xl w-full">
+            <div class="flex items-center justify-center space-x-3 mb-6">
+                <i class="fas fa-compact-disc text-sky-400 text-2xl floating"></i>
+                <span class="px-4 py-1 bg-white/10 backdrop-blur-md text-sky-300 rounded-full text-xs font-bold uppercase tracking-[0.2em] border border-white/10">Production Standard</span>
+                <i class="fas fa-waveform text-violet-400 text-2xl floating" style="animation-delay: -3s"></i>
+            </div>
+            
+            <h1 class="text-5xl md:text-8xl font-black mb-6 tracking-tighter leading-none">
+                <span class="block text-white">STUDIO</span>
+                <span class="step-number">MIGRATION</span>
+            </h1>
+            
+            <p class="text-slate-300 text-lg md:text-2xl max-w-2xl mx-auto font-light leading-relaxed">
+                A high-fidelity checklist for transitioning your professional creative workflow from Windows to macOS.
+            </p>
+
+            <!-- Sticky Progress Tracker -->
+            <div class="mt-12 glass-card rounded-2xl p-6 max-w-xl mx-auto border-sky-500/20">
+                <div class="flex justify-between items-end mb-4">
+                    <span class="text-xs font-bold uppercase tracking-[0.15em] text-slate-400">Signal Integrity</span>
+                    <span id="progress-text" class="text-3xl font-black tracking-tighter text-sky-400" style="font-family: 'JetBrains Mono'">0%</span>
+                </div>
+                <div class="progress-bar h-2 bg-black/40 rounded-full overflow-hidden">
+                    <div id="progress-fill" class="progress-fill" style="width: 0%"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto -mt-20 relative z-20 px-6 grid grid-cols-1 md:grid-cols-2 gap-8">
+        
+        <!-- Phase 1 -->
+        <section class="space-y-6" data-phase="1">
+            <div class="flex items-center space-x-4 mb-2">
+                <span class="text-5xl font-black step-number opacity-50 italic leading-none">01</span>
+                <h2 class="text-xl font-bold uppercase tracking-widest text-white">Inventory & Assets</h2>
+            </div>
+            
+            <div class="glass-card p-6 rounded-2xl">
+                <img src="https://images.unsplash.com/photo-1514794749374-fb67509dbb7f?q=80&w=800&auto=format&fit=crop" alt="Software Management" class="phase-img">
+                <div class="space-y-4">
+                    <label class="flex items-start space-x-4 group cursor-pointer">
+                        <input type="checkbox" class="custom-check mt-1" onchange="updateProgress()">
+                        <div class="text-content">
+                            <span class="font-bold text-slate-100 group-hover:text-sky-400 transition-colors">Master Software Sheet</span>
+                            <p class="text-xs text-slate-400 mt-1">Catalog every DAW, VST, and library seat currently active.</p>
+                        </div>
+                    </label>
+                    <label class="flex items-start space-x-4 group cursor-pointer">
+                        <input type="checkbox" class="custom-check mt-1" onchange="updateProgress()">
+                        <div class="text-content">
+                            <span class="font-bold text-slate-100 group-hover:text-sky-400 transition-colors">Authorization Mapping</span>
+                            <p class="text-xs text-slate-400 mt-1">Map iLok, Waves Central, and proprietary cloud managers.</p>
+                        </div>
+                    </label>
+                    <div class="pro-tip p-4 rounded-r-xl">
+                        <p class="text-[11px] text-sky-300 leading-relaxed uppercase tracking-wider font-bold">
+                            <i class="fas fa-microchip mr-2"></i>Note: Backup Serum/Sylenth1 user presets from %AppData%.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Phase 2 -->
+        <section class="space-y-6" data-phase="2">
+            <div class="flex items-center space-x-4 mb-2">
+                <span class="text-5xl font-black step-number opacity-50 italic leading-none">02</span>
+                <h2 class="text-xl font-bold uppercase tracking-widest text-white">License Release</h2>
+            </div>
+            
+            <div class="glass-card p-6 rounded-2xl border-red-500/20">
+                <!-- NEW Verified Image for Phase 2: Security Keys -->
+                <img src="https://images.unsplash.com/photo-1614064641938-3bbee52942c7?q=80&w=800&auto=format&fit=crop" alt="Digital Licensing" class="phase-img">
+                <div class="space-y-4">
+                    <label class="flex items-start space-x-4 group cursor-pointer">
+                        <input type="checkbox" class="custom-check mt-1" onchange="updateProgress()">
+                        <div class="text-content">
+                            <span class="font-bold text-red-400 group-hover:text-red-300 transition-colors">iLok Machine Deactivation</span>
+                            <p class="text-xs text-slate-400 mt-1 italic">Crucial: Must be done on the PC hardware before wiping.</p>
+                        </div>
+                    </label>
+                    <label class="flex items-start space-x-4 group cursor-pointer">
+                        <input type="checkbox" class="custom-check mt-1" onchange="updateProgress()">
+                        <div class="text-content">
+                            <span class="font-bold text-slate-100 group-hover:text-sky-400 transition-colors">Move Waves to License Cloud</span>
+                            <p class="text-xs text-slate-400 mt-1">Disconnect licenses from the PC in Waves Central.</p>
+                        </div>
+                    </label>
+                    <label class="flex items-start space-x-4 group cursor-pointer">
+                        <input type="checkbox" class="custom-check mt-1" onchange="updateProgress()">
+                        <div class="text-content">
+                            <span class="font-bold text-slate-100 group-hover:text-sky-400 transition-colors">Proprietary Manager Logout</span>
+                            <span class="block text-[10px] text-slate-500 mt-1">Arturia, Plugin Alliance, NI Native Access.</span>
+                        </div>
+                    </label>
+                </div>
+            </div>
+        </section>
+
+        <!-- Phase 3 -->
+        <section class="space-y-6" data-phase="3">
+            <div class="flex items-center space-x-4 mb-2">
+                <span class="text-5xl font-black step-number opacity-50 italic leading-none">03</span>
+                <h2 class="text-xl font-bold uppercase tracking-widest text-white">The macOS Environment</h2>
+            </div>
+            
+            <div class="glass-card p-6 rounded-2xl">
+                <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=800&auto=format&fit=crop" alt="Apple Hardware" class="phase-img">
+                <div class="space-y-4">
+                    <label class="flex items-start space-x-4 group cursor-pointer">
+                        <input type="checkbox" class="custom-check mt-1" onchange="updateProgress()">
+                        <div class="text-content">
+                            <span class="font-bold text-slate-100 group-hover:text-sky-400 transition-colors">Clean DAW Install (Native DMG)</span>
+                            <p class="text-xs text-slate-400 mt-1">Download fresh binaries. Avoid Migration Assistant for audio apps.</p>
+                        </div>
+                    </label>
+                    <div class="grid grid-cols-2 gap-3 py-2">
+                        <div class="bg-black/30 p-3 rounded-lg border border-white/5">
+                            <span class="block text-[10px] font-bold text-sky-400 uppercase tracking-tighter">Logic Pro</span>
+                            <span class="text-[11px] text-slate-300">AU (Audio Units)</span>
+                        </div>
+                        <div class="bg-black/30 p-3 rounded-lg border border-white/5">
+                            <span class="block text-[10px] font-bold text-indigo-400 uppercase tracking-tighter">Ableton / S1</span>
+                            <span class="text-[11px] text-slate-300">VST3 / CLAP</span>
+                        </div>
+                    </div>
+                    <label class="flex items-start space-x-4 group cursor-pointer">
+                        <input type="checkbox" class="custom-check mt-1" onchange="updateProgress()">
+                        <div class="text-content">
+                            <span class="font-bold text-slate-100 group-hover:text-sky-400 transition-colors">Apple Silicon Validation</span>
+                            <p class="text-xs text-slate-400 mt-1">Prioritize M1/M2/M3 native installers to bypass Rosetta 2.</p>
+                        </div>
+                    </label>
+                </div>
+            </div>
+        </section>
+
+        <!-- Phase 4 -->
+        <section class="space-y-6" data-phase="4">
+            <div class="flex items-center space-x-4 mb-2">
+                <span class="text-5xl font-black step-number opacity-50 italic leading-none">04</span>
+                <h2 class="text-xl font-bold uppercase tracking-widest text-white">Large Scale Libraries</h2>
+            </div>
+            
+            <div class="glass-card p-6 rounded-2xl">
+                <!-- NEW Verified Image for Phase 4: Data/SSD theme -->
+                <img src="https://images.unsplash.com/photo-1597733336794-12d05021d510?q=80&w=800&auto=format&fit=crop" alt="Storage Drive" class="phase-img">
+                <div class="space-y-4">
+                    <label class="flex items-start space-x-4 group cursor-pointer">
+                        <input type="checkbox" class="custom-check mt-1" onchange="updateProgress()">
+                        <div class="text-content">
+                            <span class="font-bold text-slate-100 group-hover:text-sky-400 transition-colors">ExFAT Drive Transfer</span>
+                            <p class="text-xs text-slate-400 mt-1">Physically move Kontakt, Omnisphere, and Spitfire libraries.</p>
+                        </div>
+                    </label>
+                    <label class="flex items-start space-x-4 group cursor-pointer">
+                        <input type="checkbox" class="custom-check mt-1" onchange="updateProgress()">
+                        <div class="text-content">
+                            <span class="font-bold text-slate-100 group-hover:text-sky-400 transition-colors">Batch Re-save / Path Relinking</span>
+                            <p class="text-xs text-slate-400 mt-1">Open player software and 'Locate' library folders on the Mac.</p>
+                        </div>
+                    </label>
+                </div>
+            </div>
+        </section>
+
+        <!-- Phase 5: Full Width -->
+        <section class="md:col-span-2 mt-8" data-phase="5">
+            <div class="flex items-center space-x-4 mb-6">
+                <span class="text-5xl font-black step-number opacity-50 italic leading-none">05</span>
+                <h2 class="text-xl font-bold uppercase tracking-widest text-white">The Buffer & Burn-In</h2>
+            </div>
+            <div class="glass-card p-8 rounded-2xl border-amber-500/20 bg-gradient-to-br from-amber-500/5 to-transparent">
+                <div class="flex flex-col md:flex-row gap-8 items-center">
+                    <div class="w-full md:w-1/3">
+                        <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=800&auto=format&fit=crop" alt="Final Studio Setup" class="rounded-xl shadow-2xl opacity-90 border border-white/10">
+                    </div>
+                    <div class="w-full md:w-2/3 space-y-6">
+                        <div class="bg-amber-500/10 text-amber-500 px-4 py-2 rounded-lg border border-amber-500/20 text-xs font-bold uppercase tracking-widest inline-block">Safety Protocol</div>
+                        <div class="space-y-4">
+                            <label class="flex items-start space-x-4 group cursor-pointer">
+                                <input type="checkbox" class="custom-check mt-1 border-amber-500/40" onchange="updateProgress()">
+                                <div class="text-content">
+                                    <span class="font-bold text-slate-100 group-hover:text-amber-400 transition-colors">14-Day Parallel Operation</span>
+                                    <p class="text-sm text-slate-400 mt-1">Do not wipe the PC. You will encounter missed deauthorizations.</p>
+                                </div>
+                            </label>
+                            <label class="flex items-start space-x-4 group cursor-pointer">
+                                <input type="checkbox" class="custom-check mt-1 border-amber-500/40" onchange="updateProgress()">
+                                <div class="text-content">
+                                    <span class="font-bold text-slate-100 group-hover:text-amber-400 transition-colors">Legacy Session Validation</span>
+                                    <p class="text-sm text-slate-400 mt-1">Open your most complex projects and check for missing plugin states.</p>
+                                </div>
+                            </label>
+                            <label class="flex items-start space-x-4 group cursor-pointer">
+                                <input type="checkbox" class="custom-check mt-1 border-amber-500/40" onchange="updateProgress()">
+                                <div class="text-content">
+                                    <span class="font-bold text-slate-100 group-hover:text-amber-400 transition-colors">Secure Hardware Wipe</span>
+                                    <p class="text-sm text-slate-400 mt-1">Final stage: Once Mac is 100% stable, perform a factory reset on the PC.</p>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="max-w-5xl mx-auto mt-32 px-6 text-center">
+        <div class="h-px bg-gradient-to-r from-transparent via-slate-700 to-transparent mb-12"></div>
+        <p class="text-slate-500 text-xs font-bold uppercase tracking-[0.3em] mb-4">Mastered for Mac OS Sequoia & Beyond</p>
+        <p class="text-slate-600 text-[10px] italic">Built for the Global Composer Community</p>
+    </footer>
+
+    <script>
+        function updateProgress() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            const total = checkboxes.length;
+            const checked = Array.from(checkboxes).filter(cb => cb.checked).length;
+            const percentage = Math.round((checked / total) * 100);
+
+            const progressFill = document.getElementById('progress-fill');
+            const progressText = document.getElementById('progress-text');
+
+            progressFill.style.width = percentage + '%';
+            progressText.innerText = percentage + '%';
+
+            // Store progress
+            const state = Array.from(checkboxes).map(cb => cb.checked);
+            localStorage.setItem('studio_migration_v2', JSON.stringify(state));
+        }
+
+        window.onload = () => {
+            const savedState = localStorage.getItem('studio_migration_v2');
+            if (savedState) {
+                const state = JSON.parse(savedState);
+                const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+                checkboxes.forEach((cb, index) => {
+                    if (state[index]) cb.checked = true;
+                });
+                updateProgress();
+            }
+        };
+    </script>
+</body>
+</html>
