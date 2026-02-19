@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design a Side Mission — Red Dead Redemption 2</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Special+Elite&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1108;
+    --sepia-dark: #2c1e0f;
+    --sepia-mid: #5c3d1e;
+    --sepia-light: #a87d52;
+    --parchment: #e8d8b8;
+    --parchment-dark: #d4bc94;
+    --aged: #c9a96e;
+    --rust: #8b3a1a;
+    --gold: #c8922a;
+    --cream: #f5ede0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background-color: #0d0905;
+    background-image: 
+      radial-gradient(ellipse at 50% 0%, #1a1005 0%, #0d0905 60%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23noise)' opacity='0.08'/%3E%3C/svg%3E");
+    min-height: 100vh;
+    font-family: 'Crimson Pro', Georgia, serif;
+    color: var(--ink);
+  }
+
+  /* Hero Banner */
+  .hero {
+    position: relative;
+    text-align: center;
+    padding: 3rem 2rem 2rem;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: 
+      linear-gradient(180deg, rgba(140,60,10,0.15) 0%, transparent 60%),
+      radial-gradient(ellipse at 50% 30%, rgba(200,140,40,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Special Elite', monospace;
+    font-size: 1rem;
+    letter-spacing: 0.35em;
+    color: var(--sepia-light);
+    text-transform: uppercase;
+    margin-bottom: 1.2rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s ease forwards;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 7vw, 5.5rem);
+    font-weight: 900;
+    color: var(--parchment);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    text-shadow: 0 2px 20px rgba(200,140,40,0.2), 0 0 60px rgba(140,60,10,0.3);
+    opacity: 0;
+    animation: fadeUp 0.9s 0.35s ease forwards;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .hero-sub {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(1.2rem, 2.5vw, 1.7rem);
+    color: var(--aged);
+    margin-top: 0.8rem;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.5s ease forwards;
+  }
+
+  .divider-ornament {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2rem auto;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.65s ease forwards;
+  }
+
+  .divider-ornament::before,
+  .divider-ornament::after {
+    content: '';
+    flex: 1;
+    max-width: 180px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--sepia-mid));
+  }
+  .divider-ornament::after {
+    background: linear-gradient(90deg, var(--sepia-mid), transparent);
+  }
+
+  .ornament-star {
+    color: var(--gold);
+    font-size: 1.3rem;
+  }
+
+  /* Main container */
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 2rem 4rem;
+    opacity: 0;
+    animation: fadeUp 1s 0.75s ease forwards;
+  }
+
+  /* Parchment card */
+  .parchment-card {
+    background: 
+      linear-gradient(135deg, var(--cream) 0%, var(--parchment) 40%, var(--parchment-dark) 100%);
+    border: 1px solid var(--sepia-light);
+    border-radius: 2px;
+    padding: 2.8rem 3.2rem;
+    position: relative;
+    box-shadow: 
+      0 1px 0 rgba(255,255,255,0.15) inset,
+      0 -1px 0 rgba(0,0,0,0.3) inset,
+      0 8px 40px rgba(0,0,0,0.6),
+      0 2px 8px rgba(0,0,0,0.4);
+    margin-bottom: 2rem;
+  }
+
+  .parchment-card::before {
+    content: '';
+    position: absolute;
+    inset: 6px;
+    border: 1px solid rgba(92,61,30,0.25);
+    border-radius: 1px;
+    pointer-events: none;
+  }
+
+  /* Aged corner folds */
+  .parchment-card::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 0; height: 0;
+    border-style: solid;
+    border-width: 0 30px 30px 0;
+    border-color: transparent var(--sepia-dark) transparent transparent;
+    opacity: 0.4;
+  }
+
+  /* Section headers */
+  .section-label {
+    font-family: 'Special Elite', monospace;
+    font-size: 0.9rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 0.6rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--rust), transparent);
+    opacity: 0.4;
+  }
+
+  .card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--sepia-dark);
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+
+  .card-body {
+    font-size: 1.35rem;
+    line-height: 1.75;
+    color: #2e1e0e;
+    font-weight: 300;
+  }
+
+  .card-body p + p {
+    margin-top: 0.9rem;
+  }
+
+  /* Numbered requirements */
+  .requirements {
+    counter-reset: req;
+    margin-top: 1.5rem;
+  }
+
+  .req-item {
+    counter-increment: req;
+    margin-bottom: 1.8rem;
+    padding-left: 3.2rem;
+    position: relative;
+  }
+
+  .req-item::before {
+    content: counter(req);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 2.4rem;
+    height: 2.4rem;
+    background: var(--sepia-dark);
+    color: var(--aged);
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--sepia-mid);
+  }
+
+  .req-title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 1.45rem;
+    color: var(--sepia-dark);
+    margin-bottom: 0.4rem;
+  }
+
+  .req-body {
+    font-size: 1.3rem;
+    line-height: 1.7;
+    color: #2e1e0e;
+    font-weight: 300;
+  }
+
+  /* Visual materials list */
+  .materials-list {
+    margin-top: 0.6rem;
+    padding-left: 1rem;
+    list-style: none;
+  }
+
+  .materials-list li {
+    padding: 0.3rem 0 0.3rem 1.4rem;
+    position: relative;
+    font-size: 1.25rem;
+    color: #2e1e0e;
+    font-style: italic;
+    line-height: 1.5;
+  }
+
+  .materials-list li::before {
+    content: '✦';
+    position: absolute;
+    left: 0;
+    color: var(--rust);
+    font-size: 0.8rem;
+    top: 0.45rem;
+  }
+
+  /* Evaluation rubric */
+  .rubric-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .rubric-item {
+    background: rgba(44, 30, 15, 0.07);
+    border-left: 3px solid var(--rust);
+    padding: 0.8rem 1rem;
+  }
+
+  .rubric-name {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: var(--sepia-dark);
+    margin-bottom: 0.3rem;
+  }
+
+  .rubric-desc {
+    font-size: 1.15rem;
+    color: #3d2510;
+    line-height: 1.5;
+    font-style: italic;
+  }
+
+  /* Deliverable box */
+  .deliverable-box {
+    background: var(--sepia-dark);
+    color: var(--parchment);
+    padding: 2rem 2.5rem;
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+    margin-top: 2rem;
+  }
+
+  .deliverable-box::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23noise)' opacity='0.06'/%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+
+  .deliverable-box .section-label {
+    color: var(--aged);
+  }
+
+  .deliverable-box .section-label::after {
+    background: linear-gradient(90deg, var(--aged), transparent);
+    opacity: 0.3;
+  }
+
+  .deliverable-box .card-title {
+    color: var(--parchment);
+  }
+
+  .deliverable-box .card-body {
+    color: var(--parchment-dark);
+  }
+
+  .tech-note {
+    margin-top: 1rem;
+    padding: 0.8rem 1rem;
+    background: rgba(200,140,40,0.1);
+    border: 1px solid rgba(200,140,40,0.2);
+    font-size: 1.2rem;
+    font-style: italic;
+    color: var(--aged);
+    line-height: 1.6;
+  }
+
+  /* Quote block */
+  .thematic-quote {
+    text-align: center;
+    padding: 1.5rem 2rem;
+    margin: 2rem 0;
+  }
+
+  .thematic-quote blockquote {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.6rem;
+    color: var(--aged);
+    line-height: 1.6;
+    max-width: 580px;
+    margin: 0 auto;
+  }
+
+  .thematic-quote blockquote::before { content: '\201C'; }
+  .thematic-quote blockquote::after { content: '\201D'; }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 2rem;
+    color: var(--sepia-mid);
+    font-family: 'Special Elite', monospace;
+    font-size: 0.95rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    border-top: 1px solid rgba(92,61,30,0.2);
+  }
+
+  /* Animations */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .parchment-card { padding: 1.8rem 1.4rem; }
+    .rubric-grid { grid-template-columns: 1fr; }
+    .req-item { padding-left: 2.6rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <p class="hero-eyebrow">RPGs &amp; the Humanities &nbsp;·&nbsp; Pair Assignment</p>
+  <h1 class="hero-title">Design a <em>Side Mission</em><br>for Red Dead Redemption 2</h1>
+  <p class="hero-sub">A Mission Pitch for a World on the Edge of Extinction</p>
+  <div class="divider-ornament"><span class="ornament-star">✦</span></div>
+</div>
+
+<div class="container">
+
+  <!-- Overview -->
+  <div class="parchment-card">
+    <p class="section-label">Overview</p>
+    <h2 class="card-title">The World Has Rules. Your Mission Must Follow Them.</h2>
+    <div class="card-body">
+      <p>Red Dead Redemption 2 is not just a game — it is a richly constructed fictional world with its own internal logic, history, and moral texture. Side missions in RDR 2 are rarely filler; they illuminate something about the game's themes: the death of the frontier, the cost of loyalty, the tension between civilization and wildness, the ambiguity of justice.</p>
+      <p>Working in pairs, you will design an original side mission that could plausibly exist within that world. Your mission should feel like it was written by the same creative team that made the game — not dropped in from outside.</p>
+    </div>
+  </div>
+
+  <div class="thematic-quote">
+    <blockquote>We're thieves in a world that don't want us no more.</blockquote>
+  </div>
+
+  <!-- The Assignment -->
+  <div class="parchment-card">
+    <p class="section-label">The Assignment</p>
+    <h2 class="card-title">Your Mission Design Must Include Five Elements</h2>
+
+    <div class="requirements">
+
+      <div class="req-item">
+        <p class="req-title">World &amp; Lore Fit</p>
+        <p class="req-body">Situate your mission clearly within the game's setting — region, era, social context. Who is your NPC, and why do they matter? What does your mission say, even quietly, about one of the game's larger themes?</p>
+      </div>
+
+      <div class="req-item">
+        <p class="req-title">Launch Trigger</p>
+        <p class="req-body">How does the player find or activate this mission? Describe the specific trigger: a location on the map, a time of day, a required story chapter, a prior relationship with an NPC, or some other condition. Be precise — RDR 2 missions have specific, often elegant triggers that reward exploration and attention.</p>
+      </div>
+
+      <div class="req-item">
+        <p class="req-title">Mission Structure</p>
+        <p class="req-body">Walk us through the mission beat by beat. What does the player do? What choices, if any, are presented? Where do things go wrong — because they always do in RDR 2? Your mission must involve at least two distinct gameplay phases (e.g., conversation → tracking → confrontation; or investigation → escort → moral decision).</p>
+      </div>
+
+      <div class="req-item">
+        <p class="req-title">Success &amp; Fail States</p>
+        <p class="req-body">Define what success looks like and what the player receives (honor points, money, a unique item, a relationship change). Define at least one fail state: what triggers failure, and does the mission reset or end permanently?</p>
+      </div>
+
+      <div class="req-item">
+        <p class="req-title">Visual &amp; Audio Materials</p>
+        <p class="req-body">You must include at least <strong>three</strong> visual or audio elements to help communicate your mission design. Think of this as a pitch document — something you'd show a development team. Options include:</p>
+        <ul class="materials-list">
+          <li>A hand-drawn or digitally created map marking the trigger location and key beats</li>
+          <li>Annotated screenshots from the game showing comparable mechanics or locations you're drawing from</li>
+          <li>A mood board capturing the visual tone of your mission</li>
+          <li>A short audio clip or playlist representing the musical atmosphere</li>
+          <li>Concept sketches of your NPC or key location</li>
+          <li>A storyboard of a key cinematic moment</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Evaluation -->
+  <div class="parchment-card">
+    <p class="section-label">Evaluation Criteria</p>
+    <h2 class="card-title">Your Mission Will Be Judged on Four Dimensions</h2>
+
+    <div class="rubric-grid">
+      <div class="rubric-item">
+        <p class="rubric-name">Lore Coherence</p>
+        <p class="rubric-desc">Does it feel authentically RDR 2? Does it engage meaningfully with the game's themes?</p>
+      </div>
+      <div class="rubric-item">
+        <p class="rubric-name">Mechanical Plausibility</p>
+        <p class="rubric-desc">Could this mission actually work within the game's existing systems?</p>
+      </div>
+      <div class="rubric-item">
+        <p class="rubric-name">Narrative Craft</p>
+        <p class="rubric-desc">Is the storytelling compelling? Are the characters interesting? Does the mission have an emotional or thematic payoff?</p>
+      </div>
+      <div class="rubric-item">
+        <p class="rubric-name">Presentation Quality</p>
+        <p class="rubric-desc">Are your visual and audio materials purposeful and well-integrated — not merely decorative?</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Deliverable -->
+  <div class="deliverable-box">
+    <p class="section-label">Deliverable</p>
+    <h2 class="card-title">Present Your Pitch to the Class</h2>
+    <div class="card-body">
+      <p>Present your mission design using PowerPoint, Google Slides, or any presentation software you prefer. Your presentation should run approximately <strong>5 minutes</strong> and walk the class through each element of your mission as if you were pitching it to a development team.</p>
+
+      <div class="tech-note">
+        <strong>Practical note:</strong> You will present from the classroom PC, so plan ahead. Save your file to Box, email it to yourself, or upload it to Google Drive. If your presentation includes audio or video, test it in advance — embedded media can behave differently across machines. A backup PDF export is always a smart precaution.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>Red Dead Redemption 2 &nbsp;·&nbsp; Side Mission Design Assignment &nbsp;·&nbsp; RPGs &amp; the Humanities</footer>
+
+</body>
+</html>
