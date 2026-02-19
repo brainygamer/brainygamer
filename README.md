@@ -1,4 +1,4 @@
-# Hi, I'm Michael Abbott
+## Hi, I'm Michael Abbott
 
 I am a **Professor of Theater** and **Chair of the Music Department** at **Wabash College**. My work lives at the intersection of performance, pedagogy, and digital storytelling, with a particular focus on how narrative functions across different media.
 
