@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prompt Refinery</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1a1612;
+    --parchment: #f5f0e8;
+    --warm-mid: #e8dece;
+    --accent: #8b3a2a;
+    --accent-light: #c4634f;
+    --muted: #8a7f72;
+    --border: #ccc4b4;
+    --gemini: #1a6b4a;
+    --gemini-light: #2e9e6e;
+  }
+
+  body {
+    background: var(--parchment);
+    color: var(--ink);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 3rem 1.5rem 4rem;
+  }
+
+  header { text-align: center; margin-bottom: 3rem; animation: fadeDown 0.8s ease both; }
+
+  .eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.6rem;
+  }
+
+  h1 { font-size: clamp(2.4rem, 5vw, 3.8rem); font-weight: 300; letter-spacing: -0.01em; line-height: 1.05; }
+  h1 em { font-style: italic; color: var(--accent); }
+
+  .subtitle {
+    margin-top: 0.75rem;
+    font-size: 1.05rem;
+    font-weight: 300;
+    color: var(--muted);
+    font-style: italic;
+    max-width: 42ch;
+    margin-inline: auto;
+  }
+
+  .divider { width: 60px; height: 1px; background: var(--border); margin: 1.5rem auto 0; }
+
+  .card {
+    background: #faf7f2;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    width: 100%;
+    max-width: 720px;
+    padding: 2rem 2.25rem;
+    box-shadow: 0 2px 24px rgba(0,0,0,0.06);
+    animation: fadeUp 0.9s ease 0.15s both;
+  }
+
+  /* ── API Key Section ── */
+  .keys-section {
+    margin-bottom: 1.75rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .keys-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+
+  .keys-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .keys-status {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.6rem;
+    border-radius: 1px;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    transition: all 0.3s;
+  }
+
+  .keys-status.ready {
+    background: rgba(26,107,74,0.08);
+    border-color: rgba(26,107,74,0.25);
+    color: var(--gemini);
+  }
+
+  .keys-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+
+  @media (max-width: 520px) { .keys-grid { grid-template-columns: 1fr; } }
+
+  .key-field { display: flex; flex-direction: column; gap: 0.35rem; }
+
+  .key-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .key-input-wrap { position: relative; }
+
+  .key-input {
+    width: 100%;
+    background: var(--parchment);
+    border: 1px solid var(--border);
+    border-radius: 1px;
+    padding: 0.5rem 2.2rem 0.5rem 0.75rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.2s;
+    letter-spacing: 0.03em;
+  }
+
+  .key-input:focus { border-color: var(--accent-light); }
+  .key-input.valid { border-color: var(--gemini); }
+  .key-input::placeholder { color: var(--border); font-size: 0.62rem; }
+
+  .key-toggle {
+    position: absolute;
+    right: 0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--muted);
+    font-size: 0.75rem;
+    padding: 0.1rem;
+    line-height: 1;
+    transition: color 0.2s;
+  }
+  .key-toggle:hover { color: var(--ink); }
+
+  .keys-note {
+    margin-top: 0.75rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.06em;
+    color: var(--border);
+    line-height: 1.5;
+  }
+
+  /* ── Model section ── */
+  .model-section {
+    margin-bottom: 1.75rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .model-row { display: flex; align-items: center; gap: 1rem; }
+
+  .row-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    white-space: nowrap;
+    min-width: 56px;
+  }
+
+  .toggle-track {
+    position: relative;
+    display: flex;
+    background: var(--warm-mid);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 3px;
+    gap: 3px;
+  }
+
+  .toggle-option {
+    position: relative;
+    z-index: 1;
+    padding: 0.45rem 1.2rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    color: var(--muted);
+    transition: color 0.25s;
+    border-radius: 1px;
+  }
+
+  .toggle-option.active-claude { color: white; }
+  .toggle-option.active-gemini { color: white; }
+
+  .toggle-slider {
+    position: absolute;
+    top: 3px; bottom: 3px;
+    border-radius: 1px;
+    transition: left 0.25s cubic-bezier(0.4,0,0.2,1), width 0.25s, background 0.25s;
+    pointer-events: none;
+  }
+
+  .version-btns { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+
+  .ver-btn {
+    padding: 0.35rem 0.85rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.18s;
+    border-radius: 1px;
+  }
+
+  .ver-btn:hover { border-color: var(--accent-light); color: var(--accent-light); }
+  .ver-btn.active { background: var(--accent); border-color: var(--accent); color: white; }
+  body.gemini-mode .ver-btn:hover { border-color: var(--gemini-light); color: var(--gemini-light); }
+  body.gemini-mode .ver-btn.active { background: var(--gemini); border-color: var(--gemini); color: white; }
+
+  /* ── Mode buttons ── */
+  .mode-row { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+
+  .mode-btn {
+    flex: 1;
+    min-width: 80px;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--border);
+    background: transparent;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.2s;
+    border-radius: 1px;
+  }
+
+  .mode-btn.active { background: var(--accent); border-color: var(--accent); color: white; }
+  .mode-btn:hover:not(.active) { border-color: var(--accent-light); color: var(--accent-light); }
+  body.gemini-mode .mode-btn.active { background: var(--gemini); border-color: var(--gemini); }
+  body.gemini-mode .mode-btn:hover:not(.active) { border-color: var(--gemini-light); color: var(--gemini-light); }
+
+  label {
+    display: block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+  }
+
+  textarea {
+    width: 100%;
+    background: var(--parchment);
+    border: 1px solid var(--border);
+    border-radius: 1px;
+    padding: 1rem 1.1rem;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.05rem;
+    font-weight: 300;
+    line-height: 1.65;
+    color: var(--ink);
+    resize: vertical;
+    transition: border-color 0.2s;
+    outline: none;
+  }
+
+  textarea:focus { border-color: var(--accent-light); }
+  body.gemini-mode textarea:focus { border-color: var(--gemini-light); }
+  textarea::placeholder { color: var(--muted); font-style: italic; }
+  #input-prompt { min-height: 130px; }
+
+  .btn-row { display: flex; justify-content: flex-end; margin-top: 1.2rem; }
+
+  button.refine {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 0.7rem 2rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    border-radius: 1px;
+  }
+
+  button.refine:hover { background: var(--accent-light); }
+  button.refine:active { transform: scale(0.98); }
+  button.refine:disabled { background: var(--border); cursor: not-allowed; }
+  body.gemini-mode button.refine { background: var(--gemini); }
+  body.gemini-mode button.refine:hover { background: var(--gemini-light); }
+
+  .output-section { margin-top: 2rem; border-top: 1px solid var(--border); padding-top: 1.5rem; animation: fadeUp 0.5s ease both; }
+  .output-section.hidden { display: none; }
+
+  .output-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.6rem; }
+
+  .copy-btn {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    padding: 0.3rem 0.7rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    border-radius: 1px;
+  }
+
+  .copy-btn:hover { border-color: var(--accent); color: var(--accent); }
+  body.gemini-mode .copy-btn:hover { border-color: var(--gemini); color: var(--gemini); }
+
+  #output-text {
+    background: #fff9f0;
+    border: 1px solid #ddd4c0;
+    border-left: 3px solid var(--accent);
+    padding: 1.1rem 1.25rem;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    font-weight: 400;
+    white-space: pre-wrap;
+    color: var(--ink);
+    min-height: 80px;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    transition: border-left-color 0.3s;
+  }
+
+  body.gemini-mode #output-text { border-left-color: var(--gemini); }
+
+  .spinner {
+    display: inline-block;
+    width: 16px; height: 16px;
+    border: 2px solid rgba(255,255,255,0.4);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    vertical-align: middle;
+    margin-right: 6px;
+  }
+
+  .error-msg { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--accent); margin-top: 0.75rem; display: none; }
+
+  @keyframes fadeDown { from { opacity:0; transform:translateY(-16px); } to { opacity:1; transform:translateY(0); } }
+  @keyframes fadeUp   { from { opacity:0; transform:translateY(14px);  } to { opacity:1; transform:translateY(0); } }
+  @keyframes spin     { to { transform:rotate(360deg); } }
+
+  footer {
+    margin-top: 3rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--border);
+    animation: fadeUp 1s ease 0.4s both;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow">AI Prompt Refinery</p>
+  <h1>Turn a rough idea into<br><em>a precise prompt</em></h1>
+  <p class="subtitle">Paste your draft prompt below and receive a sharpened version optimized for academic or creative work.</p>
+  <div class="divider"></div>
+</header>
+
+<div class="card">
+
+  <!-- API Keys -->
+  <div class="keys-section">
+    <div class="keys-header">
+      <span class="keys-title">API Keys</span>
+      <span class="keys-status" id="keys-status">Not configured</span>
+    </div>
+    <div class="keys-grid">
+      <div class="key-field">
+        <span class="key-label">Anthropic (Claude)</span>
+        <div class="key-input-wrap">
+          <input type="password" class="key-input" id="anthropic-key" placeholder="sk-ant-api03-…" autocomplete="off" spellcheck="false">
+          <button class="key-toggle" data-target="anthropic-key" title="Show/hide">👁</button>
+        </div>
+      </div>
+      <div class="key-field">
+        <span class="key-label">Google (Gemini)</span>
+        <div class="key-input-wrap">
+          <input type="password" class="key-input" id="gemini-key" placeholder="AIzaSy…" autocomplete="off" spellcheck="false">
+          <button class="key-toggle" data-target="gemini-key" title="Show/hide">👁</button>
+        </div>
+      </div>
+    </div>
+    <p class="keys-note">Keys are held in memory only and never stored or transmitted anywhere except directly to Anthropic and Google's APIs.</p>
+  </div>
+
+  <!-- Provider + Version -->
+  <div class="model-section">
+    <div class="model-row">
+      <span class="row-label">Provider</span>
+      <div class="toggle-track" id="toggle-track">
+        <div class="toggle-slider" id="toggle-slider"></div>
+        <button class="toggle-option active-claude" id="btn-claude">Claude</button>
+        <button class="toggle-option" id="btn-gemini">Gemini</button>
+      </div>
+    </div>
+    <div class="model-row">
+      <span class="row-label">Version</span>
+      <div class="version-btns" id="version-btns"></div>
+    </div>
+  </div>
+
+  <!-- Mode -->
+  <div class="mode-row" role="group" aria-label="Optimization mode">
+    <button class="mode-btn active" data-mode="academic">Academic</button>
+    <button class="mode-btn" data-mode="creative">Creative Writing</button>
+    <button class="mode-btn" data-mode="both">Both</button>
+    <button class="mode-btn" data-mode="general">General</button>
+  </div>
+
+  <label for="input-prompt">Your Draft Prompt</label>
+  <textarea id="input-prompt" placeholder="e.g. Write something about how Chinatown deals with memory and corruption…"></textarea>
+
+  <div class="btn-row">
+    <button class="refine" id="refine-btn">Refine Prompt</button>
+  </div>
+  <p class="error-msg" id="error-msg"></p>
+
+  <div class="output-section hidden" id="output-section">
+    <div class="output-header">
+      <label style="margin:0">Refined Prompt</label>
+      <button class="copy-btn" id="copy-btn">Copy</button>
+    </div>
+    <div id="output-text"></div>
+  </div>
+</div>
+
+<footer>Claude &amp; Gemini · Keys stored in memory only · Safe to host publicly</footer>
+
+<script>
+  // ── Models ───────────────────────────────────────────────
+  const MODELS = {
+    claude: [
+      { label: 'Sonnet 4.6', value: 'claude-sonnet-4-6',      isDefault: true },
+      { label: 'Opus 4.6',   value: 'claude-opus-4-6' },
+    ],
+    gemini: [
+      { label: '3 Flash',    value: 'gemini-3-flash-preview',  isDefault: true },
+      { label: '3.1 Pro',    value: 'gemini-3.1-pro-preview' },
+    ]
+  };
+
+  let currentProvider = 'claude';
+  let currentVersion  = MODELS.claude[0].value;
+  let currentMode     = 'academic';
+
+  // ── Key visibility toggles ───────────────────────────────
+  document.querySelectorAll('.key-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const input = document.getElementById(btn.dataset.target);
+      input.type = input.type === 'password' ? 'text' : 'password';
+    });
+  });
+
+  // ── Key status indicator ─────────────────────────────────
+  function updateKeyStatus() {
+    const ak = document.getElementById('anthropic-key').value.trim();
+    const gk = document.getElementById('gemini-key').value.trim();
+    const status = document.getElementById('keys-status');
+    const bothReady = ak.startsWith('sk-ant') && gk.startsWith('AIza');
+    const oneReady  = ak.startsWith('sk-ant') || gk.startsWith('AIza');
+
+    if (bothReady) {
+      status.textContent = 'Both keys ready';
+      status.className = 'keys-status ready';
+    } else if (oneReady) {
+      status.textContent = ak.startsWith('sk-ant') ? 'Claude ready' : 'Gemini ready';
+      status.className = 'keys-status ready';
+    } else {
+      status.textContent = 'Not configured';
+      status.className = 'keys-status';
+    }
+
+    document.getElementById('anthropic-key').classList.toggle('valid', ak.startsWith('sk-ant'));
+    document.getElementById('gemini-key').classList.toggle('valid', gk.startsWith('AIza'));
+  }
+
+  document.getElementById('anthropic-key').addEventListener('input', updateKeyStatus);
+  document.getElementById('gemini-key').addEventListener('input', updateKeyStatus);
+
+  // ── Version buttons ──────────────────────────────────────
+  function renderVersions(provider) {
+    const container = document.getElementById('version-btns');
+    container.innerHTML = '';
+    MODELS[provider].forEach(m => {
+      const btn = document.createElement('button');
+      btn.className = 'ver-btn' + (m.isDefault ? ' active' : '');
+      btn.textContent = m.label;
+      btn.addEventListener('click', () => {
+        container.querySelectorAll('.ver-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentVersion = m.value;
+      });
+      container.appendChild(btn);
+    });
+    currentVersion = (MODELS[provider].find(m => m.isDefault) || MODELS[provider][0]).value;
+  }
+
+  renderVersions('claude');
+
+  // ── Provider toggle ──────────────────────────────────────
+  const slider    = document.getElementById('toggle-slider');
+  const btnClaude = document.getElementById('btn-claude');
+  const btnGemini = document.getElementById('btn-gemini');
+
+  function positionSlider(btn) {
+    slider.style.left  = (btn.offsetLeft - 3) + 'px';
+    slider.style.width = btn.offsetWidth + 'px';
+  }
+
+  function setProvider(provider) {
+    currentProvider = provider;
+    const isClaude = provider === 'claude';
+    btnClaude.className = 'toggle-option' + (isClaude  ? ' active-claude' : '');
+    btnGemini.className = 'toggle-option' + (!isClaude ? ' active-gemini' : '');
+    slider.style.background = isClaude ? 'var(--accent)' : 'var(--gemini)';
+    positionSlider(isClaude ? btnClaude : btnGemini);
+    document.body.className = isClaude ? '' : 'gemini-mode';
+    renderVersions(provider);
+  }
+
+  btnClaude.addEventListener('click', () => setProvider('claude'));
+  btnGemini.addEventListener('click', () => setProvider('gemini'));
+  window.addEventListener('load', () => { slider.style.background = 'var(--accent)'; positionSlider(btnClaude); });
+
+  // ── Mode buttons ─────────────────────────────────────────
+  document.querySelectorAll('.mode-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentMode = btn.dataset.mode;
+    });
+  });
+
+  // ── System prompts ───────────────────────────────────────
+  const SYSTEM_PROMPTS = {
+    academic: `You are an expert at crafting precise, effective prompts for AI systems, specializing in academic and scholarly contexts. Your task: take the user's rough or unfocused prompt and rewrite it into a significantly more effective version.
+
+A strong academic prompt typically:
+- Specifies the intellectual task clearly (analyze, compare, argue, synthesize, close-read, etc.)
+- Names specific texts, theorists, or frameworks when relevant
+- Requests a particular perspective, argument structure, or rhetorical approach
+- Indicates appropriate register (scholarly, critical, theoretical)
+- Asks for depth and nuance rather than summary
+- May specify length or format when useful
+
+Output ONLY the refined prompt — no preamble, no explanation, no labels. Just the improved prompt text itself, ready to paste into an AI.`,
+
+    creative: `You are an expert at crafting precise, effective prompts for AI systems, specializing in creative writing. Your task: take the user's rough or unfocused prompt and rewrite it into a significantly more effective version.
+
+A strong creative writing prompt typically:
+- Establishes tone, voice, or POV
+- Specifies genre conventions or subverts them deliberately
+- Provides enough constraint to spark creativity without over-specifying
+- Names specific craft elements (e.g., pacing, imagery, structure, dialogue)
+- Anchors the scene or narrative in concrete sensory detail
+- May specify form (flash fiction, lyric essay, dramatic monologue, etc.)
+
+Output ONLY the refined prompt — no preamble, no explanation, no labels. Just the improved prompt text itself, ready to paste into an AI.`,
+
+    both: `You are an expert at crafting precise, effective prompts for AI systems, with deep fluency in both academic/scholarly and literary/creative contexts. Your task: take the user's rough or unfocused prompt and rewrite it into a significantly more effective version.
+
+Draw on the best practices of both worlds:
+- Precision and intellectual rigor from academic writing
+- Sensory specificity, voice, and constraint from creative writing
+- Clarity about the task type, tone, audience, and desired depth
+- Concrete framing that gives the AI genuine creative and analytical traction
+
+Output ONLY the refined prompt — no preamble, no explanation, no labels. Just the improved prompt text itself, ready to paste into an AI.`,
+
+    general: `You are an expert at writing clear, direct prompts for AI systems. Your task: take the user's rough or vague input and rewrite it as a simple, well-formed prompt — nothing more.
+
+A strong general prompt:
+- States the request plainly and specifically
+- Removes vagueness without adding unnecessary complexity
+- Stays conversational — no academic jargon, no creative scaffolding
+- Is as short as it can be while still being precise
+
+Output ONLY the refined prompt — no preamble, no explanation, no labels. Just the improved prompt text itself, ready to paste into an AI.`
+  };
+
+  // ── API calls ────────────────────────────────────────────
+  async function callClaude(input) {
+    const key = document.getElementById('anthropic-key').value.trim();
+    if (!key) throw new Error('Please enter your Anthropic API key above.');
+
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': key,
+        'anthropic-version': '2023-06-01'
+      },
+      body: JSON.stringify({
+        model: currentVersion,
+        max_tokens: 4096,
+        system: SYSTEM_PROMPTS[currentMode],
+        messages: [{ role: 'user', content: input }]
+      })
+    });
+
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error?.message || 'Claude API error');
+    return data.content?.find(b => b.type === 'text')?.text;
+  }
+
+  async function callGemini(input) {
+    const key = document.getElementById('gemini-key').value.trim();
+    if (!key) throw new Error('Please enter your Google Gemini API key above.');
+
+    const combined = SYSTEM_PROMPTS[currentMode] + '\n\nUser prompt to refine:\n' + input;
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/${currentVersion}:generateContent?key=${key}`;
+
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        contents: [{ parts: [{ text: combined }] }],
+        generationConfig: { maxOutputTokens: 8192 }
+      })
+    });
+
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error?.message || 'Gemini API error');
+    return data.candidates?.[0]?.content?.parts?.[0]?.text;
+  }
+
+  // ── Refine button ────────────────────────────────────────
+  document.getElementById('refine-btn').addEventListener('click', async () => {
+    const input = document.getElementById('input-prompt').value.trim();
+    if (!input) return;
+
+    const btn           = document.getElementById('refine-btn');
+    const outputSection = document.getElementById('output-section');
+    const outputText    = document.getElementById('output-text');
+    const errorMsg      = document.getElementById('error-msg');
+
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner"></span>Refining…';
+    outputSection.classList.add('hidden');
+    errorMsg.style.display = 'none';
+
+    try {
+      const result = currentProvider === 'claude'
+        ? await callClaude(input)
+        : await callGemini(input);
+
+      if (!result) throw new Error('No response received.');
+      outputText.textContent = result;
+      outputSection.classList.remove('hidden');
+    } catch (err) {
+      errorMsg.textContent = 'Error: ' + err.message;
+      errorMsg.style.display = 'block';
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Refine Prompt';
+    }
+  });
+
+  // ── Copy ─────────────────────────────────────────────────
+  document.getElementById('copy-btn').addEventListener('click', () => {
+    navigator.clipboard.writeText(document.getElementById('output-text').textContent).then(() => {
+      const btn = document.getElementById('copy-btn');
+      btn.textContent = 'Copied!';
+      setTimeout(() => btn.textContent = 'Copy', 1800);
+    });
+  });
+</script>
+</body>
+</html>
