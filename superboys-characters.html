@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Superboys of Malegaon — Characters</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #f5ede0;
+    --ink: #1a1008;
+    --gold: #c9922b;
+    --rust: #9e3a1a;
+    --warm-gray: #7a6a58;
+    --card-bg: #fdf6ed;
+  }
+
+  body {
+    background-color: var(--ink);
+    background-image:
+      radial-gradient(ellipse at 20% 50%, rgba(201,146,43,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 20%, rgba(158,58,26,0.07) 0%, transparent 50%);
+    font-family: 'Source Sans 3', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+
+  .slide {
+    width: 100%;
+    max-width: 1200px;
+  }
+
+  /* Header */
+  .header {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(201,146,43,0.3);
+  }
+
+  .header .eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+
+  .header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    color: var(--cream);
+    font-weight: 700;
+    line-height: 1.1;
+  }
+
+  .header .subtitle {
+    font-size: 0.85rem;
+    color: var(--warm-gray);
+    margin-top: 0.4rem;
+    letter-spacing: 0.05em;
+  }
+
+  /* Grid */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.2rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .grid-bottom {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.2rem;
+  }
+
+  /* Cards */
+  .card {
+    background: var(--card-bg);
+    border-radius: 4px;
+    padding: 1.4rem 1.4rem 1.2rem;
+    position: relative;
+    overflow: hidden;
+    border-top: 3px solid var(--gold);
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 60px; height: 60px;
+    background: radial-gradient(circle at top right, rgba(201,146,43,0.08), transparent 70%);
+  }
+
+  .card.rust-accent { border-top-color: var(--rust); }
+  .card.warm-accent { border-top-color: #7a6a58; }
+
+  .role-badge {
+    display: inline-block;
+    font-size: 0.62rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid rgba(201,146,43,0.4);
+    padding: 0.15em 0.6em;
+    border-radius: 2px;
+    margin-bottom: 0.75rem;
+  }
+
+  .card.rust-accent .role-badge {
+    color: var(--rust);
+    border-color: rgba(158,58,26,0.4);
+  }
+
+  .card.warm-accent .role-badge {
+    color: var(--warm-gray);
+    border-color: rgba(122,106,88,0.4);
+  }
+
+  .character-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    color: var(--ink);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 0.2rem;
+  }
+
+  .actor-name {
+    font-size: 0.72rem;
+    color: var(--warm-gray);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 0.9rem;
+  }
+
+  .divider {
+    width: 24px;
+    height: 1px;
+    background: var(--gold);
+    margin-bottom: 0.9rem;
+  }
+
+  .card.rust-accent .divider { background: var(--rust); }
+  .card.warm-accent .divider { background: var(--warm-gray); }
+
+  .description {
+    font-size: 0.82rem;
+    line-height: 1.6;
+    color: #3a2e22;
+  }
+
+  /* Footer */
+  .footer {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(201,146,43,0.2);
+  }
+
+  .footer-info {
+    font-size: 0.7rem;
+    color: rgba(245,237,224,0.35);
+    letter-spacing: 0.05em;
+  }
+
+  .film-info {
+    font-size: 0.7rem;
+    color: rgba(245,237,224,0.35);
+    text-align: right;
+    letter-spacing: 0.05em;
+  }
+
+  @media (max-width: 800px) {
+    .grid, .grid-bottom { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 500px) {
+    .grid, .grid-bottom { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="slide">
+
+  <div class="header">
+    <p class="eyebrow">World Cinema · Character Guide</p>
+    <h1>Superboys of Malegaon</h1>
+    <p class="subtitle">Dir. Reema Kagti &nbsp;·&nbsp; 2024 &nbsp;·&nbsp; Hindi</p>
+  </div>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="role-badge">Director</span>
+      <div class="character-name">Nasir Shaikh</div>
+      <div class="actor-name">Adarsh Gourav</div>
+      <div class="divider"></div>
+      <p class="description">The visionary at the center of it all. Nasir runs his family's video parlor and becomes obsessed with making films for Malegaon's own audience. He's the driving force behind every production — and his ambitions grow almost faster than his friendships can hold.</p>
+    </div>
+
+    <div class="card rust-accent">
+      <span class="role-badge">The Writer</span>
+      <div class="character-name">Farogh</div>
+      <div class="actor-name">Vineet Kumar Singh</div>
+      <div class="divider"></div>
+      <p class="description">Nasir's poet-screenwriter and intellectual foil. Farogh brings literary ambition to the group's scrappy productions. He eventually leaves for Mumbai to chase a career in Bollywood — where he quickly discovers that the industry has no interest in stories from Malegaon.</p>
+    </div>
+
+    <div class="card">
+      <span class="role-badge">The Soul</span>
+      <div class="character-name">Shafique</div>
+      <div class="actor-name">Shashank Arora</div>
+      <div class="divider"></div>
+      <p class="description">Nasir's most loyal friend and the group's lead actor — though he rarely gets the recognition he deserves. Quiet, selfless, and deeply devoted, Shafique dreams of being seen as a hero. His arc becomes the film's most emotional thread, especially as his health declines.</p>
+    </div>
+
+  </div>
+
+  <div class="grid-bottom">
+
+    <div class="card warm-accent">
+      <span class="role-badge">The Actor</span>
+      <div class="character-name">Akram</div>
+      <div class="actor-name">Anuj Singh Duhan</div>
+      <div class="divider"></div>
+      <p class="description">One of the core "superboys" of the troupe, Akram takes on acting roles in Nasir's productions. Like others in the group, he struggles with being underpaid and uncredited, which eventually strains the friendship and the collaboration.</p>
+    </div>
+
+    <div class="card warm-accent">
+      <span class="role-badge">The Crew</span>
+      <div class="character-name">Irfan</div>
+      <div class="actor-name">Saqib Ayub</div>
+      <div class="divider"></div>
+      <p class="description">Another member of the founding circle, Irfan helps bring Nasir's films to life. His presence underlines the film's central theme: that moviemaking in Malegaon is a collective act, built on trust and shared passion rather than contracts or credits.</p>
+    </div>
+
+    <div class="card rust-accent">
+      <span class="role-badge">The Anchor</span>
+      <div class="character-name">Shabeena</div>
+      <div class="actor-name">Muskkaan Jaferi</div>
+      <div class="divider"></div>
+      <p class="description">Nasir's wife, and one of the film's most grounded presences. Shabeena understands that cinema is Nasir's "first love" — and loves him anyway. Her relationship with Nasir is portrayed with rare emotional maturity: quiet, honest, and free of melodrama.</p>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <span class="footer-info">Based on the 2008 documentary <em>Supermen of Malegaon</em> dir. Faiza Ahmad Khan</span>
+    <span class="film-info">Screenplay: Varun Grover &nbsp;·&nbsp; Produced by Zoya Akhtar / Tiger Baby</span>
+  </div>
+
+</div>
+</body>
+</html>
