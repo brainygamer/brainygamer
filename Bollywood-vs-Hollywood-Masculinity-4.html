@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Masculinity in Indian Cinema vs. Hollywood - Presentation Mode</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* High Contrast Palette for Projectors */
+    --saffron: #FF8F00; 
+    --gold: #FFD54F;
+    --white: #FFFFFF;
+    --bg-dark: #000000; 
+    --surface: #111111;
+    --accent-red: #FF5252;
+    --accent-teal: #26A69A;
+    
+    /* Boosted Global Sizing for High-Visibility */
+    --base-font-size: 38px; 
+    --h1-size: 5.5rem;
+    --h2-size: 3.5rem;
+    --body-size: 1.6rem; 
+    --line-height: 1.5;
+    --slide-padding: 6vh 8vw;
+  }
+
+  * { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    background-color: var(--bg-dark);
+    color: var(--white);
+    font-family: 'Outfit', sans-serif;
+    font-size: var(--base-font-size);
+    overflow: hidden; 
+    height: 100vh;
+    width: 100vw;
+  }
+
+  .presentation-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: var(--slide-padding);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: radial-gradient(circle at center, #0a0a0a 0%, #000000 100%);
+  }
+
+  .slide.active { 
+    opacity: 1; 
+    visibility: visible; 
+    z-index: 10; 
+  }
+
+  /* Typography */
+  h1 { 
+    font-family: 'Playfair Display', serif; 
+    font-size: var(--h1-size); 
+    color: var(--saffron); 
+    margin-bottom: 2rem; 
+    line-height: 1.05; 
+    text-align: center;
+  }
+
+  h2 { 
+    font-family: 'Playfair Display', serif; 
+    font-size: var(--h2-size); 
+    color: var(--gold); 
+    border-left: 15px solid var(--saffron); 
+    padding-left: 2.5rem; 
+    margin-bottom: 2rem; 
+    line-height: 1.1;
+  }
+  
+  p, li { 
+    font-size: var(--body-size); 
+    line-height: var(--line-height); 
+    color: #F5F5F5; 
+    margin-bottom: 1rem; 
+  }
+  
+  ul { list-style: none; margin-bottom: 1rem; }
+  li { position: relative; padding-left: 3rem; }
+  li::before { 
+    content: "◈"; 
+    position: absolute; 
+    left: 0; 
+    color: var(--saffron); 
+    font-weight: bold;
+    font-size: 1.2em;
+  }
+
+  /* Structural Content Boxes */
+  .content-grid { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    gap: 3rem; 
+    width: 100%;
+    align-items: stretch;
+  }
+
+  .comparison-card { 
+    background: rgba(255, 255, 255, 0.04); 
+    border: 2px solid rgba(255, 255, 255, 0.08); 
+    padding: 2.5rem; 
+    border-radius: 24px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .comparison-card h3 { 
+    color: var(--saffron); 
+    font-size: 2.2rem; 
+    margin-bottom: 1.2rem; 
+    text-transform: uppercase; 
+    letter-spacing: 2px;
+    border-bottom: 3px solid rgba(255, 143, 0, 0.2);
+    padding-bottom: 0.8rem;
+  }
+
+  .highlight { 
+    color: var(--gold); 
+    font-weight: 700; 
+  }
+
+  /* UI Elements */
+  .controls { 
+    position: fixed; 
+    bottom: 40px; 
+    right: 50px; 
+    display: flex; 
+    gap: 20px; 
+    z-index: 100; 
+  }
+
+  .nav-btn { 
+    background: rgba(255, 255, 255, 0.1); 
+    border: 1px solid rgba(255, 255, 255, 0.2); 
+    color: white; 
+    width: 80px; 
+    height: 80px; 
+    border-radius: 50%; 
+    cursor: pointer; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    font-size: 2.2rem; 
+    transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+  }
+
+  .nav-btn:hover { 
+    background: var(--saffron); 
+    transform: scale(1.1); 
+    box-shadow: 0 0 30px rgba(255, 143, 0, 0.3);
+  }
+
+  .progress-bar { 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    height: 10px; 
+    background: linear-gradient(to right, var(--saffron), var(--gold)); 
+    transition: width 0.4s ease; 
+    z-index: 1000; 
+  }
+
+  .slide-num { 
+    position: fixed; 
+    bottom: 50px; 
+    left: 60px; 
+    color: rgba(255, 255, 255, 0.4); 
+    font-size: 1.2rem; 
+    font-weight: 800; 
+    letter-spacing: 3px;
+  }
+
+  /* Responsive tweaks */
+  @media (max-height: 900px) {
+    :root { 
+      --base-font-size: 30px; 
+      --h1-size: 4rem;
+      --h2-size: 2.8rem;
+    }
+    .comparison-card { padding: 1.8rem; }
+    .content-grid { gap: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progress"></div>
+<div class="slide-num" id="counter">SLIDE 1 OF 5</div>
+
+<div class="presentation-wrapper">
+  <!-- SLIDE 1: TITLE -->
+  <section class="slide active" id="slide-1">
+    <div style="text-align: center;">
+      <h1>Masculinity in <span style="color:var(--gold)">Indian Cinema</span> <br>vs. Hollywood</h1>
+      <p style="font-style: italic; color: var(--gold); font-size: 2.5rem; margin-top: 2rem;">A Comparative Socio-Cultural Analysis of the Hero Archetype</p>
+      <div style="width: 200px; height: 8px; background: var(--saffron); margin: 4rem auto;"></div>
+    </div>
+  </section>
+
+  <!-- SLIDE 2: THE HERO ARCHETYPE -->
+  <section class="slide" id="slide-2">
+    <h2>The Hero Archetype</h2>
+    <div class="content-grid">
+      <div class="comparison-card">
+        <h3>Indian Cinema: The "Angry Young Man"</h3>
+        <ul>
+          <li><strong>Moral Protector:</strong> Masculinity is defined by the protection of the family unit and the community.</li>
+          <li><span class="highlight">Duality of Duty (Dharma):</span> A constant internal conflict between familial loyalty and societal laws.</li>
+          <li>Hyper-emotionality is viewed as a sign of passion and moral conviction.</li>
+        </ul>
+      </div>
+      <div class="comparison-card">
+        <h3>Hollywood: The "Lone Wolf"</h3>
+        <ul>
+          <li><strong>Rugged Individualism:</strong> The hero often operates outside of established family structures or societal norms.</li>
+          <li>Stoicism is the primary currency of strength; silence indicates power.</li>
+          <li>Self-reliance is prioritized over communal or ancestral obligation.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 3: EMOTIONAL EXPRESSION (Reformatted to Two Column) -->
+  <section class="slide" id="slide-3">
+    <h2>Emotional Landscapes</h2>
+    <div class="content-grid">
+      <div class="comparison-card">
+          <h3>Indian Cinema: Expression</h3>
+          <p>Unlike Western tropes, song and dance sequences are not "feminizing." They serve as a <span class="highlight">legitimate outlet</span> for grief, joy, and spiritual devotion, allowing the hero to remain "tough" while expressing deep vulnerability.</p>
+      </div>
+      <div class="comparison-card">
+          <h3>Hollywood: Minimalism</h3>
+          <p>Employs "Emotional Minimalism." Strength is traditionally communicated through the <span class="highlight">suppression</span> of feeling. Intimacy is often coded through action rather than verbal or artistic expression.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 4: MODERN TRANSITIONS -->
+  <section class="slide" id="slide-4">
+    <h2>Modern Transitions</h2>
+    <div class="content-grid">
+        <div class="comparison-card">
+            <h3>Bollywood & Beyond</h3>
+            <p>A shift toward <span class="highlight">"Alpha-Vulnerability."</span> Modern characters (e.g., in <em>Kabir Singh</em> or <em>Animal</em>) explore the darker, more destructive side of traditional traits, while others focus on mental health struggles.</p>
+        </div>
+        <div class="comparison-card">
+            <h3>Hollywood Evolution</h3>
+            <p>Deconstructing the "Lone Wolf." Recent portrayals (e.g., <strong>Logan</strong> or Pattinson's <strong>Batman</strong>) emphasize the <strong>burden of trauma</strong>. The hero is no longer an invincible savior, but a human attempting to heal.</p>
+        </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 5: CONCLUSION -->
+  <section class="slide" id="slide-5">
+    <div style="text-align: center;">
+      <h2 style="text-align: center; border: none; padding: 0; margin-bottom: 2rem;">Critical Takeaways</h2>
+      <div style="max-width: 1200px; margin: 0 auto; text-align: left; background: rgba(255,255,255,0.04); padding: 3rem; border-radius: 40px; border: 2px solid rgba(255,255,255,0.1);">
+        <ul>
+          <li>Masculinity is not a monolith; it is a <span class="highlight">socially constructed performance</span> that adapts to cultural values.</li>
+          <li>Indian cinema's focus on <strong>Collectivism</strong> creates a hero who is a servant of the family.</li>
+          <li>Hollywood's focus on <strong>Individualism</strong> creates a hero who is a master of his own destiny.</li>
+          <li>Both industries are moving toward a more nuanced, psychological exploration of the 21st-century man.</li>
+        </ul>
+      </div>
+      <h3 style="color: var(--saffron); margin-top: 3rem; font-size: 3rem; font-family: 'Playfair Display', serif;">Thoughts or Questions?</h3>
+    </div>
+  </section>
+</div>
+
+<div class="controls">
+  <button class="nav-btn" id="prev" title="Previous Slide">←</button>
+  <button class="nav-btn" id="next" title="Next Slide">→</button>
+</div>
+
+<script>
+  let currentSlide = 0;
+  const slides = document.querySelectorAll('.slide');
+  const progressBar = document.getElementById('progress');
+  const counter = document.getElementById('counter');
+
+  function updateSlide() {
+    slides.forEach((slide, index) => {
+      slide.classList.toggle('active', index === currentSlide);
+    });
+    
+    const progressWidth = ((currentSlide + 1) / slides.length) * 100;
+    progressBar.style.width = `${progressWidth}%`;
+    counter.textContent = `SLIDE ${currentSlide + 1} OF ${slides.length}`;
+  }
+
+  document.getElementById('next').addEventListener('click', () => { 
+    if (currentSlide < slides.length - 1) { currentSlide++; updateSlide(); } 
+  });
+
+  document.getElementById('prev').addEventListener('click', () => { 
+    if (currentSlide > 0) { currentSlide--; updateSlide(); } 
+  });
+  
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'Enter') { 
+      if (currentSlide < slides.length - 1) { currentSlide++; updateSlide(); } 
+    }
+    if (e.key === 'ArrowLeft' || e.key === 'Backspace') { 
+      if (currentSlide > 0) { currentSlide--; updateSlide(); } 
+    }
+  });
+
+  window.addEventListener('resize', updateSlide);
+  updateSlide();
+</script>
+</body>
+</html>
