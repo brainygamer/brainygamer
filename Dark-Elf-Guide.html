@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESO: Dark Elf Sorcerer Starter Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap');
+        
+        :root {
+            --dunmer-red: #8b0000;
+            --dunmer-gold: #c5a059;
+            --ash-gray: #2c2c2c;
+        }
+
+        body {
+            background-color: #121212;
+            color: #e0e0e0;
+            font-family: 'Lora', serif;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Cinzel', serif;
+            color: var(--dunmer-gold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .border-accent {
+            border-color: var(--dunmer-red);
+        }
+
+        .bg-card {
+            background-color: #1e1e1e;
+        }
+
+        .gradient-overlay {
+            background: linear-gradient(180deg, rgba(139, 0, 0, 0.2) 0%, rgba(18, 18, 18, 1) 100%);
+        }
+
+        .step-number {
+            background-color: var(--dunmer-red);
+            color: white;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-weight: bold;
+            margin-right: 12px;
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+    <div class="max-w-4xl mx-auto overflow-hidden rounded-lg shadow-2xl border border-accent">
+        <!-- Hero Section -->
+        <div class="relative h-64 flex items-end p-8 gradient-overlay">
+            <div>
+                <h1 class="text-4xl font-bold mb-2">The Dunmer Sorcerer</h1>
+                <p class="text-lg italic opacity-80 text-white">Ebonheart Pact & Faction Origin Guide</p>
+            </div>
+        </div>
+
+        <!-- Quick Setup -->
+        <section class="p-8 bg-card border-b border-accent">
+            <h2 class="text-2xl mb-4 flex items-center">
+                <span class="mr-2">🔥</span> Immediate Setup (Skip Tutorial)
+            </h2>
+            <div class="space-y-4">
+                <div class="flex items-start">
+                    <div class="step-number">1</div>
+                    <p><strong>Spawn & Ignore:</strong> After skipping the tutorial, you'll spawn in the latest DLC zone. Ignore the local quest-givers and find the nearest <strong>Wayshrine</strong>.</p>
+                </div>
+                <div class="flex items-start">
+                    <div class="step-number">2</div>
+                    <p><strong>Teleport to Stonefalls:</strong> Open your map and look for <strong>Davon's Watch</strong> in the Stonefalls region. Teleport there immediately.</p>
+                </div>
+                <div class="flex items-start">
+                    <div class="step-number">3</div>
+                    <p><strong>Trigger the Main Story:</strong> As soon as you step off the Wayshrine, a <strong>"Hooded Figure"</strong> will approach you. Talk to her to start the "Soul Shriven in Coldharbour" quest. This is the Harborage storyline.</p>
+                </div>
+                <div class="flex items-start">
+                    <div class="step-number">4</div>
+                    <p><strong>Backtrack for Faction Context:</strong> Go to the docks in Davon's Watch and find the Boatswain to go to <strong>Bleakrock Isle</strong>. This is the true beginning of the Ebonheart Pact story.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Narrative Path -->
+        <section class="p-8 bg-neutral-900">
+            <h2 class="text-2xl mb-6">Chronological Questing Order</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+                <div class="p-4 bg-card rounded border border-gray-700">
+                    <h3 class="text-dunmer-red mb-2">The Faction Story</h3>
+                    <ul class="list-disc list-inside space-y-2 opacity-90">
+                        <li>Bleakrock Isle (Starter Island)</li>
+                        <li>Bal Foyen (Prologue)</li>
+                        <li>Stonefalls (Dunmer Heartlands)</li>
+                        <li>Deshaan (Mournhold City)</li>
+                        <li>Shadowfen (Argonian Marshes)</li>
+                    </ul>
+                </div>
+                <div class="p-4 bg-card rounded border border-gray-700">
+                    <h3 class="text-dunmer-red mb-2">The Harborage (Main Story)</h3>
+                    <p class="mb-2 italic">Return to the Harborage in Stonefalls whenever the Prophet calls.</p>
+                    <ul class="list-disc list-inside space-y-2 opacity-90">
+                        <li>Soul Shriven in Coldharbour</li>
+                        <li>Chasing Shadows</li>
+                        <li>Castle of the Worm</li>
+                        <li>Halls of Torment</li>
+                        <li>God of Schemes (Finale)</li>
+                    </ul>
+                </div>
+            </div>
+            <p class="mt-4 text-xs italic opacity-70">*Note: You can swap between these two paths at your own pace. Neither will penalize the other.</p>
+        </section>
+
+        <!-- Mage Build -->
+        <section class="p-8 bg-card border-t border-accent">
+            <h2 class="text-2xl mb-6">Sorcerer "Powerful Mage" Build</h2>
+            <div class="space-y-6">
+                <div class="bg-black/30 p-4 rounded-lg">
+                    <h3 class="text-lg mb-2">Attributes: Magicka Is Everything</h3>
+                    <p class="text-sm">Put <strong>64 points into Magicka</strong>. Do not put points into Health or Stamina. As a Dark Elf Sorcerer, your Magicka pool directly determines your damage output and shield strength.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="p-3 border border-gray-700 rounded text-center">
+                        <span class="block text-dunmer-gold font-bold">Weapon</span>
+                        <span class="text-sm">Lightning Staff</span>
+                    </div>
+                    <div class="p-3 border border-gray-700 rounded text-center">
+                        <span class="block text-dunmer-gold font-bold">Armor</span>
+                        <span class="text-sm">Light Armor (All)</span>
+                    </div>
+                    <div class="p-3 border border-gray-700 rounded text-center">
+                        <span class="block text-dunmer-gold font-bold">Mundus Stone</span>
+                        <span class="text-sm">The Mage (Max Magicka)</span>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-lg mb-3">Core Skills to Unlock Early</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm">
+                        <div class="flex justify-between p-2 bg-neutral-800">
+                            <span>Crystal Shard</span>
+                            <span class="text-dunmer-gold">Main Damage</span>
+                        </div>
+                        <div class="flex justify-between p-2 bg-neutral-800">
+                            <span>Daedric Summoning</span>
+                            <span class="text-dunmer-gold">Pets/Shields</span>
+                        </div>
+                        <div class="flex justify-between p-2 bg-neutral-800">
+                            <span>Lightning Splash</span>
+                            <span class="text-dunmer-gold">AoE Damage</span>
+                        </div>
+                        <div class="flex justify-between p-2 bg-neutral-800">
+                            <span>Inner Light (Mages Guild)</span>
+                            <span class="text-dunmer-gold">Buffs</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final Tips -->
+        <footer class="p-6 bg-neutral-900 text-center text-sm italic opacity-60">
+            "We are Dunmer. We do not ask for power; we take it from the Ash."
+        </footer>
+    </div>
+</body>
+</html>
