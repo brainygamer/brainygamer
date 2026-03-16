@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>From Samurai to Hollywood: The Lone Wolf Hero</title>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;700&family=Bebas+Neue&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0e0b07;
+    --parchment: #f5ede0;
+    --red: #c0392b;
+    --gold: #c8a951;
+    --slate: #2c2c2c;
+    --muted: #7a6e62;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--ink);
+    font-family: 'Lato', sans-serif;
+    color: var(--parchment);
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+  }
+
+  /* SLIDE SYSTEM */
+  .slides {
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    display: none;
+    flex-direction: column;
+  }
+  .slide.active { display: flex; }
+
+
+  /* ─────────── SLIDE 1: TITLE ─────────── */
+  #slide-1 {
+    background: var(--ink);
+    overflow: hidden;
+  }
+
+  .title-bg {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .title-bg-half {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .title-bg-half img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.35;
+    filter: sepia(60%) contrast(1.1);
+  }
+
+  .title-bg-half.left::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, rgba(14,11,7,0.2), rgba(14,11,7,0.7));
+  }
+
+  .title-bg-half.right::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to left, rgba(14,11,7,0.2), rgba(14,11,7,0.7));
+  }
+
+  .title-center-line {
+    position: absolute;
+    top: 0; bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+  }
+
+  .title-content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 60px 80px;
+  }
+
+  .title-eyebrow {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 13px;
+    letter-spacing: 6px;
+    color: var(--gold);
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+
+  .title-main {
+    font-family: 'Bebas Neue', sans-calls-to-action sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(52px, 7vw, 96px);
+    line-height: 0.95;
+    letter-spacing: 4px;
+    color: var(--parchment);
+    margin-bottom: 18px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.4s forwards;
+  }
+
+  .title-main span { color: var(--red); }
+
+  .title-sub {
+    font-family: 'Shippori Mincho', serif;
+    font-size: clamp(16px, 2vw, 22px);
+    color: var(--gold);
+    letter-spacing: 2px;
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.6s forwards;
+  }
+
+  .title-rule {
+    width: 80px;
+    height: 1px;
+    background: var(--gold);
+    margin: 0 auto 24px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.7s forwards;
+  }
+
+  .title-body {
+    font-size: 15px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    max-width: 480px;
+    line-height: 1.7;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.8s forwards;
+  }
+
+  .title-labels {
+    position: absolute;
+    bottom: 40px;
+    left: 0; right: 0;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 60px;
+    opacity: 0;
+    animation: fadeUp 0.8s 1s forwards;
+  }
+
+  .title-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 12px;
+    letter-spacing: 4px;
+    color: var(--muted);
+  }
+
+  /* ─────────── SLIDE 2: COMPARISON TABLE ─────────── */
+  #slide-2 {
+    background: var(--ink);
+    padding: 48px 60px 48px;
+    overflow: hidden;
+  }
+
+  .slide-header {
+    margin-bottom: 32px;
+  }
+
+  .slide-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 11px;
+    letter-spacing: 5px;
+    color: var(--red);
+    margin-bottom: 8px;
+  }
+
+  .slide-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(32px, 4vw, 52px);
+    letter-spacing: 3px;
+    line-height: 1;
+    color: var(--parchment);
+  }
+
+  .slide-title span { color: var(--gold); }
+
+  .slide-rule {
+    width: 60px;
+    height: 2px;
+    background: var(--red);
+    margin-top: 12px;
+  }
+
+  /* Pairing cards */
+  .pairings {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    flex: 1;
+  }
+
+  .pair-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(200,169,81,0.15);
+    border-radius: 6px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: border-color 0.3s;
+    animation: fadeUp 0.6s both;
+  }
+  .pair-card:nth-child(1) { animation-delay: 0.1s; }
+  .pair-card:nth-child(2) { animation-delay: 0.2s; }
+  .pair-card:nth-child(3) { animation-delay: 0.3s; }
+  .pair-card:nth-child(4) { animation-delay: 0.4s; }
+  .pair-card:hover { border-color: rgba(200,169,81,0.5); }
+
+  .pair-images {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 130px;
+    position: relative;
+  }
+
+  .pair-img-wrap {
+    overflow: hidden;
+    position: relative;
+  }
+
+  .pair-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    filter: sepia(30%) contrast(1.1);
+    transition: filter 0.3s;
+  }
+  .pair-card:hover .pair-img-wrap img { filter: sepia(0%) contrast(1.1); }
+
+  .pair-img-wrap.source::after {
+    content: '源 SOURCE';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    background: rgba(192,57,43,0.85);
+    color: white;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-align: center;
+    padding: 3px;
+  }
+
+  .pair-img-wrap.inspired::after {
+    content: '影響 INSPIRED';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    background: rgba(44,44,44,0.85);
+    color: var(--gold);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-align: center;
+    padding: 3px;
+  }
+
+  .pair-arrow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 28px;
+    height: 28px;
+    background: var(--gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    color: var(--ink);
+    z-index: 2;
+    font-weight: bold;
+  }
+
+  .pair-body {
+    padding: 12px 14px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .pair-source-name {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 12px;
+    color: var(--red);
+    letter-spacing: 1px;
+  }
+
+  .pair-arrow-text {
+    color: var(--gold);
+    font-size: 10px;
+    margin: 0 3px;
+  }
+
+  .pair-dest-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 14px;
+    letter-spacing: 2px;
+    color: var(--parchment);
+  }
+
+  .pair-names-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2px;
+  }
+
+  .pair-connection {
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.5;
+    flex: 1;
+  }
+
+  .pair-tag {
+    display: inline-block;
+    background: rgba(200,169,81,0.12);
+    border: 1px solid rgba(200,169,81,0.25);
+    color: var(--gold);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 9px;
+    letter-spacing: 2px;
+    padding: 2px 7px;
+    border-radius: 10px;
+    align-self: flex-start;
+    margin-top: 4px;
+  }
+
+  /* Placeholder styling for images that can't load */
+  .img-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #1a1510;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--muted);
+    text-align: center;
+    padding: 8px;
+  }
+
+  /* ─────────── SLIDE 3: FORCE / JEDI slide ─────────── */
+  #slide-3 {
+    background: var(--ink);
+    overflow: hidden;
+    padding: 48px 60px 48px;
+  }
+
+  .jedi-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    flex: 1;
+    align-items: start;
+  }
+
+  .jedi-col-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 13px;
+    letter-spacing: 5px;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(200,169,81,0.3);
+  }
+
+  .jedi-col-title.red { color: var(--red); }
+  .jedi-col-title.gold { color: var(--gold); }
+
+  .concept-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .concept-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    animation: fadeUp 0.5s both;
+  }
+
+  .concept-item:nth-child(1) { animation-delay: 0.15s; }
+  .concept-item:nth-child(2) { animation-delay: 0.25s; }
+  .concept-item:nth-child(3) { animation-delay: 0.35s; }
+  .concept-item:nth-child(4) { animation-delay: 0.45s; }
+  .concept-item:nth-child(5) { animation-delay: 0.55s; }
+
+  .concept-icon {
+    font-size: 18px;
+    min-width: 28px;
+    text-align: center;
+    margin-top: 1px;
+  }
+
+  .concept-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 14px;
+    letter-spacing: 2px;
+    color: var(--parchment);
+    margin-bottom: 3px;
+  }
+
+  .concept-desc {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .concept-desc strong { color: var(--parchment); }
+
+  .jedi-quote-block {
+    margin-top: 28px;
+    border-left: 3px solid var(--red);
+    padding: 14px 20px;
+    background: rgba(192,57,43,0.06);
+    border-radius: 0 4px 4px 0;
+    animation: fadeUp 0.6s 0.6s both;
+  }
+
+  .jedi-quote {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 14px;
+    color: var(--parchment);
+    line-height: 1.7;
+    font-style: italic;
+    margin-bottom: 8px;
+  }
+
+  .jedi-quote-attr {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--gold);
+  }
+
+  .jedi-visual {
+    position: relative;
+    border-radius: 6px;
+    overflow: hidden;
+    height: 280px;
+    animation: fadeUp 0.6s 0.3s both;
+  }
+
+  .jedi-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: sepia(20%) contrast(1.1);
+  }
+
+  .jedi-visual-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(14,11,7,0.9) 0%, transparent 50%);
+  }
+
+  .jedi-visual-caption {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    right: 16px;
+  }
+
+  .jedi-visual-caption h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 3px;
+    color: var(--parchment);
+    margin-bottom: 4px;
+  }
+
+  .jedi-visual-caption p {
+    font-size: 12px;
+    color: var(--gold);
+    letter-spacing: 1px;
+  }
+
+  .jedi-comparisons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 16px;
+  }
+
+  .jedi-comp-item {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(200,169,81,0.15);
+    border-radius: 4px;
+    padding: 10px 12px;
+    animation: fadeUp 0.5s both;
+  }
+
+  .jedi-comp-item:nth-child(1) { animation-delay: 0.4s; }
+  .jedi-comp-item:nth-child(2) { animation-delay: 0.5s; }
+  .jedi-comp-item:nth-child(3) { animation-delay: 0.6s; }
+  .jedi-comp-item:nth-child(4) { animation-delay: 0.7s; }
+
+  .comp-jp { font-family: 'Shippori Mincho', serif; font-size: 11px; color: var(--red); margin-bottom: 2px; }
+  .comp-arrow { color: var(--gold); font-size: 10px; margin: 2px 0; }
+  .comp-en { font-family: 'Bebas Neue', sans-serif; font-size: 12px; letter-spacing: 1px; color: var(--parchment); }
+
+  /* Animation */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Scrollable inner content for tight slides */
+  .slide-inner {
+    flex: 1;
+    overflow-y: auto;
+    scrollbar-width: none;
+  }
+  .slide-inner::-webkit-scrollbar { display: none; }
+
+  .discussion-box {
+    margin-top: 24px;
+    background: rgba(192,57,43,0.08);
+    border: 1px solid rgba(192,57,43,0.3);
+    border-radius: 6px;
+    padding: 16px 20px;
+    animation: fadeUp 0.6s 0.7s both;
+  }
+  .discussion-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--red);
+    margin-bottom: 8px;
+  }
+  .discussion-q {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 14px;
+    color: var(--parchment);
+    line-height: 1.7;
+    font-style: italic;
+  }
+</style>
+</head>
+<body>
+
+<div class="slides">
+
+  <!-- ══════ SLIDE 1: TITLE ══════ -->
+  <div class="slide active" id="slide-1">
+    <div class="title-bg">
+      <div class="title-bg-half left">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Yojimbo_%281961%29.jpg/800px-Yojimbo_%281961%29.jpg"
+             onerror="this.style.display='none'" alt="Yojimbo">
+      </div>
+      <div class="title-bg-half right">
+        <img src="https://upload.wikimedia.org/wikipedia/en/4/4d/The_Mandalorian_Season_3_key_art.jpg"
+             onerror="this.style.display='none'" alt="The Mandalorian">
+      </div>
+    </div>
+    <div class="title-center-line"></div>
+    <div class="title-content">
+      <div class="title-eyebrow">Film Studies · World Cinema</div>
+      <div class="title-main">From <span>Samurai</span><br>to Hollywood</div>
+      <div class="title-sub">The Lone Wolf Hero Across Cultures</div>
+      <div class="title-rule"></div>
+      <div class="title-body">How Akira Kurosawa's ronin archetype traveled from postwar Japan to shape the heroes of Westerns, Star Wars, and Marvel — and why it worked so perfectly.</div>
+    </div>
+    <div class="title-labels">
+      <div class="title-label">Japan · 1950s–1960s</div>
+      <div class="title-label">Hollywood · 1960s–Present</div>
+    </div>
+  </div>
+
+  <!-- ══════ SLIDE 2: CHARACTER PAIRINGS ══════ -->
+  <div class="slide" id="slide-2">
+    <div class="slide-header">
+      <div class="slide-number">01 — CHARACTER CONNECTIONS</div>
+      <div class="slide-title">The <span>Ronin</span> Reborn</div>
+      <div class="slide-rule"></div>
+    </div>
+    <div class="slide-inner">
+      <div class="pairings">
+
+        <!-- PAIR 1: Sanjuro → Mandalorian -->
+        <div class="pair-card">
+          <div class="pair-images">
+            <div class="pair-img-wrap source">
+              <div class="img-placeholder">SANJURO<br>Yojimbo (1961)</div>
+            </div>
+            <div class="pair-img-wrap inspired">
+              <div class="img-placeholder">DIN DJARIN<br>The Mandalorian</div>
+            </div>
+            <div class="pair-arrow">→</div>
+          </div>
+          <div class="pair-body">
+            <div class="pair-names-row">
+              <span class="pair-source-name">Sanjuro</span>
+              <span class="pair-arrow-text">→</span>
+              <span class="pair-dest-name">The Mandalorian</span>
+            </div>
+            <div class="pair-connection">Armored, silent wanderer. Protects the vulnerable without attachment. A personal code replaces loyalty to any master.</div>
+            <span class="pair-tag">Silent Protector</span>
+          </div>
+        </div>
+
+        <!-- PAIR 2: Sanjuro → Man with No Name -->
+        <div class="pair-card">
+          <div class="pair-images">
+            <div class="pair-img-wrap source">
+              <div class="img-placeholder">SANJURO<br>Yojimbo (1961)</div>
+            </div>
+            <div class="pair-img-wrap inspired">
+              <div class="img-placeholder">MAN WITH<br>NO NAME<br>Fistful of Dollars</div>
+            </div>
+            <div class="pair-arrow">→</div>
+          </div>
+          <div class="pair-body">
+            <div class="pair-names-row">
+              <span class="pair-source-name">Sanjuro</span>
+              <span class="pair-arrow-text">→</span>
+              <span class="pair-dest-name">Man with No Name</span>
+            </div>
+            <div class="pair-connection"><strong>Direct adaptation.</strong> Leone copied Kurosawa scene-for-scene. Kurosawa sued — and won. The squint, the silence, the mercenary code: all Mifune.</div>
+            <span class="pair-tag">Direct Source</span>
+          </div>
+        </div>
+
+        <!-- PAIR 3: Lone ronin → Logan / Wolverine -->
+        <div class="pair-card">
+          <div class="pair-images">
+            <div class="pair-img-wrap source">
+              <div class="img-placeholder">RONIN<br>ARCHETYPE<br>Japanese Cinema</div>
+            </div>
+            <div class="pair-img-wrap inspired">
+              <div class="img-placeholder">LOGAN<br>Wolverine (2017)</div>
+            </div>
+            <div class="pair-arrow">→</div>
+          </div>
+          <div class="pair-body">
+            <div class="pair-names-row">
+              <span class="pair-source-name">Lone Ronin</span>
+              <span class="pair-arrow-text">→</span>
+              <span class="pair-dest-name">Logan / Wolverine</span>
+            </div>
+            <div class="pair-connection">The retired warrior drawn back in by a child needing protection. Scarred. Violent skills he's trying to leave behind. A code of honor among killers.</div>
+            <span class="pair-tag">Reluctant Warrior</span>
+          </div>
+        </div>
+
+        <!-- PAIR 4: Seven Samurai → Avengers -->
+        <div class="pair-card">
+          <div class="pair-images">
+            <div class="pair-img-wrap source">
+              <div class="img-placeholder">KAMBEI<br>Seven Samurai<br>(1954)</div>
+            </div>
+            <div class="pair-img-wrap inspired">
+              <div class="img-placeholder">CAPTAIN<br>AMERICA<br>The Avengers</div>
+            </div>
+            <div class="pair-arrow">→</div>
+          </div>
+          <div class="pair-body">
+            <div class="pair-names-row">
+              <span class="pair-source-name">Kambei</span>
+              <span class="pair-arrow-text">→</span>
+              <span class="pair-dest-name">Captain America</span>
+            </div>
+            <div class="pair-connection">The weary veteran who assembles reluctant specialists. Fights for principle, not reward. Leadership through moral gravity, not rank or wealth.</div>
+            <span class="pair-tag">Ensemble Leader</span>
+          </div>
+        </div>
+
+      </div><!-- /pairings -->
+
+      <div class="discussion-box">
+        <div class="discussion-label">Discussion</div>
+        <div class="discussion-q">"Why does the Man with No Name have no name? That's not a Western convention — it's a Kurosawa convention."</div>
+      </div>
+
+    </div><!-- /slide-inner -->
+  </div>
+
+  <!-- ══════ SLIDE 3: THE FORCE = BUSHIDO ══════ -->
+  <div class="slide" id="slide-3">
+    <div class="slide-header">
+      <div class="slide-number">02 — THE DEEPEST CONNECTION</div>
+      <div class="slide-title">The <span>Force</span> Is Bushidō</div>
+      <div class="slide-rule"></div>
+    </div>
+    <div class="slide-inner">
+      <div class="jedi-layout">
+
+        <!-- LEFT: Samurai concepts -->
+        <div>
+          <div class="jedi-col-title red">Japanese Samurai Cinema</div>
+          <div class="concept-list">
+
+            <div class="concept-item">
+              <div class="concept-icon">⚔️</div>
+              <div>
+                <div class="concept-label">The Ronin — Masterless Warrior</div>
+                <div class="concept-desc">A disbanded order, masters dead, serving a <strong>code rather than a state</strong>. The skill demands a spiritual discipline, not just muscle.</div>
+              </div>
+            </div>
+
+            <div class="concept-item">
+              <div class="concept-icon">🗡️</div>
+              <div>
+                <div class="concept-label">The Katana as Identity</div>
+                <div class="concept-desc">The sword is inseparable from the warrior's soul. To wield it demands <strong>years of inner cultivation</strong>, not just technique.</div>
+              </div>
+            </div>
+
+            <div class="concept-item">
+              <div class="concept-icon">🎋</div>
+              <div>
+                <div class="concept-label">Bushidō — The Way of the Warrior</div>
+                <div class="concept-desc">A moral code: loyalty, honor, self-sacrifice. The warrior <strong>serves values larger than himself</strong>, even when no master commands it.</div>
+              </div>
+            </div>
+
+            <div class="concept-item">
+              <div class="concept-icon">🎬</div>
+              <div>
+                <div class="concept-label">The Hidden Fortress (1958)</div>
+                <div class="concept-desc">George Lucas's <strong>direct source</strong> for Star Wars — the perspective device, the princess, the general who guides her across enemy lines.</div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="jedi-quote-block">
+            <div class="jedi-quote">"I was inspired by Kurosawa's use of multiple characters to tell the story of a battle. The Hidden Fortress really inspired Star Wars."</div>
+            <div class="jedi-quote-attr">— George Lucas</div>
+          </div>
+        </div>
+
+        <!-- RIGHT: Star Wars / Hollywood equivalents -->
+        <div>
+          <div class="jedi-col-title gold">Star Wars · Hollywood Translation</div>
+
+          <div class="jedi-comparisons">
+            <div class="jedi-comp-item">
+              <div class="comp-jp">Ronin (浪人) — masterless samurai</div>
+              <div class="comp-arrow">↓</div>
+              <div class="comp-en">The Jedi Order — disbanded, serving the Force alone</div>
+            </div>
+            <div class="jedi-comp-item">
+              <div class="comp-jp">Katana — spiritual weapon</div>
+              <div class="comp-arrow">↓</div>
+              <div class="comp-en">Lightsaber — requires inner calm, not just skill</div>
+            </div>
+            <div class="jedi-comp-item">
+              <div class="comp-jp">Kabuto (兜) — samurai battle helmet</div>
+              <div class="comp-arrow">↓</div>
+              <div class="comp-en">Darth Vader's helmet — McQuarrie explicitly drew on kabuto design</div>
+            </div>
+            <div class="jedi-comp-item">
+              <div class="comp-jp">Bushidō moral code</div>
+              <div class="comp-arrow">↓</div>
+              <div class="comp-en">The Jedi Code — honor, sacrifice, service to something larger</div>
+            </div>
+          </div>
+
+          <div class="discussion-box" style="margin-top: 16px;">
+            <div class="discussion-label">Discussion Question</div>
+            <div class="discussion-q">"What's the difference between a Jedi and a soldier? The answer is essentially the difference between a samurai and a foot soldier."</div>
+          </div>
+
+          <div class="discussion-box" style="margin-top: 12px; border-color: rgba(200,169,81,0.3); background: rgba(200,169,81,0.06);">
+            <div class="discussion-label" style="color: var(--gold);">The Bigger Question</div>
+            <div class="discussion-q">"We think of the lone hero as an American myth. But if Hollywood keeps borrowing it from Japanese cinema — who actually owns this myth?"</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /slides -->
+
+
+<script>
+  let current = 0;
+  const slides = document.querySelectorAll('.slide');
+  const total = slides.length;
+
+  function changeSlide(dir) {
+    slides[current].classList.remove('active');
+    current = Math.max(0, Math.min(total - 1, current + dir));
+    slides[current].classList.add('active');
+  }
+
+  // Keyboard navigation
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') changeSlide(1);
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   changeSlide(-1);
+  });
+</script>
+</body>
+</html>
