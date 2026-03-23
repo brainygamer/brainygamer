@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Preparation for Wednesday's Screening — Full Time</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;1,8..60,300;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1a1410;
+    --paper: #f5f0e8;
+    --rule: #c8bfaa;
+    --accent: #8b1a1a;
+    --muted: #6b6255;
+    --highlight-bg: #ede7d9;
+  }
+
+  html { font-size: 18px; }
+
+  body {
+    background-color: var(--paper);
+    color: var(--ink);
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-weight: 300;
+    line-height: 1.75;
+    min-height: 100vh;
+  }
+
+  /* Subtle texture overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page {
+    position: relative;
+    z-index: 1;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 5rem 2.5rem 6rem;
+  }
+
+  /* Header */
+  header {
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .kicker {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.72rem;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.4rem;
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .subtitle {
+    font-family: 'Source Serif 4', serif;
+    font-size: 0.95rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--muted);
+    letter-spacing: 0.02em;
+  }
+
+  /* Sections */
+  section {
+    margin-bottom: 3rem;
+  }
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 1rem;
+    padding-top: 0.25rem;
+    border-top: 1px solid var(--rule);
+    padding-top: 1.25rem;
+    margin-top: 2.5rem;
+  }
+
+  p {
+    margin-bottom: 1.1rem;
+    font-size: 1rem;
+  }
+
+  p:last-child { margin-bottom: 0; }
+
+  em { font-style: italic; }
+  strong { font-weight: 400; color: var(--accent); }
+
+  /* Watch-for items */
+  .watch-items {
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+    margin-top: 1rem;
+  }
+
+  .watch-item {
+    background: var(--highlight-bg);
+    border-left: 3px solid var(--accent);
+    padding: 1.25rem 1.5rem;
+  }
+
+  .watch-item h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    font-style: italic;
+    color: var(--accent);
+    margin-bottom: 0.6rem;
+  }
+
+  .watch-item p {
+    font-size: 0.95rem;
+    color: var(--ink);
+    margin-bottom: 0;
+  }
+
+  /* Sign-off */
+  .signoff {
+    margin-top: 3.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--rule);
+    font-style: italic;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  /* Pull quote treatment for the key line */
+  .pull {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.35rem;
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--accent);
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    padding: 1.4rem 0;
+    margin: 2.5rem 0;
+    text-align: center;
+  }
+
+  @media (max-width: 600px) {
+    html { font-size: 16px; }
+    .page { padding: 3rem 1.5rem 4rem; }
+    h1 { font-size: 1.9rem; }
+  }
+
+  @media print {
+    body { background: white; }
+    body::before { display: none; }
+    .pull { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <span class="kicker">World Cinema &mdash; Preparation for Wednesday&rsquo;s Screening</span>
+    <h1><em>Full Time</em><br><span style="font-size:1.5rem; font-weight:400;">(À plein temps, dir. Éric Gravel, 2021)</span></h1>
+  </header>
+
+  <section>
+    <h2>The Film</h2>
+    <p>I&rsquo;m sorry to miss you today, but I want to make sure you&rsquo;re well prepared for Wednesday&rsquo;s film, because it&rsquo;s one that rewards some context going in.</p>
+    <p><em>Full Time.</em> Its French title, <em>À plein temps</em>, means &ldquo;full-time&rdquo; but also &ldquo;at full capacity,&rdquo; a double meaning that will feel apt by the time you reach the end. It was written and directed by Éric Gravel and released in France in 2022. It stars Laure Calamy as a single mother who works as head chambermaid at a luxury hotel in Paris. The film has a 98% approval rating on Rotten Tomatoes, where the critical consensus describes it as a &ldquo;sobering reminder that just staying financially afloat can sometimes feel like a white-knuckle thriller.&rdquo;</p>
+    <p>Don&rsquo;t let the word &ldquo;drama&rdquo; mislead you. This film is viscerally <strong>tense</strong> in ways that most genre thrillers never achieve. Several critics have compared it to the Safdie Brothers&rsquo; <em>Uncut Gems</em>, an American film defined by unrelenting anxiety. Keep that in mind. And see <em>Uncut Gems</em> if you haven&rsquo;t.</p>
+  </section>
+
+  <section>
+    <h2>What Is French About This Film</h2>
+    <p><em>Full Time</em> is deeply rooted in a specific French social and political moment, and understanding that context will sharpen what you see on screen.</p>
+    <p>The film is set during the massive transit strikes of December 2019. These were not ordinary labor disputes. Beginning on December 5th, France was gripped by strikes against the Macron government&rsquo;s planned pension reform &mdash; the longest continuous strike wave in contemporary French history. The strikes shut down the Paris Métro and suburban rail lines for weeks. For millions of commuters &mdash; especially those in the outer suburbs who depend entirely on trains to reach their jobs in the city &mdash; this was a catastrophe.</p>
+    <p>But the strikes didn&rsquo;t happen in a vacuum. They followed on the heels of another massive upheaval: the <em>Gilets Jaunes</em> (Yellow Vest) movement, which staged 52 consecutive weeks of protests against economic hardship, mounting inequality, and a political establishment that working-class and lower-middle-class French people felt had abandoned them. The Yellow Vests weren&rsquo;t primarily Parisians &mdash; they were broadly working-class and lower-middle-class: manual workers, low-paid service sector workers, people employed on part-time or precarious contracts. Many lived exactly where Julie lives: in the &ldquo;périphérie,&rdquo; the outer ring of commuter towns and villages beyond Paris&rsquo;s glow.</p>
+    <p>This is where France&rsquo;s deep geographic divide comes in. There is a stark split in French society between the prosperous, centralized metropolis &mdash; Paris &mdash; and what some call <em>la France périphérique</em>, the peripheral France of smaller cities, suburbs, and rural areas that many French people feel has been left behind by globalization and by Macron&rsquo;s economically liberal government. French metropolitan areas represent 50% of the nation&rsquo;s economic output while covering only 5% of its territory &mdash; a concentration that has fueled a sense among working-class people that &ldquo;the popular classes have been abandoned by the elites of the metropolises.&rdquo;</p>
+
+    <div class="pull">The commuter train is not incidental to the plot &mdash; it is the fragile lifeline on which an entire existence depends. When it stops, everything stops.</div>
+
+    <p>Julie embodies this divide. The director, Éric Gravel, actually lives in the Sens area south of Paris, and many of his neighbors &mdash; like Julie &mdash; commute daily into the city by train. This is not an abstraction for him. He is filming the lives of people he knows.</p>
+    <p>There&rsquo;s one more layer worth noting: the film&rsquo;s class portrait of the luxury hotel. Julie works in a <em>palace</em> &mdash; the French designation for a five-star hotel of the highest order &mdash; performing invisible labor so that wealthy guests experience seamless luxury. The gap between the world she serves and the world she lives in is one of the film&rsquo;s quiet, devastating preoccupations.</p>
+  </section>
+
+  <section>
+    <h2>Things to Watch For</h2>
+    <div class="watch-items">
+
+      <div class="watch-item">
+        <h3>The camera as pressure</h3>
+        <p>Gravel shoots the film in a relentlessly close, handheld style that stays almost entirely on Calamy&rsquo;s face and body. The cinematographer Victor Seguin uses a deliberately cold color correction for the Paris sequences to make the city feel like hostile territory for Julie. Notice how rarely the film gives you a wide shot to breathe. This is intentional &mdash; the film denies you the distance that would let you relax.</p>
+      </div>
+
+      <div class="watch-item">
+        <h3>The score</h3>
+        <p>The film&rsquo;s composer is Irène Drésel, and the music is doing crucial work. It has a synth-driven, propulsive quality that may remind you of the score of <em>Uncut Gems</em>, if you&rsquo;ve seen that movie. Listen to how it frames ordinary moments &mdash; catching a bus, waiting for a callback &mdash; as if they were life-or-death sequences. The music argues that, for Julie, they are.</p>
+      </div>
+
+      <div class="watch-item">
+        <h3>Time as the real antagonist</h3>
+        <p>The film is essentially about a woman for whom there is never enough time: not for her children, not for her job search, not for her own dignity. Watch how Gravel structures the film around the clock: departure times, pickup times, interview times. Every scene is a countdown.</p>
+      </div>
+
+      <div class="watch-item">
+        <h3>Julie in every frame</h3>
+        <p>I think the most striking filmmaking choice in <em>Full Time</em> is one you may not consciously notice until you stop and think about it: Julie is present in virtually every shot of the film. Not just frequently &mdash; almost without exception. This is unusual enough to be a deliberate artistic strategy, and it&rsquo;s worth thinking about what it does to you as a viewer.</p>
+        <p>Gravel uses a great deal of close, over-the-shoulder, and near-POV shooting that doesn&rsquo;t quite give you Julie&rsquo;s literal point of view but places you in her proximity so consistently that you begin to experience the film almost from inside her nervous system. You don&rsquo;t see the world <em>as</em> Julie exactly, but you see it <em>with</em> her, always at her shoulder, always in her orbit.</p>
+        <p>Compare this to the other films we&rsquo;ve watched this semester, where the camera regularly cuts away to other characters, other spaces, other perspectives, establishing a world that exists independently of any single consciousness. Gravel essentially refuses that move. When Julie isn&rsquo;t on screen, the world doesn&rsquo;t exist. That&rsquo;s not just an emotional choice; it&rsquo;s a philosophical one. It argues that Julie&rsquo;s predicament is isolating. That when you are running this hard just to stay in place, your entire reality narrows to the tunnel of your own immediate survival. The film&rsquo;s form is its argument. Watch for this on Wednesday, and ask yourself: by the end, do you feel exhausted? If so, that&rsquo;s not an accident.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <p class="signoff">See you Wednesday.</p>
+
+</div>
+</body>
+</html>
