@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>No Other Land — Pre-Screening Notes | World Cinema</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@300;400&display=swap');
+
+  :root {
+    --ink: #1a1714;
+    --warm-black: #0f0d0b;
+    --cream: #f5f0e8;
+    --sand: #e8dfc8;
+    --sienna: #8b4513;
+    --rust: #a0522d;
+    --ochre: #b8860b;
+    --muted-gold: #c9a84c;
+    --stone: #7a7068;
+    --rule: #c4b89a;
+    --accent: #6b3d2e;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    font-size: 17px;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--cream);
+    color: var(--ink);
+    font-family: 'Libre Baskerville', Georgia, serif;
+    line-height: 1.75;
+    min-height: 100vh;
+  }
+
+  /* — MASTHEAD — */
+  .masthead {
+    background-color: var(--warm-black);
+    color: var(--cream);
+    padding: 3.5rem 4rem 2.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .masthead::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: 
+      radial-gradient(ellipse at 15% 50%, rgba(139,69,19,0.18) 0%, transparent 60%),
+      radial-gradient(ellipse at 85% 20%, rgba(184,134,11,0.10) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  .course-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted-gold);
+    margin-bottom: 1.5rem;
+  }
+
+  .masthead h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 3.6rem;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.4rem;
+  }
+
+  .masthead h1 em {
+    font-style: italic;
+    font-weight: 300;
+  }
+
+  .masthead h1 .arabic {
+    font-size: 2rem;
+    display: block;
+    color: #b8a88a;
+    font-style: normal;
+    margin-top: 0.3rem;
+    font-weight: 300;
+    letter-spacing: 0.05em;
+  }
+
+  .masthead-meta {
+    margin-top: 1.8rem;
+    display: flex;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+
+  .meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .meta-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--stone);
+  }
+
+  .meta-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-weight: 400;
+    color: #d4c9b5;
+  }
+
+  /* — RULE — */
+  .gold-rule {
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--muted-gold), transparent);
+    margin: 0 4rem;
+    opacity: 0.5;
+  }
+
+  /* — MAIN LAYOUT — */
+  .document-body {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 3rem 4rem 5rem;
+  }
+
+  /* — SECTION — */
+  section {
+    margin-bottom: 3.2rem;
+    padding-bottom: 3.2rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+  }
+
+  .section-number {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted-gold);
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: 1.85rem;
+    line-height: 1.2;
+    color: var(--accent);
+    margin-bottom: 1.4rem;
+    letter-spacing: -0.01em;
+  }
+
+  h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 1.2rem;
+    color: var(--ink);
+    margin-top: 1.6rem;
+    margin-bottom: 0.6rem;
+  }
+
+  p {
+    margin-bottom: 1.1rem;
+    font-size: 0.97rem;
+  }
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* — PULL QUOTE — */
+  .pull-quote {
+    margin: 1.8rem 0;
+    padding: 1.4rem 1.8rem;
+    border-left: 3px solid var(--muted-gold);
+    background: rgba(201, 168, 76, 0.06);
+    border-radius: 0 4px 4px 0;
+  }
+
+  .pull-quote p {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.18rem;
+    line-height: 1.55;
+    color: var(--accent);
+    margin-bottom: 0;
+  }
+
+  .pull-quote cite {
+    display: block;
+    margin-top: 0.6rem;
+    font-family: 'DM Mono', monospace;
+    font-style: normal;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--stone);
+  }
+
+  /* — INFO BOXES — */
+  .info-box {
+    background: var(--sand);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 1.4rem 1.6rem;
+    margin: 1.5rem 0;
+  }
+
+  .info-box-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--stone);
+    margin-bottom: 0.9rem;
+  }
+
+  .info-box p, .info-box li {
+    font-size: 0.9rem;
+  }
+
+  /* — AWARDS LIST — */
+  .awards-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem 2rem;
+    margin-top: 0.8rem;
+  }
+
+  .award-item {
+    display: flex;
+    gap: 0.5rem;
+    align-items: flex-start;
+    font-size: 0.88rem;
+    line-height: 1.4;
+  }
+
+  .award-dot {
+    color: var(--muted-gold);
+    margin-top: 0.12rem;
+    flex-shrink: 0;
+  }
+
+  /* — TWO COLS — */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin: 1.5rem 0;
+  }
+
+  .col-card {
+    background: var(--sand);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 1.2rem 1.4rem;
+  }
+
+  .col-card-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--stone);
+    margin-bottom: 0.7rem;
+  }
+
+  .col-card p, .col-card li {
+    font-size: 0.88rem;
+    line-height: 1.55;
+    margin-bottom: 0.5rem;
+  }
+
+  /* — DIRECTOR PROFILES — */
+  .director-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .director-card {
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 1rem 1.2rem;
+    background: rgba(255,255,255,0.4);
+  }
+
+  .director-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--accent);
+    margin-bottom: 0.15rem;
+  }
+
+  .director-id {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--stone);
+    margin-bottom: 0.5rem;
+  }
+
+  .director-card p {
+    font-size: 0.83rem;
+    line-height: 1.5;
+    margin-bottom: 0;
+  }
+
+  /* — ANALYTICAL QUESTIONS — */
+  .questions-list {
+    list-style: none;
+    counter-reset: q-counter;
+    margin-top: 0.8rem;
+  }
+
+  .questions-list li {
+    counter-increment: q-counter;
+    display: flex;
+    gap: 0.8rem;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .questions-list li::before {
+    content: counter(q-counter, decimal-leading-zero);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    color: var(--muted-gold);
+    min-width: 1.8rem;
+    margin-top: 0.28rem;
+    flex-shrink: 0;
+  }
+
+  /* — ALERT BOX — */
+  .alert-box {
+    background: rgba(107, 61, 46, 0.07);
+    border: 1px solid rgba(107, 61, 46, 0.25);
+    border-radius: 4px;
+    padding: 1.2rem 1.6rem;
+    margin: 1.5rem 0;
+  }
+
+  .alert-box p {
+    font-size: 0.92rem;
+  }
+
+  /* — CONTESTED TERMS — */
+  .term-note {
+    background: rgba(201, 168, 76, 0.08);
+    border: 1px dashed var(--rule);
+    border-radius: 4px;
+    padding: 1rem 1.4rem;
+    margin: 1.2rem 0;
+    font-size: 0.88rem;
+    line-height: 1.6;
+  }
+
+  .term-note strong {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ochre);
+    display: block;
+    margin-bottom: 0.4rem;
+  }
+
+  /* — FOOTER — */
+  .doc-footer {
+    background-color: var(--warm-black);
+    padding: 2rem 4rem;
+    margin-top: 1rem;
+  }
+
+  .footer-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .footer-inner p {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--stone);
+    margin: 0;
+  }
+
+  /* — PRINT STYLES — */
+  @media print {
+    .masthead { background: #1a1714 !important; -webkit-print-color-adjust: exact; }
+    body { font-size: 10pt; }
+    h2 { font-size: 14pt; }
+    .document-body { padding: 0; }
+  }
+
+  @media (max-width: 700px) {
+    .masthead { padding: 2rem; }
+    .masthead h1 { font-size: 2.4rem; }
+    .document-body { padding: 2rem; }
+    .two-col, .director-list, .awards-grid { grid-template-columns: 1fr; }
+    .masthead-meta { gap: 1.2rem; }
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <p class="course-label">World Cinema — Pre-Screening Lecture Notes</p>
+  <h1>
+    <em>No Other Land</em>
+    <span class="arabic">لا أرض أخرى</span>
+  </h1>
+  <div class="masthead-meta">
+    <div class="meta-item">
+      <span class="meta-label">Directors</span>
+      <span class="meta-value">Basel Adra, Hamdan Ballal, Yuval Abraham, Rachel Szor</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Year</span>
+      <span class="meta-value">2024</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Runtime</span>
+      <span class="meta-value">95 minutes</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Co-Production</span>
+      <span class="meta-value">Palestine / Norway</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Languages</span>
+      <span class="meta-value">Arabic, Hebrew, English</span>
+    </div>
+  </div>
+</header>
+
+<div class="gold-rule"></div>
+
+<main class="document-body">
+
+  <!-- SECTION 1: OVERVIEW -->
+  <section>
+    <span class="section-number">Section 01</span>
+    <h2>What the Film Documents</h2>
+
+    <p><em>No Other Land</em> is a feature-length documentary filmed over five years (2019–2023) by a collective of four Palestinian and Israeli activists in the southern West Bank. The film centers on Masafer Yatta — a cluster of small Palestinian villages and hamlets in the South Hebron Hills — and the community's struggle against a decades-long campaign of demolition, displacement, and military restriction.</p>
+
+    <p>At the heart of the film is the friendship between Basel Adra, a Palestinian activist and journalist from Masafer Yatta who has been documenting his community since adolescence, and Yuval Abraham, an Israeli journalist and filmmaker who joins Adra on the ground. Their collaboration — and the profound asymmetry of their daily lives within the same landscape — forms the film's central human axis.</p>
+
+    <div class="info-box">
+      <p class="info-box-title">The Masafer Yatta Context</p>
+      <p>In the early 1980s, the Israeli military declared approximately 30,000 dunams (3,000 hectares) of land in the South Hebron Hills as "Firing Zone 918" — a closed military training area. Several Palestinian communities had been living in the area for generations, predating both the designation and Israel's 1967 occupation of the West Bank.</p>
+      <p style="margin-top: 0.6rem;">In 1999, the Israeli military forcibly evicted approximately 700 residents. Residents petitioned Israel's High Court of Justice, received an interim injunction allowing return, and spent the next two decades in legal limbo: permitted to live on the land but barred from building new structures, accessing full services, or developing infrastructure. In May 2022, the Israeli Supreme Court ruled in favor of the military's authority to expel the communities, paving the way for what human rights organizations have described as the largest single forced displacement in the West Bank since 1967.</p>
+    </div>
+
+    <p>What the film captures across its five-year span includes: systematic demolitions of homes and schools by the Israeli military; settler violence against Palestinian residents; the shooting of community members; Adra's filming of his own family's displacement; and the friendship between Adra and Abraham as it deepens against a backdrop of what Abraham describes at the Berlin Film Festival as a situation of structural inequality — "I live under civilian law; Basel is under military law."</p>
+
+    <p>The footage is largely raw and vérité in style, combining handheld documentation of demolitions and confrontations with quieter, more intimate passages of daily life and family. The film does not adopt a conventional documentary narrative of resolution; conditions in Masafer Yatta deteriorated throughout production, and continue to deteriorate.</p>
+  </section>
+
+  <!-- SECTION 2: FILMMAKERS -->
+  <section>
+    <span class="section-number">Section 02</span>
+    <h2>The Filmmakers</h2>
+
+    <p>This is the first feature film for all four directors. They describe themselves not as a production company but as a collective — a term that reflects both their shared commitment and the political stakes of the collaboration itself.</p>
+
+    <div class="director-list">
+      <div class="director-card">
+        <p class="director-name">Basel Adra</p>
+        <p class="director-id">Palestinian — Masafer Yatta</p>
+        <p>Born 1996. Lawyer, journalist, and activist. Has documented his community's situation since age fourteen. His family's story is central to the film. In early 2025, he was attacked by Israeli settlers in the West Bank.</p>
+      </div>
+      <div class="director-card">
+        <p class="director-name">Hamdan Ballal</p>
+        <p class="director-id">Palestinian — Susiya</p>
+        <p>Born 1989. Photographer, filmmaker, and farmer. Has worked as a researcher for anti-occupation human rights groups. In March 2025, he was attacked by settlers, suffered head injuries, and was detained by the IDF before being released.</p>
+      </div>
+      <div class="director-card">
+        <p class="director-name">Yuval Abraham</p>
+        <p class="director-id">Israeli — Jerusalem</p>
+        <p>Born 1995. Investigative journalist with years of reporting on the Israeli occupation. His acceptance speeches at Berlin and the Oscars became flashpoints in the film's reception controversy.</p>
+      </div>
+      <div class="director-card">
+        <p class="director-name">Rachel Szor</p>
+        <p class="director-id">Israeli — Jerusalem</p>
+        <p>Born 1994. Cinematographer, editor, and director. Her work behind the camera gives the film much of its visual coherence. The military twice entered Adra's home and confiscated computers and cameras during production.</p>
+      </div>
+    </div>
+
+    <p style="margin-top: 1.2rem;">The cross-national collaboration is itself an argument embedded in the film's form. The Palestinian-Israeli co-direction is not incidental — it is the condition under which the film was made, and one source of its moral complexity. As Abraham stated at the Oscars: "When I look at Basel, I see my brother, but we are unequal."</p>
+  </section>
+
+  <!-- SECTION 3: CRITICAL RECEPTION AND AWARDS -->
+  <section>
+    <span class="section-number">Section 03</span>
+    <h2>Critical Reception and Awards</h2>
+
+    <p><em>No Other Land</em> is one of the most decorated documentaries in recent memory, accumulating more than sixty awards across the international festival circuit. Critical response has been near-unanimous in its praise.</p>
+
+    <div class="pull-quote">
+      <p>"Given the conditions of its production, <em>No Other Land</em> would be vital even in a more ragged form. But the filmmaking here is tight and considered."</p>
+      <cite>Guy Lodge, Variety</cite>
+    </div>
+
+    <div class="pull-quote">
+      <p>"The footage is out there, and it's rarely been assembled into a more concise, powerful, and damning array than it is here."</p>
+      <cite>David Ehrlich, IndieWire (Grade: A)</cite>
+    </div>
+
+    <div class="info-box">
+      <p class="info-box-title">Selected Major Awards</p>
+      <div class="awards-grid">
+        <div class="award-item"><span class="award-dot">◆</span><span><strong>Academy Award, Best Documentary Feature</strong> — 2025 (97th Oscars)</span></div>
+        <div class="award-item"><span class="award-dot">◆</span><span><strong>Berlinale Documentary Award</strong> — 74th Berlin International Film Festival, 2024</span></div>
+        <div class="award-item"><span class="award-dot">◆</span><span><strong>Panorama Audience Award, Best Documentary</strong> — Berlin, 2024</span></div>
+        <div class="award-item"><span class="award-dot">◆</span><span><strong>Best Documentary</strong> — European Film Awards, 2024</span></div>
+        <div class="award-item"><span class="award-dot">◆</span><span><strong>Best Documentary</strong> — Gotham Awards, 2024</span></div>
+        <div class="award-item"><span class="award-dot">◆</span><span><strong>Best Documentary</strong> — National Society of Film Critics</span></div>
+        <div class="award-item"><span class="award-dot">◆</span><span><strong>Courage Under Fire Award</strong> — International Documentary Association</span></div>
+        <div class="award-item"><span class="award-dot">◆</span><span><strong>Audience Award</strong> — CPH:DOX (Copenhagen)</span></div>
+        <div class="award-item"><span class="award-dot">◆</span><span><strong>Ranked 3rd</strong> — Top 25 European Works of 2024, Cineuropa critics poll</span></div>
+        <div class="award-item"><span class="award-dot">◆</span><span><strong>Rotten Tomatoes</strong> — 100% approval from 106 reviewed critics (avg. 8.9/10)</span></div>
+      </div>
+    </div>
+
+    <p>The film also screened at the Toronto International Film Festival, the New York Film Festival, Sydney Film Festival, Karlovy Vary, Busan, and AFI Fest, among many others. It is widely regarded as a landmark of contemporary political documentary filmmaking.</p>
+  </section>
+
+  <!-- SECTION 4: CONTROVERSY & DISTRIBUTION -->
+  <section>
+    <span class="section-number">Section 04</span>
+    <h2>Controversy and Suppression of Distribution</h2>
+
+    <p>The film's journey from critical triumph to the screen you are about to watch has been significantly shaped by political pressures — and understanding those pressures is itself part of what makes this screening pedagogically significant.</p>
+
+    <h3>The U.S. Distribution Problem</h3>
+    <p>Despite winning the Academy Award for Best Documentary Feature and securing distribution deals in twenty-four countries — including theatrical and streaming releases across Europe — <em>No Other Land</em> could not find a U.S. distributor for over a year after its release. By contrast, the previous year's Oscar-winning documentary, <em>20 Days in Mariupol</em> (about the Russian siege of Ukraine), was acquired by PBS Distribution and made available on major streaming platforms almost immediately.</p>
+
+    <p>The filmmakers have been explicit about their interpretation of the disparity. "I take the lack of distribution as something that's completely political," Abraham told <em>Variety</em>. "We're obviously talking about the Israeli military occupation of the West Bank, and it's very ugly." Eventually, the film self-distributed through Cinetic Media, had a limited theatrical run in New York and Los Angeles in early 2025, expanded to roughly 150 theaters nationally, and became the top-grossing documentary from the 2025 Oscar lineup, with domestic box office exceeding $2 million. It was made available for digital rental in April 2025, with proceeds going to Masafer Yatta.</p>
+
+    <h3>Attempts to Prevent Screenings</h3>
+    <p>Beyond the distribution gap, the film has faced active efforts to block or discourage screenings in a variety of contexts:</p>
+
+    <div class="info-box">
+      <p class="info-box-title">Documented Suppression Efforts</p>
+      <p><strong>Campus screenings:</strong> Sponsors have withdrawn at the last minute; venues have been canceled under institutional pressure. At UCLA, the Hillel and Jewish studies department withdrew sponsorship and canceled a booked venue. At UC Santa Cruz, security presence was deemed necessary for a campus screening. Jewish film festival programmers reported private pressure from donors, who described the film as "sophisticated propaganda."</p>
+      <p style="margin-top: 0.6rem;"><strong>Miami Beach:</strong> After a local independent cinema (O Cinema) screened the film, the city's mayor issued a draft resolution seeking to terminate the theater's lease at a city-owned building, describing the film as "a false one-sided propaganda attack on the Jewish people." The theater continued to screen the film, prefacing each showing with a statement of editorial purpose. The resolution did not pass.</p>
+      <p style="margin-top: 0.6rem;"><strong>India:</strong> The film was pulled from the MAMI Mumbai Film Festival before its scheduled South Asia premiere.</p>
+      <p style="margin-top: 0.6rem;"><strong>Germany (Berlinale):</strong> After the filmmakers' acceptance speeches at Berlin — in which Abraham spoke about the inequality between his life and Adra's — German officials, including Berlin's mayor and a state senator, called the speeches antisemitic. The Israeli public broadcaster initially described Abraham's speech as an "antisemitic speech by an Israeli filmmaker," then issued a correction and apology. Festival director Tricia Tuttle defended the filmmakers.</p>
+      <p style="margin-top: 0.6rem;"><strong>Netflix:</strong> In October 2024, Netflix removed nineteen films from a collection titled "Palestinian Stories," citing license expiration. Advocacy groups called for their restoration.</p>
+    </div>
+
+    <h3>Criticism from Multiple Directions</h3>
+    <p>The controversy surrounding the film does not run along a single political axis. It has attracted criticism from opposing sides simultaneously — a fact that is itself worth noting:</p>
+
+    <div class="two-col">
+      <div class="col-card">
+        <p class="col-card-label">From Pro-Israel Critics</p>
+        <p>Israeli officials, including Culture Minister Miki Zohar, called the Oscar win "a sad moment for cinema" and described the film as defamation. Hollywood nonprofit Creative Community for Peace claimed the film "presents a one-sided, inaccurate narrative that demonizes Israelis and overlooks the rationale behind Israel's security policies." Various figures called the acceptance speeches antisemitic.</p>
+      </div>
+      <div class="col-card">
+        <p class="col-card-label">From Pro-Palestinian Critics</p>
+        <p>The Palestinian Campaign for the Academic and Cultural Boycott of Israel (PACBI) declared the film violates BDS anti-normalization guidelines, arguing that the Israeli-Palestinian co-direction implicitly legitimizes Israeli participation in Palestinian storytelling. Some Palestinian activists described it as performing a "soft Zionist function."</p>
+      </div>
+    </div>
+
+    <p>As one observer noted, the film was called pro-Hamas by one set of critics and "wishful thinking" and a rehabilitation of Zionism by another — a dynamic that the head of the Masafer Yatta village council cut through succinctly: "The pros outweigh the cons, and the film should not be boycotted. It tells our story, the Palestinian story."</p>
+
+    <p>The Academy of Motion Picture Arts and Sciences faced criticism for failing to publicly support Ballal after his detention following the settler attack in March 2025. Over 800 Academy members signed an open letter of protest; the Academy subsequently issued a statement condemning the violence and apologizing for not naming Ballal in its initial response.</p>
+  </section>
+
+  <!-- SECTION 5: POLITICAL CONTEXT -->
+  <section>
+    <span class="section-number">Section 05</span>
+    <h2>Political Context</h2>
+
+    <p>This section is not intended to provide a comprehensive account of the Israeli-Palestinian conflict — that history spans more than a century and cannot be reduced to a paragraph. It is intended to give you the specific legal and geopolitical context needed to understand what you will see in the film.</p>
+
+    <h3>The West Bank and Area C</h3>
+    <p>The West Bank is territory occupied by Israel following the 1967 Six-Day War. Under the Oslo Accords of the 1990s, the West Bank was divided into administrative zones: Area A (Palestinian civil and security control), Area B (Palestinian civil control, Israeli military control), and Area C (full Israeli civil and military control). Masafer Yatta falls within Area C, which covers approximately 60% of the West Bank. Building permits in Area C require approval from the Israeli Civil Administration; according to UN figures, more than 98% of Palestinian permit applications are rejected.</p>
+
+    <h3>Settlements and International Law</h3>
+    <p>Israeli settlements in the West Bank — civilian communities built on occupied territory — are considered illegal under international law, including the Fourth Geneva Convention and repeated UN Security Council resolutions. The Israeli government disputes this characterization and continues to expand settlements. As of 2024, there are estimated to be over 700,000 Israeli settlers living in the West Bank and East Jerusalem.</p>
+
+    <h3>The Firing Zone Designation</h3>
+    <p>The specific mechanism that drives the film's events — the "Firing Zone" designation — is contested in both factual and legal terms:</p>
+
+    <div class="term-note">
+      <strong>Competing Claims</strong>
+      The Israeli government maintains that Masafer Yatta was not permanently inhabited when Firing Zone 918 was declared in the early 1980s, and that the designation reflects genuine military needs. The Supreme Court's 2022 ruling upheld this position. Critics — including Israeli human rights organizations, UN agencies, and independent legal scholars — argue that documentary evidence (Ottoman land records, 1930s geographic surveys, satellite imagery analysis, and a leaked 1979 cabinet transcript in which Ariel Sharon reportedly stated that firing zones would be used to remove Palestinian residents) indicates that the designation was motivated by a goal of displacing the population rather than by military necessity. International human rights law distinguishes between temporary evacuations for military purposes (permissible) and permanent forced transfers of civilian populations (prohibited as a war crime).
+    </div>
+
+    <h3>What the Film Does and Does Not Show</h3>
+    <p>The film documents events from the vantage point of the Palestinian community and its allies. It does not provide extended presentation of the Israeli government's legal or security rationale for the Firing Zone designation. This is a deliberate editorial choice, not an oversight, and understanding it as such is part of engaging with the film analytically. The filmmakers have stated their intent was to document lived experience, not to construct a debate program.</p>
+
+    <div class="alert-box">
+      <p>You may find that the film's perspective feels one-sided. That response is worth examining: documentaries — like all films — make choices. The question worth asking is not whether the film presents a point of view (it does, openly) but whether the events it depicts are real, whether those events matter morally, and what it means that this perspective has historically been difficult to see in American mainstream media.</p>
+    </div>
+
+    <p>The United Nations, the European Union, B'Tselem (an Israeli human rights organization), Human Rights Watch, and Médecins Sans Frontières have all documented conditions in Masafer Yatta in terms consistent with what the film shows. This does not settle all contested questions about the conflict, but it does situate the film's depictions within a recognized body of human rights documentation.</p>
+  </section>
+
+  <!-- SECTION 6: ACADEMIC FREEDOM -->
+  <section>
+    <span class="section-number">Section 06</span>
+    <h2>Academic Freedom and the Purpose of This Screening</h2>
+
+    <p>It is worth being transparent about why we are watching this film in this course, and what the act of screening it means — particularly given the documented attempts to prevent precisely this kind of showing.</p>
+
+    <p>World Cinema exists as a course in part because cinema has always been one of the primary ways human beings bear witness to experiences outside their own. Documentaries in particular operate at the intersection of journalism, advocacy, and art — they make arguments, they are made by people with stakes in what they document, and they ask us to see something we might otherwise not see.</p>
+
+    <p>The films we screen in this course are not chosen because they are politically neutral, aesthetically safe, or free of controversy. They are chosen because they are significant works of cinema that demand engagement. <em>No Other Land</em> meets that standard by virtually every measure available: its craft, its critical recognition, the circumstances of its making, and the conversation it has generated worldwide.</p>
+
+    <p>Academic freedom — the principle that a university is a place where ideas, arguments, and evidence can be examined without prior censorship — is not a background condition of this course. It is an active commitment. Screening a film that distributors have declined to touch, that civic officials have tried to suppress, and that has generated legal and political pressure against venues that show it is itself an exercise of that principle.</p>
+
+    <div class="pull-quote">
+      <p>"It's a crime if it's not out there to be seen, to spark conversations. Maybe some distributors are afraid to engage with the topic of Israel and Palestine, but isn't this why we're making documentaries?"</p>
+      <cite>Yuval Abraham, co-director</cite>
+    </div>
+
+    <p>Engaging with this film does not require you to adopt any particular political position. It does require you to look, to think, and to bring the same analytical tools to it that you bring to every film in this course.</p>
+  </section>
+
+  <!-- SECTION 7: ANALYTICAL APPROACHES -->
+  <section>
+    <span class="section-number">Section 07</span>
+    <h2>Watching Analytically: What to Notice</h2>
+
+    <p>As you watch, I'd encourage you to hold two modes simultaneously: the experiential (allowing yourself to be moved, disturbed, affected) and the analytical (attending to how the film is constructed and what choices it makes). These modes are not in conflict — the best documentary viewing moves between them.</p>
+
+    <h3>Questions of Form and Method</h3>
+    <ul class="questions-list">
+      <li>The film was shot over five years under difficult conditions, with cameras sometimes confiscated. How does the accumulation of time shape the film's emotional and argumentative structure?</li>
+      <li>The directors are also the film's main subjects. What are the implications of this collapse between filmmaker and subject? What does it enable, and what does it foreclose?</li>
+      <li>How does the film use the friendship between Adra and Abraham — and the structural inequality between them — as a device for making a political argument visible through personal relationship?</li>
+      <li>Compare the film's vérité aesthetic with other documentaries you have seen. What do handheld immediacy and absence of narration produce emotionally and rhetorically that other documentary modes would not?</li>
+    </ul>
+
+    <h3>Questions of Representation and Perspective</h3>
+    <ul class="questions-list">
+      <li>Whose voices are centered, and whose are absent? What does the film gain and lose by focusing on the community's experience rather than presenting debate?</li>
+      <li>The film depicts Israeli soldiers, settlers, and officials primarily through their actions toward the Palestinian community. Consider the ethics of this representational choice.</li>
+      <li>How does the film handle the tension between documenting ongoing harm and the limits of what documentation can accomplish? This is a question the filmmakers themselves raise within the film.</li>
+    </ul>
+
+    <h3>Questions of Context and Reception</h3>
+    <ul class="questions-list">
+      <li>The difficulty this film faced in finding U.S. distribution — despite critical acclaim, Oscar recognition, and distribution in 24 other countries — is itself a media phenomenon. What does it tell us about which perspectives on the Israeli-Palestinian conflict circulate freely in American public life, and which do not?</li>
+      <li>Both pro-Israel and some pro-Palestinian critics have attacked the film, from different directions. What does it mean for a film to be criticized simultaneously for normalizing Israeli presence in Palestinian storytelling and for delegitimizing Israel? How do you evaluate those critiques?</li>
+      <li>The Oscars acceptance speeches were described by some as antisemitic and by others as a straightforward call for political equality. How do you assess the speeches based on what was actually said?</li>
+    </ul>
+
+    <h3>Questions of Personal Response</h3>
+    <ul class="questions-list">
+      <li>If you find yourself having a strong emotional or political response to the film, that response is worth examining rather than suppressing. What, specifically, is producing it? What does your response tell you about what you already believed, or what you were unprepared for?</li>
+      <li>Documentary films always ask us to do something with what we have seen. What does this film ask of you? What, if anything, do you feel called to do with it?</li>
+    </ul>
+  </section>
+
+  <!-- SECTION 8: NOTE TO STUDENTS -->
+  <section>
+    <span class="section-number">Section 08</span>
+    <h2>A Note on Strong Reactions</h2>
+
+    <p>The Israeli-Palestinian conflict is one of the most contested, painful, and politically charged subjects in contemporary life. Many of you will have personal connections to it — through family, community, religious tradition, or previous study. Some of you may have strong views before the film begins. All of that is legitimate.</p>
+
+    <p>What we ask of each other in this room is a specific kind of intellectual generosity: the willingness to watch with full attention, to allow the film to make its case, and to disagree — if you disagree — on the basis of what is actually in the film rather than on the basis of what you imagine it to contain. That is, in essence, what academic engagement requires.</p>
+
+    <p>If you find the film distressing, you may step out. If you wish to discuss your response with me outside of class, my door is open. Our post-screening discussion will be a space for genuine exchange, and I am committed to making sure a range of perspectives can be heard.</p>
+
+    <p>What is not available to us, as a matter of intellectual honesty, is the option to treat the events depicted as something other than real. Homes were demolished. People were displaced. Some were shot. The film was made at considerable personal risk by people who lived these events. Whether one agrees with the filmmakers' framing or not, the documentary record they have created demands to be taken seriously.</p>
+
+    <div class="pull-quote">
+      <p>The purpose of this screening is not to tell you what to think. It is to ensure that you have seen something — and that you have thought about why seeing it is significant.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="doc-footer">
+  <div class="footer-inner">
+    <p>World Cinema — Pre-Screening Lecture Notes</p>
+    <p><em>No Other Land</em> — 2024</p>
+    <p>For classroom use only</p>
+  </div>
+</footer>
+
+</body>
+</html>
