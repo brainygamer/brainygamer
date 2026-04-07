@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>THE 204 – World Cinema | Film Screening History</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;1,8..60,300&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #1a1410;
+      --paper: #f5f0e8;
+      --rule: #c8b99a;
+      --accent: #8b2c2c;
+      --muted: #6b5e4e;
+      --light-rule: #e2d9cc;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--paper);
+      color: var(--ink);
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-weight: 300;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* Subtle paper texture via repeating gradient */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 31px,
+          rgba(139, 44, 44, 0.04) 31px,
+          rgba(139, 44, 44, 0.04) 32px
+        );
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 3rem 2rem 5rem;
+    }
+
+    /* ── Header ── */
+    header {
+      border-top: 3px double var(--accent);
+      border-bottom: 1px solid var(--rule);
+      padding: 2rem 0 1.5rem;
+      margin-bottom: 2.5rem;
+      text-align: center;
+    }
+
+    .kicker {
+      font-family: 'Source Serif 4', serif;
+      font-size: 0.7rem;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.6rem;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(1.9rem, 6vw, 3rem);
+      font-weight: 700;
+      line-height: 1.15;
+      color: var(--ink);
+      margin-bottom: 0.4rem;
+    }
+
+    .subtitle {
+      font-family: 'Source Serif 4', serif;
+      font-size: 0.9rem;
+      font-style: italic;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+    }
+
+    /* ── At a Glance ── */
+    .at-a-glance {
+      background: white;
+      border: 1px solid var(--rule);
+      border-left: 4px solid var(--accent);
+      padding: 1.4rem 1.6rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .at-a-glance h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1rem;
+    }
+
+    .stat {
+      border-right: 1px solid var(--light-rule);
+      padding-right: 1rem;
+    }
+    .stat:last-child { border-right: none; }
+
+    .stat-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: block;
+      margin-bottom: 0.2rem;
+    }
+
+    .stat-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.3;
+    }
+
+    /* ── Section heading ── */
+    .section-head {
+      margin: 2.5rem 0 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--ink);
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
+    }
+
+    .section-head h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+
+    .section-note {
+      font-size: 0.78rem;
+      font-style: italic;
+      color: var(--muted);
+      line-height: 1.4;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ── Table (desktop) ── */
+    .table-wrap {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+
+    thead th {
+      font-family: 'Source Serif 4', serif;
+      font-size: 0.65rem;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-align: left;
+      padding: 0.5rem 0.75rem;
+      border-bottom: 1px solid var(--ink);
+      background: var(--paper);
+      white-space: nowrap;
+    }
+
+    thead th.col-times { text-align: center; }
+
+    tbody tr {
+      border-bottom: 1px solid var(--light-rule);
+      transition: background 0.15s;
+    }
+    tbody tr:hover { background: rgba(139,44,44,0.04); }
+
+    /* Country header row */
+    tr.country-row td {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      padding: 0.9rem 0.75rem 0.3rem;
+      border-bottom: none;
+      background: transparent;
+    }
+
+    td {
+      padding: 0.45rem 0.75rem;
+      vertical-align: top;
+    }
+
+    td.col-country { color: transparent; width: 0; padding: 0; }
+
+    td.col-film {
+      font-style: italic;
+      color: var(--ink);
+      font-size: 0.93rem;
+    }
+
+    td.col-coprod {
+      font-size: 0.78rem;
+      color: var(--muted);
+      font-style: normal;
+    }
+
+    /* film + coprod stacked in one cell on desktop */
+    .film-cell { display: flex; flex-direction: column; gap: 0.1rem; }
+    .film-title { font-style: italic; }
+    .film-coprod { font-style: normal; font-size: 0.78rem; color: var(--muted); }
+
+    td.col-semesters {
+      font-size: 0.82rem;
+      color: var(--muted);
+      white-space: normal;
+    }
+
+    td.col-times {
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    /* ── Card layout (mobile) ── */
+    .card-list { display: none; }
+
+    .country-block { margin-bottom: 1.8rem; }
+
+    .country-label {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      padding: 0.4rem 0;
+      border-bottom: 1px solid var(--light-rule);
+      margin-bottom: 0.6rem;
+    }
+
+    .film-card {
+      background: white;
+      border: 1px solid var(--light-rule);
+      border-radius: 2px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.5rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 0.25rem 0.75rem;
+      align-items: start;
+    }
+
+    .card-title {
+      font-style: italic;
+      font-size: 0.95rem;
+      grid-column: 1;
+    }
+
+    .card-coprod {
+      font-size: 0.75rem;
+      color: var(--muted);
+      grid-column: 1;
+      margin-top: 0.1rem;
+    }
+
+    .card-times {
+      grid-column: 2;
+      grid-row: 1 / 3;
+      align-self: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .card-times-label {
+      font-family: 'Source Serif 4', serif;
+      font-size: 0.6rem;
+      font-weight: 300;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: block;
+      text-align: right;
+      margin-top: -0.2rem;
+    }
+
+    .card-semesters {
+      font-size: 0.78rem;
+      color: var(--muted);
+      grid-column: 1 / 3;
+      margin-top: 0.3rem;
+      padding-top: 0.3rem;
+      border-top: 1px solid var(--light-rule);
+    }
+
+    /* ── Footer ── */
+    footer {
+      margin-top: 3rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--rule);
+      font-size: 0.75rem;
+      color: var(--muted);
+      font-style: italic;
+      text-align: center;
+      line-height: 1.7;
+    }
+
+    /* ── Responsive breakpoint ── */
+    @media (max-width: 620px) {
+      .page { padding: 1.5rem 1rem 3rem; }
+
+      header { padding: 1.4rem 0 1.2rem; }
+
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .stat { border-right: none; padding-right: 0; }
+      .stat:nth-child(odd) {
+        border-right: 1px solid var(--light-rule);
+        padding-right: 0.75rem;
+      }
+
+      .table-wrap { display: none; }
+      .card-list  { display: block; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <p class="kicker">Wabash College &nbsp;·&nbsp; Professor Michael Abbott</p>
+    <h1>THE 204 – World Cinema</h1>
+    <p class="subtitle">Film Screening History &nbsp;|&nbsp; Spring 2023 through Spring 2026</p>
+  </header>
+
+  <!-- At a Glance -->
+  <section class="at-a-glance" aria-label="Summary statistics">
+    <h2>At a Glance</h2>
+    <div class="stats-grid">
+      <div class="stat">
+        <span class="stat-label">Semesters covered</span>
+        <span class="stat-value">5<br><small style="font-family:'Source Serif 4',serif;font-size:0.72rem;font-weight:300;color:var(--muted);">Sp '23 · Sp '24 · Su '24 · Sp '25 · Sp '26</small></span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">Countries represented</span>
+        <span class="stat-value">20</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">Unique films screened</span>
+        <span class="stat-value">37</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">Most-screened film</span>
+        <span class="stat-value"><em>Parasite</em> (South Korea)<br><small style="font-family:'Source Serif 4',serif;font-size:0.72rem;font-weight:300;color:var(--muted);">Shown every semester</small></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Films by Country -->
+  <div class="section-head">
+    <h2>Films by Country</h2>
+  </div>
+  <p class="section-note">
+    Countries and films are listed alphabetically. Co-productions are filed under their primary country as listed in each syllabus, with co-producing countries noted in parentheses. The "Times" column indicates the total number of semesters in which a film was screened. All films were screened in their native languages with English subtitles.
+  </p>
+
+  <!-- Desktop table -->
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Country</th>
+          <th>Film Title</th>
+          <th>Semesters Screened</th>
+          <th class="col-times">Times</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <!-- Belgium -->
+        <tr class="country-row"><td colspan="4">Belgium</td></tr>
+        <tr>
+          <td></td>
+          <td><div class="film-cell"><span class="film-title">Close</span></div></td>
+          <td class="col-semesters">Sp '26</td>
+          <td class="col-times">1</td>
+        </tr>
+
+        <!-- Colombia -->
+        <tr class="country-row"><td colspan="4">Colombia</td></tr>
+        <tr>
+          <td></td>
+          <td><div class="film-cell"><span class="film-title">In the Summers</span><span class="film-coprod">co-prod. with USA</span></div></td>
+          <td class="col-semesters">Sp '25</td>
+          <td class="col-times">1</td>
+        </tr>
+
+        <!-- Denmark -->
+        <tr class="country-row"><td colspan="4">Denmark</td></tr>
+        <tr>
+          <td></td>
+          <td><div class="film-cell"><span class="film-title">Another Round</span></div></td>
+          <td class="col-semesters">Sp '23, Sp '24, Sp '25, Sp '26</td>
+          <td class="col-times">4</td>
+        </tr>
+
+        <!-- France -->
+        <tr class="country-row"><td colspan="4">France</td></tr>
+        <tr>
+          <td></td>
+          <td><div class="film-cell"><span class="film-title">The Intouchables</span></div></td>
+          <td class="col-semesters">Su '24</td>
+          <td class="col-times">1</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><div class="film-cell"><span class="film-title">Holy Motors</span></div></td>
+          <td class="col-semesters">Sp '23</td>
+          <td class="col-times">1</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><div class="film-cell"><span class="film-title">Full Time</span></div></td>
+          <td class="col-semesters">Sp '24, Sp '25, Sp '26</td>
+          <td class="col-times">3</td>
+        </tr>
+
+        <!-- Germany -->
+        <tr class="country-row"><td colspan="4">Germany</td></tr>
+        <tr>
+          <td></td>
+          <td><div class="film-cell"><span class="film-title">All Quiet on the Western Front</span></div></td>
+          <td class="col-semesters">Su '24, Sp '25, Sp '26</td>
+          <td class="col-times">3</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><div class="film-cell"><span class="film-title">Toni Erdmann</span></div></td>
+          <td class="col-semesters">Sp '24</td>
+          <td class="col-times">1</td>
+        </tr>
+
+        <!-- India -->
+        <tr class="country-row"><td colspan="4">India</td></tr>
+        <tr>
+          <td></td>
+          <td><div class="film-cell"><span class="film-title">RRR</span></div></td>
+          <td class="col-semesters">Su '24, Sp '23, Sp '24, Sp '25</td>
+          <td class="col-times">4</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><div class="film-cell"><span class="film-title">Superboys of Malegaon</span></div></td>
+          <td class="col-semesters">Sp '26</td>
+          <td class="col-times">1</td>
+        </tr>
+
+        <!-- Iran -->
+        <tr class="country-row"><td colspan="4">Iran</td></tr>
+        <tr>
+          <td></td>
+          <td><div class="film-cell"><span class="film-title">A Separation</span></div></td>
+          <td class="col-semesters">Sp '23, Sp '24</td>
+          <td class="col-times">2</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><div class="film-cell"><span class="film-title">A Hero</span></div></td>
+          <td class="col-semesters">Sp '25</td>
+          <td class="col-times">1</td>
+        </tr>
+
+        <!-- Ireland -->
+        <tr class="country-row"><td colspan="4">Ireland</td></tr>
+        <tr>
+          <td></td>
+          <td><div class="film-cell"><span class="film-title">The Banshees of Inisherin</span></div></td>
+          <td class="col-semesters">Sp '23, Sp '24, Sp '25, Sp '26</td>
+          <td class="col-times">4</td>
+        </tr>
+
+        <!-- Israel/Palestine -->
+        <tr class="country-row"><td colspan="4">Israel/Palestine</td></tr>
+        <tr>
+          <td></td>
+          <td><div class="film-cell"><span class="film-title">No Other Land</span></div></td>
+          <td class="col-semesters">Sp '26</td>
+          <td class="col-times">1</td>
+        </tr>
+
+        <!-- Italy -->
+        <tr class="country-row"><td colspan="4">Italy</td></tr>
+        <tr>
+          <td></td>
+          <td><div class="film-cell"><span class="film-title">The Great Beauty</span></div></td>
+          <td class="col-semesters">Sp '23</td>
+          <td class="col-times">1</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><div class="film-cell"><span class="film-title">Mixed by Erry</span></div></td>
+          <td class="col-semesters">Sp '24</td>
+          <td class="col-times">1</td>
+        </tr>
+
+        <!-- Japan -->
+        <tr class="country-row"><td colspan="4">Japan</td></tr>
+        <tr>
+          <td></td>
+          <td><div class="film-cell"><span class="film-title">Godzilla Minus One</span></div></td>
+          <td class="col-semesters">Su '24, Sp '25, Sp '26</td>
+          <td class="col-times">3</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><div class="film-cell"><span class="film-title">Shoplifters</span></div></td>
+          <td class="col-semesters">Sp '23, Sp '24</td>
+          <td class="col-times">2</td>
+        </tr>
+
+        <!-- Korea -->
+        <tr class="country-row"><td colspan="4">Korea</td></tr>
+        <tr>
+          <td></td>
+          <td><div class="film-cell"><span class="film-title">Parasite</span></div></td>
+          <td class="col-semesters">Su '24, Sp '23, Sp '24, Sp '25, Sp '26</td>
+          <td class="col-times">5</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><div class="film-cell"><span class="film-title">Past Lives</span><span class="film-coprod">co-prod. with USA</span></div></td>
+          <td class="col-semesters">Sp '24</td>
+          <td class="col-times">1</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><div class="film-cell"><span class="film-title">Minari</span><span class="film-coprod">co-prod. with USA</span></div></td>
+          <td class="col-semesters">Sp '25</td>
+          <td class="col-times">1</td>
+        </tr>
+
+        <!-- Malawi -->
+        <tr class="country-row"><td colspan="4">Malawi</td></tr>
+        <tr>
+          <td></td>
+          <td><div class="film-cell"><span class="film-title">The Boy Who Harnessed the Wind</span><span class="film-coprod">co-prod. with UK</span></div></td>
+          <td class="col-semesters">Sp '25</td>
+          <td class="col-times">1</td>
+        </tr>
+
+        <!-- Mexico -->
+        <tr class="country-row"><td colspan="4">Mexico</td></tr>
+        <tr>
+          <td></td>
+          <td><div class="film-cell"><span class="film-title">Pinocchio (del Toro)</span><span class="film-coprod">co-prod. with USA</span></div></td>
+          <td class="col-semesters">Su '24</td>
+          <td class="col-times">1</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><div class="film-cell"><span class="film-title">La Jaula de Oro (The Golden Dream)</span></div></td>
+          <td class="col-semesters">Sp '23, Sp '24, Sp '25</td>
+          <td class="col-times">3</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><div class="film-cell"><span class="film-title">Tótem</span></div></td>
+          <td class="col-semesters">Sp '26</td>
+          <td class="col-times">1</td>
+        </tr>
+
+        <!-- Norway -->
+        <tr class="country-row"><td colspan="4">Norway</td></tr>
+        <tr>
+          <td></td>
+          <td><div class="film-cell"><span class="film-title">The Worst Person in the World</span></div></td>
+          <td class="col-semesters">Sp '23</td>
+          <td class="col-times">1</td>
+        </tr>
+
+        <!-- Poland -->
+        <tr class="country-row"><td colspan="4">Poland</td></tr>
+        <tr>
+          <td></td>
+          <td><div class="film-cell"><span class="film-title">Ida</span></div></td>
+          <td class="col-semesters">Sp '23, Sp '24</td>
+          <td class="col-times">2</td>
+        </tr>
+
+        <!-- Senegal -->
+        <tr class="country-row"><td colspan="4">Senegal</td></tr>
+        <tr>
+          <td></td>
+          <td><div class="film-cell"><span class="film-title">Saloum</span></div></td>
+          <td class="col-semesters">Sp '23</td>
+          <td class="col-times">1</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><div class="film-cell"><span class="film-title">Dahomey</span><span class="film-coprod">co-prod. with Benin &amp; France</span></div></td>
+          <td class="col-semesters">Sp '26</td>
+          <td class="col-times">1</td>
+        </tr>
+
+        <!-- Spain -->
+        <tr class="country-row"><td colspan="4">Spain</td></tr>
+        <tr>
+          <td></td>
+          <td><div class="film-cell"><span class="film-title">Truman</span></div></td>
+          <td class="col-semesters">Sp '23</td>
+          <td class="col-times">1</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><div class="film-cell"><span class="film-title">Pain and Glory</span></div></td>
+          <td class="col-semesters">Sp '24</td>
+          <td class="col-times">1</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><div class="film-cell"><span class="film-title">Society of the Snow</span></div></td>
+          <td class="col-semesters">Sp '25</td>
+          <td class="col-times">1</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><div class="film-cell"><span class="film-title">Robot Dreams</span></div></td>
+          <td class="col-semesters">Sp '26</td>
+          <td class="col-times">1</td>
+        </tr>
+
+        <!-- United Kingdom -->
+        <tr class="country-row"><td colspan="4">United Kingdom</td></tr>
+        <tr>
+          <td></td>
+          <td><div class="film-cell"><span class="film-title">1917</span></div></td>
+          <td class="col-semesters">Su '24</td>
+          <td class="col-times">1</td>
+        </tr>
+
+        <!-- USA -->
+        <tr class="country-row"><td colspan="4">USA</td></tr>
+        <tr>
+          <td></td>
+          <td><div class="film-cell"><span class="film-title">The Holdovers</span></div></td>
+          <td class="col-semesters">Su '24</td>
+          <td class="col-times">1</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><div class="film-cell"><span class="film-title">The Rider</span></div></td>
+          <td class="col-semesters">Sp '23, Sp '24, Sp '25, Sp '26</td>
+          <td class="col-times">4</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><div class="film-cell"><span class="film-title">The Brutalist</span><span class="film-coprod">co-prod. with Hungary</span></div></td>
+          <td class="col-semesters">Sp '26</td>
+          <td class="col-times">1</td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Mobile card list -->
+  <div class="card-list" aria-label="Films by country (mobile view)">
+
+    <div class="country-block">
+      <div class="country-label">Belgium</div>
+      <div class="film-card">
+        <div class="card-title">Close</div>
+        <div class="card-times">1<span class="card-times-label">time</span></div>
+        <div class="card-semesters">Sp '26</div>
+      </div>
+    </div>
+
+    <div class="country-block">
+      <div class="country-label">Colombia</div>
+      <div class="film-card">
+        <div class="card-title">In the Summers</div>
+        <div class="card-times">1<span class="card-times-label">time</span></div>
+        <div class="card-coprod">co-prod. with USA</div>
+        <div class="card-semesters">Sp '25</div>
+      </div>
+    </div>
+
+    <div class="country-block">
+      <div class="country-label">Denmark</div>
+      <div class="film-card">
+        <div class="card-title">Another Round</div>
+        <div class="card-times">4<span class="card-times-label">times</span></div>
+        <div class="card-semesters">Sp '23, Sp '24, Sp '25, Sp '26</div>
+      </div>
+    </div>
+
+    <div class="country-block">
+      <div class="country-label">France</div>
+      <div class="film-card">
+        <div class="card-title">The Intouchables</div>
+        <div class="card-times">1<span class="card-times-label">time</span></div>
+        <div class="card-semesters">Su '24</div>
+      </div>
+      <div class="film-card">
+        <div class="card-title">Holy Motors</div>
+        <div class="card-times">1<span class="card-times-label">time</span></div>
+        <div class="card-semesters">Sp '23</div>
+      </div>
+      <div class="film-card">
+        <div class="card-title">Full Time</div>
+        <div class="card-times">3<span class="card-times-label">times</span></div>
+        <div class="card-semesters">Sp '24, Sp '25, Sp '26</div>
+      </div>
+    </div>
+
+    <div class="country-block">
+      <div class="country-label">Germany</div>
+      <div class="film-card">
+        <div class="card-title">All Quiet on the Western Front</div>
+        <div class="card-times">3<span class="card-times-label">times</span></div>
+        <div class="card-semesters">Su '24, Sp '25, Sp '26</div>
+      </div>
+      <div class="film-card">
+        <div class="card-title">Toni Erdmann</div>
+        <div class="card-times">1<span class="card-times-label">time</span></div>
+        <div class="card-semesters">Sp '24</div>
+      </div>
+    </div>
+
+    <div class="country-block">
+      <div class="country-label">India</div>
+      <div class="film-card">
+        <div class="card-title">RRR</div>
+        <div class="card-times">4<span class="card-times-label">times</span></div>
+        <div class="card-semesters">Su '24, Sp '23, Sp '24, Sp '25</div>
+      </div>
+      <div class="film-card">
+        <div class="card-title">Superboys of Malegaon</div>
+        <div class="card-times">1<span class="card-times-label">time</span></div>
+        <div class="card-semesters">Sp '26</div>
+      </div>
+    </div>
+
+    <div class="country-block">
+      <div class="country-label">Iran</div>
+      <div class="film-card">
+        <div class="card-title">A Separation</div>
+        <div class="card-times">2<span class="card-times-label">times</span></div>
+        <div class="card-semesters">Sp '23, Sp '24</div>
+      </div>
+      <div class="film-card">
+        <div class="card-title">A Hero</div>
+        <div class="card-times">1<span class="card-times-label">time</span></div>
+        <div class="card-semesters">Sp '25</div>
+      </div>
+    </div>
+
+    <div class="country-block">
+      <div class="country-label">Ireland</div>
+      <div class="film-card">
+        <div class="card-title">The Banshees of Inisherin</div>
+        <div class="card-times">4<span class="card-times-label">times</span></div>
+        <div class="card-semesters">Sp '23, Sp '24, Sp '25, Sp '26</div>
+      </div>
+    </div>
+
+    <div class="country-block">
+      <div class="country-label">Israel/Palestine</div>
+      <div class="film-card">
+        <div class="card-title">No Other Land</div>
+        <div class="card-times">1<span class="card-times-label">time</span></div>
+        <div class="card-semesters">Sp '26</div>
+      </div>
+    </div>
+
+    <div class="country-block">
+      <div class="country-label">Italy</div>
+      <div class="film-card">
+        <div class="card-title">The Great Beauty</div>
+        <div class="card-times">1<span class="card-times-label">time</span></div>
+        <div class="card-semesters">Sp '23</div>
+      </div>
+      <div class="film-card">
+        <div class="card-title">Mixed by Erry</div>
+        <div class="card-times">1<span class="card-times-label">time</span></div>
+        <div class="card-semesters">Sp '24</div>
+      </div>
+    </div>
+
+    <div class="country-block">
+      <div class="country-label">Japan</div>
+      <div class="film-card">
+        <div class="card-title">Godzilla Minus One</div>
+        <div class="card-times">3<span class="card-times-label">times</span></div>
+        <div class="card-semesters">Su '24, Sp '25, Sp '26</div>
+      </div>
+      <div class="film-card">
+        <div class="card-title">Shoplifters</div>
+        <div class="card-times">2<span class="card-times-label">times</span></div>
+        <div class="card-semesters">Sp '23, Sp '24</div>
+      </div>
+    </div>
+
+    <div class="country-block">
+      <div class="country-label">Korea</div>
+      <div class="film-card">
+        <div class="card-title">Parasite</div>
+        <div class="card-times">5<span class="card-times-label">times</span></div>
+        <div class="card-semesters">Su '24, Sp '23, Sp '24, Sp '25, Sp '26</div>
+      </div>
+      <div class="film-card">
+        <div class="card-title">Past Lives</div>
+        <div class="card-times">1<span class="card-times-label">time</span></div>
+        <div class="card-coprod">co-prod. with USA</div>
+        <div class="card-semesters">Sp '24</div>
+      </div>
+      <div class="film-card">
+        <div class="card-title">Minari</div>
+        <div class="card-times">1<span class="card-times-label">time</span></div>
+        <div class="card-coprod">co-prod. with USA</div>
+        <div class="card-semesters">Sp '25</div>
+      </div>
+    </div>
+
+    <div class="country-block">
+      <div class="country-label">Malawi</div>
+      <div class="film-card">
+        <div class="card-title">The Boy Who Harnessed the Wind</div>
+        <div class="card-times">1<span class="card-times-label">time</span></div>
+        <div class="card-coprod">co-prod. with UK</div>
+        <div class="card-semesters">Sp '25</div>
+      </div>
+    </div>
+
+    <div class="country-block">
+      <div class="country-label">Mexico</div>
+      <div class="film-card">
+        <div class="card-title">Pinocchio (del Toro)</div>
+        <div class="card-times">1<span class="card-times-label">time</span></div>
+        <div class="card-coprod">co-prod. with USA</div>
+        <div class="card-semesters">Su '24</div>
+      </div>
+      <div class="film-card">
+        <div class="card-title">La Jaula de Oro (The Golden Dream)</div>
+        <div class="card-times">3<span class="card-times-label">times</span></div>
+        <div class="card-semesters">Sp '23, Sp '24, Sp '25</div>
+      </div>
+      <div class="film-card">
+        <div class="card-title">Tótem</div>
+        <div class="card-times">1<span class="card-times-label">time</span></div>
+        <div class="card-semesters">Sp '26</div>
+      </div>
+    </div>
+
+    <div class="country-block">
+      <div class="country-label">Norway</div>
+      <div class="film-card">
+        <div class="card-title">The Worst Person in the World</div>
+        <div class="card-times">1<span class="card-times-label">time</span></div>
+        <div class="card-semesters">Sp '23</div>
+      </div>
+    </div>
+
+    <div class="country-block">
+      <div class="country-label">Poland</div>
+      <div class="film-card">
+        <div class="card-title">Ida</div>
+        <div class="card-times">2<span class="card-times-label">times</span></div>
+        <div class="card-semesters">Sp '23, Sp '24</div>
+      </div>
+    </div>
+
+    <div class="country-block">
+      <div class="country-label">Senegal</div>
+      <div class="film-card">
+        <div class="card-title">Saloum</div>
+        <div class="card-times">1<span class="card-times-label">time</span></div>
+        <div class="card-semesters">Sp '23</div>
+      </div>
+      <div class="film-card">
+        <div class="card-title">Dahomey</div>
+        <div class="card-times">1<span class="card-times-label">time</span></div>
+        <div class="card-coprod">co-prod. with Benin &amp; France</div>
+        <div class="card-semesters">Sp '26</div>
+      </div>
+    </div>
+
+    <div class="country-block">
+      <div class="country-label">Spain</div>
+      <div class="film-card">
+        <div class="card-title">Truman</div>
+        <div class="card-times">1<span class="card-times-label">time</span></div>
+        <div class="card-semesters">Sp '23</div>
+      </div>
+      <div class="film-card">
+        <div class="card-title">Pain and Glory</div>
+        <div class="card-times">1<span class="card-times-label">time</span></div>
+        <div class="card-semesters">Sp '24</div>
+      </div>
+      <div class="film-card">
+        <div class="card-title">Society of the Snow</div>
+        <div class="card-times">1<span class="card-times-label">time</span></div>
+        <div class="card-semesters">Sp '25</div>
+      </div>
+      <div class="film-card">
+        <div class="card-title">Robot Dreams</div>
+        <div class="card-times">1<span class="card-times-label">time</span></div>
+        <div class="card-semesters">Sp '26</div>
+      </div>
+    </div>
+
+    <div class="country-block">
+      <div class="country-label">United Kingdom</div>
+      <div class="film-card">
+        <div class="card-title">1917</div>
+        <div class="card-times">1<span class="card-times-label">time</span></div>
+        <div class="card-semesters">Su '24</div>
+      </div>
+    </div>
+
+    <div class="country-block">
+      <div class="country-label">USA</div>
+      <div class="film-card">
+        <div class="card-title">The Holdovers</div>
+        <div class="card-times">1<span class="card-times-label">time</span></div>
+        <div class="card-semesters">Su '24</div>
+      </div>
+      <div class="film-card">
+        <div class="card-title">The Rider</div>
+        <div class="card-times">4<span class="card-times-label">times</span></div>
+        <div class="card-semesters">Sp '23, Sp '24, Sp '25, Sp '26</div>
+      </div>
+      <div class="film-card">
+        <div class="card-title">The Brutalist</div>
+        <div class="card-times">1<span class="card-times-label">time</span></div>
+        <div class="card-coprod">co-prod. with Hungary</div>
+        <div class="card-semesters">Sp '26</div>
+      </div>
+    </div>
+
+  </div><!-- end card-list -->
+
+  <footer>
+    Prepared from course syllabi for THE 204 – World Cinema, Wabash College. Professor Michael Abbott.
+  </footer>
+
+</div><!-- end page -->
+</body>
+</html>
