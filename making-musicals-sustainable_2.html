@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Making Musical Theater Sustainable</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:          #f5f2ec;
+    --bg-white:    #ffffff;
+    --slate:       #2c3a4a;
+    --slate-mid:   #445566;
+    --slate-light: #6b7c8d;
+    --accent:      #3d6b8e;
+    --accent-soft: #dde8f0;
+    --rule:        #c8c0b4;
+    --rule-light:  #e4dfd7;
+    --ink:         #1c2530;
+    --ink-mid:     #3a4a5a;
+    --ink-light:   #5a6a7a;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 18px;
+    line-height: 1.75;
+    min-height: 100vh;
+  }
+
+  /* ── Curtain open animation ── */
+  .curtain-left, .curtain-right {
+    position: fixed;
+    top: 0;
+    width: 50%;
+    height: 100vh;
+    background: var(--slate);
+    z-index: 1000;
+    transition: transform 1.1s cubic-bezier(0.77, 0, 0.175, 1);
+  }
+  .curtain-left  { left: 0; }
+  .curtain-right { right: 0; }
+  .curtain-left.open  { transform: translateX(-100%); }
+  .curtain-right.open { transform: translateX(100%); }
+
+  /* ── Ornamental border frame ── */
+  .page-frame {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0 2rem 4rem;
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.8s ease 1s, transform 0.8s ease 1s;
+  }
+  .page-frame.visible { opacity: 1; transform: none; }
+
+  /* ── Header / Cover ── */
+  .cover {
+    text-align: center;
+    padding: 4rem 2rem 3rem;
+    position: relative;
+    border-bottom: 2px solid var(--slate);
+    margin-bottom: 3rem;
+  }
+
+  .cover::before {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 2px;
+    background: var(--accent);
+    margin: 0 auto 1.5rem;
+  }
+
+  .cover-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    color: var(--slate-light);
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+
+  .cover-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 5vw, 3.4rem);
+    font-weight: 900;
+    line-height: 1.1;
+    color: var(--slate);
+    margin-bottom: 0.7rem;
+    letter-spacing: -0.01em;
+  }
+
+  .cover-subtitle {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--ink-mid);
+    margin-bottom: 1.8rem;
+  }
+
+  .cover-date {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    color: var(--slate-light);
+    text-transform: uppercase;
+  }
+
+  .cover::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 2px;
+    background: var(--accent);
+    margin: 1.5rem auto 0;
+  }
+
+  /* ── Ornament ── */
+  .ornament {
+    text-align: center;
+    color: var(--rule);
+    font-size: 1.2rem;
+    margin: 2.5rem 0;
+    letter-spacing: 0.5em;
+    user-select: none;
+  }
+
+  /* ── Intro / preamble ── */
+  .preamble {
+    font-size: 1.2rem;
+    color: var(--ink-mid);
+    max-width: 650px;
+    margin: 0 auto 3rem;
+    text-align: center;
+    font-style: italic;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--rule-light);
+  }
+
+  /* ── TOC / Nav ── */
+  .toc {
+    background: var(--slate);
+    color: #fff;
+    padding: 2rem 2.5rem;
+    margin-bottom: 3.5rem;
+    position: relative;
+  }
+
+  .toc::before {
+    content: 'Contents';
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    color: #aabccc;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+  }
+
+  .toc ol {
+    list-style: none;
+    counter-reset: toc-counter;
+  }
+
+  .toc li {
+    counter-increment: toc-counter;
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    padding: 0.35rem 0;
+  }
+
+  .toc li::before {
+    content: counter(toc-counter, upper-roman);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: #aabccc;
+    min-width: 2.5rem;
+    letter-spacing: 0.05em;
+  }
+
+  .toc a {
+    color: #ffffff;
+    text-decoration: none;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    transition: color 0.2s;
+    border-bottom: 1px solid transparent;
+  }
+
+  .toc a:hover {
+    color: #a8d0ee;
+  }
+
+  /* ── Sections ── */
+  .section {
+    margin-bottom: 4rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .section.visible { opacity: 1; transform: none; }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    margin-bottom: 1.8rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .section-numeral {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    color: #fff;
+    background: var(--slate);
+    padding: 0.35rem 0.75rem;
+    flex-shrink: 0;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--slate);
+    line-height: 1.2;
+  }
+
+  /* ── Body text ── */
+  .section p {
+    margin-bottom: 1.2rem;
+    color: var(--ink-mid);
+  }
+
+  /* ── Strategy cards ── */
+  .strategies {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    margin: 1.5rem 0;
+  }
+
+  .strategy-card {
+    border-left: 3px solid var(--accent);
+    padding: 1rem 1.25rem 1rem 1.5rem;
+    background: var(--bg-white);
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .strategy-card:hover {
+    background: var(--accent-soft);
+    border-color: var(--slate);
+  }
+
+  .strategy-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--slate);
+    margin-bottom: 0.4rem;
+  }
+
+  .strategy-card p {
+    font-size: 1.05rem;
+    color: var(--ink-mid);
+    margin: 0;
+  }
+
+  .strategy-card .examples {
+    font-style: italic;
+    color: var(--slate-light);
+    font-size: 1rem;
+    margin-top: 0.4rem !important;
+  }
+
+  /* ── MOU checklist ── */
+  .mou-items {
+    margin: 1.5rem 0;
+  }
+
+  .mou-item {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid var(--rule-light);
+  }
+
+  .mou-item:last-child { border-bottom: none; }
+
+  .mou-icon {
+    width: 28px;
+    height: 28px;
+    background: var(--slate);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .mou-item p { margin: 0; font-size: 1.05rem; }
+
+  /* ── Remedies ── */
+  .remedies {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+
+  .remedy-card {
+    background: var(--slate);
+    color: #e8eef3;
+    padding: 1.4rem;
+    font-size: 1.05rem;
+    line-height: 1.6;
+  }
+
+  .remedy-card strong {
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    color: #a8c8e0;
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
+  }
+
+  /* ── Production tiers ── */
+  .tiers {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin: 1.5rem 0;
+  }
+
+  @media (max-width: 600px) { .tiers { grid-template-columns: 1fr; } }
+
+  .tier {
+    padding: 1.5rem;
+    position: relative;
+  }
+
+  .tier.chamber {
+    background: var(--bg-white);
+    border: 1px solid var(--rule);
+  }
+
+  .tier.full {
+    background: var(--slate);
+  }
+
+  .tier-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .tier.chamber .tier-label { color: var(--slate-light); }
+  .tier.full    .tier-label { color: #a8c8e0; }
+
+  .tier-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+  }
+
+  .tier.chamber .tier-name { color: var(--slate); }
+  .tier.full    .tier-name { color: #ffffff; }
+
+  .tier-freq {
+    font-style: italic;
+    font-size: 0.9rem;
+    margin-bottom: 0.9rem;
+  }
+
+  .tier.chamber .tier-freq { color: var(--slate-light); }
+  .tier.full    .tier-freq { color: #a8c8e0; }
+
+  .tier p { font-size: 1.05rem; line-height: 1.6; margin: 0; }
+  .tier.full p { color: #e8eef3; }
+
+  /* ── Closing rule ── */
+  .footer-rule {
+    text-align: center;
+    padding: 2.5rem 0 1rem;
+    border-top: 1px solid var(--rule);
+    margin-top: 2rem;
+  }
+
+  .footer-dept {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    color: var(--slate-light);
+    text-transform: uppercase;
+  }
+
+  /* ── Title: plain slate, no gradient clip ── */
+  .cover-title {
+    color: var(--slate);
+    background: none;
+    -webkit-text-fill-color: var(--slate);
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 640px) {
+    .page-frame { padding: 0 1rem 3rem; }
+    .toc { padding: 1.5rem; }
+    .section-header { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Curtain -->
+<div class="curtain-left" id="cl"></div>
+<div class="curtain-right" id="cr"></div>
+
+<div class="page-frame" id="frame">
+
+  <!-- Cover -->
+  <header class="cover">
+    <p class="cover-label">Theater Department — Internal Proposal</p>
+    <h1 class="cover-title">Making Musical<br>Theater Sustainable</h1>
+    <p class="cover-subtitle">A Modest Proposal for Theater <em>(heh)</em></p>
+    <p class="cover-date">April 2026</p>
+  </header>
+
+  <!-- Preamble -->
+  <p class="preamble">
+    Producing musical theater in a small, all-male department is ridiculously hard, and the standard playbook wasn't designed with us in mind. Rather than continuing to improvise solutions show by show, this proposal suggests we step back and design a model that actually fits our situation.
+  </p>
+
+  <!-- TOC -->
+  <nav class="toc">
+    <ol>
+      <li><a href="#repertoire">Choose the Right Shows</a></li>
+      <li><a href="#partnership">Build a Real Partnership with Another School</a></li>
+      <li><a href="#music">Formalize the Music Department Relationship</a></li>
+      <li><a href="#production">Right-Size the Production Model</a></li>
+    </ol>
+  </nav>
+
+  <!-- Section I -->
+  <section class="section" id="repertoire">
+    <div class="section-header">
+      <span class="section-numeral">I</span>
+      <h2 class="section-title">Choose the Right Shows</h2>
+    </div>
+
+    <p>The single highest-leverage decision we make is repertoire. Many of our recurring difficulties — finding enough actors, managing loads, crew strain — are significantly affected by what show we select. If we're going to do a musical on a regular cycle, the choice of material has to be deliberate, not aspirational.</p>
+
+    <p>Three viable approaches, which can be mixed depending on the moment:</p>
+
+    <div class="strategies">
+      <div class="strategy-card">
+        <h3>Male-Weighted Repertoire</h3>
+        <p>There is a richer canon of male-skewing and all-male musicals than is commonly assumed. Chamber musicals and two-handers open up further options.</p>
+        <p class="examples">Working · Sweeney Todd · The Full Monty · Tick Tick… Boom! · Floyd Collins · Spring Awakening</p>
+      </div>
+      <div class="strategy-card">
+        <h3>Gender-Flexible Casting as Artistic Policy</h3>
+        <p>Instead of treating cross-gender or non-traditional casting as a workaround, we could own it as a deliberate artistic choice — putting us in the same conversation as some of the most exciting theater happening right now. Framing this as our approach rather than a compromise gives our program a distinct identity that could even help with recruiting.</p>
+        <p class="examples">Company · Cabaret · Into the Woods</p>
+      </div>
+      <div class="strategy-card">
+        <h3>Original or Devised Work</h3>
+        <p>Longer-term, the most sustainable musical theater program might be one that creates its own work: small-scale, original, built around our ensemble. This eliminates licensing costs and is native to our resources. It also represents a genuine collaborative opportunity with Music.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="ornament">✦ &nbsp; ✦ &nbsp; ✦</div>
+
+  <!-- Section II -->
+  <section class="section" id="partnership">
+    <div class="section-header">
+      <span class="section-numeral">II</span>
+      <h2 class="section-title">Build a Real Partnership with Another School</h2>
+    </div>
+
+    <p>Every production, we find ourselves renegotiating informally, hoping the right people are still available and willing. A formal Memorandum of Understanding (MOU) with a program like DePauw's Institute of Music would give us something to actually rely on.</p>
+
+    <p>An MOU doesn't need to be elaborate — two pages, signed by both department chairs, covering:</p>
+
+    <div class="mou-items">
+      <div class="mou-item">
+        <div class="mou-icon">A</div>
+        <p><strong>Audition access</strong> — their students may audition for our productions, with appropriate billing and recognition.</p>
+      </div>
+      <div class="mou-item">
+        <div class="mou-icon">B</div>
+        <p><strong>Academic credit</strong> — how their students receive recognition at their institution (independent study, practicum hours, etc.).</p>
+      </div>
+      <div class="mou-item">
+        <div class="mou-icon">C</div>
+        <p><strong>Pit orchestra</strong> — whether their Music program can reliably supply players, and under what terms.</p>
+      </div>
+    </div>
+
+    <p>The goal is to move from <em>"we know some people over there"</em> to <em>"we have a production partner."</em> That shift requires a document and two signatures.</p>
+  </section>
+
+  <div class="ornament">✦ &nbsp; ✦ &nbsp; ✦</div>
+
+  <!-- Section III -->
+  <section class="section" id="music">
+    <div class="section-header">
+      <span class="section-numeral">III</span>
+      <h2 class="section-title">Formalize the Music Department Relationship</h2>
+    </div>
+
+    <p>The most important question this proposal raises is also the trickiest: what are we actually asking our colleague in Music to do, and what does Wabash owe them for doing it?</p>
+
+    <p>The current setup — where musical direction runs on goodwill and personal generosity — isn't sustainable, and it isn't fair. It puts the whole weight of that relationship on individuals rather than on any real interdepartmental structure, and it means the musical's future depends on whoever happens to be available and willing in a given year.</p>
+
+    <p>Consider one of the following remedies:</p>
+
+    <div class="remedies">
+      <div class="remedy-card">
+        <strong>Stipend</strong>
+        A formal stipend for musical direction, comparable to what we would pay an outside contractor.
+      </div>
+      <div class="remedy-card">
+        <strong>Course Release</strong>
+        A workload adjustment that recognizes the production as part of their formally assigned duties.
+      </div>
+      <div class="remedy-card">
+        <strong>Joint Agreement</strong>
+        A departmental agreement designating the musical as a <em>shared</em> production, with both Theater and Music formally invested in its success.
+      </div>
+    </div>
+
+    <p>The third option is worth pursuing seriously. If our Music colleague is a co-owner of the production rather than a service provider to Theater, their chair has institutional reason to protect that time. The musical becomes something Music <em>does</em>, not something Music <em>helps Theater with</em>.</p>
+
+    <p>A related possibility: could the musical be timed to a course? A musical theater practicum cross-listed between Theater and Music — generating enrollment credit for both departments — would provide the institutional justification for faculty time on both sides.</p>
+  </section>
+
+  <div class="ornament">✦ &nbsp; ✦ &nbsp; ✦</div>
+
+  <!-- Section IV -->
+  <section class="section" id="production">
+    <div class="section-header">
+      <span class="section-numeral">IV</span>
+      <h2 class="section-title">Right-Size the Production Model</h2>
+    </div>
+
+    <p>A full proscenium musical with elaborate scenery, full orchestra, and weeks of rehearsal is expensive and exhausting — because that model was designed for theater companies with more resources than we have. A tiered production model might serve us better.</p>
+
+    <div class="tiers">
+      <div class="tier chamber">
+        <p class="tier-label">Alternating Years</p>
+        <h3 class="tier-name">The Chamber Production</h3>
+        <p class="tier-freq">Minimal set · Piano + 2–3 players · Near-memorized</p>
+        <p>A concert staging costs a fraction of a full production and can be artistically equal to it if the material is right. This is not a lesser version of the musical; it is a different and entirely legitimate form. It also serves as a low-stakes way to build our partnership with the coed university before committing to a full production together.</p>
+      </div>
+      <div class="tier full">
+        <p class="tier-label">Every Two Years (or so)</p>
+        <h3 class="tier-name">The Full Production</h3>
+        <p class="tier-freq">Proper design · Fuller orchestra · Complete technical investment</p>
+        <p>The full production remains the centerpiece. But it lands better — and is produced more sustainably — when it alternates with a lighter-touch year that keeps the work alive without depleting us. This rhythm also gives students more consistent exposure to musical theater across their four years.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer-rule">
+    <div class="ornament" style="margin:0 0 1rem;">✦</div>
+    <p class="footer-dept">Theater Department &nbsp;—&nbsp; Musical Theater Sustainability &nbsp;—&nbsp; April 2026</p>
+  </footer>
+
+</div><!-- /page-frame -->
+
+<script>
+  // Curtain open on load
+  window.addEventListener('load', () => {
+    const cl = document.getElementById('cl');
+    const cr = document.getElementById('cr');
+    const frame = document.getElementById('frame');
+
+    setTimeout(() => {
+      cl.classList.add('open');
+      cr.classList.add('open');
+      frame.classList.add('visible');
+    }, 200);
+  });
+
+  // Scroll-triggered section reveals
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.section').forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
