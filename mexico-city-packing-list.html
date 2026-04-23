@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mexico City Packing List — Michael Abbott</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    min-height: 100vh;
+    background: #0e0c0a;
+    font-family: Georgia, 'Times New Roman', serif;
+    color: #f0e6d3;
+  }
+  header {
+    background: linear-gradient(135deg, #1a1208 0%, #2d1f0a 50%, #1a1208 100%);
+    border-bottom: 1px solid #4a3520;
+    padding: 40px 32px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 20% 50%, rgba(180,120,40,0.08) 0%, transparent 60%),
+                radial-gradient(circle at 80% 20%, rgba(180,100,30,0.06) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .header-inner { max-width: 720px; margin: 0 auto; position: relative; }
+  .eyebrow {
+    font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase;
+    color: #a07840; margin-bottom: 8px;
+  }
+  h1 { font-size: clamp(28px,5vw,42px); font-weight: normal; color: #f5e8cc;
+       letter-spacing: -0.01em; line-height: 1.1; margin-bottom: 6px; }
+  .subhead { font-size: 13px; color: #8a7055; margin-bottom: 24px; }
+  .progress-row { display: flex; align-items: center; gap: 16px; }
+  .progress-track { flex: 1; height: 4px; background: #2a1e0f; border-radius: 2px; overflow: hidden; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, #b87820, #e8a830);
+                   border-radius: 2px; transition: width 0.4s ease; width: 0%; }
+  .progress-label { font-size: 12px; color: #a07840; white-space: nowrap; font-family: monospace; }
+
+  .filter-bar {
+    background: #14100a; border-bottom: 1px solid #2a1e0f; padding: 12px 32px;
+  }
+  .filter-inner { max-width: 720px; margin: 0 auto; display: flex; gap: 8px; }
+  .filter-btn {
+    padding: 5px 14px; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+    border: 1px solid #2a1e0f; border-radius: 2px; background: transparent;
+    color: #6a5540; cursor: pointer; transition: all 0.2s; font-family: Georgia, serif;
+  }
+  .filter-btn.active {
+    border-color: #b87820; background: rgba(184,120,32,0.15); color: #e8a830;
+  }
+
+  main { max-width: 720px; margin: 0 auto; padding: 24px 32px 60px; }
+
+  .category { margin-bottom: 32px; }
+  .cat-header {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid #2a1e0f;
+  }
+  .cat-icon { font-size: 16px; }
+  .cat-label {
+    font-size: 14px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: #a07840; transition: color 0.3s;
+  }
+  .cat-label.done { color: #6a8a50; }
+  .cat-count { margin-left: auto; font-size: 10px; color: #4a3520; font-family: monospace; }
+
+  .item {
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 12px; border-radius: 3px; cursor: pointer;
+    transition: background 0.2s; user-select: none;
+  }
+  .item:hover { background: rgba(180,120,32,0.07); }
+  .item.checked { background: rgba(100,130,70,0.08); }
+  .item.checked:hover { background: rgba(100,130,70,0.12); }
+
+  .checkbox {
+    width: 16px; height: 16px; border: 1.5px solid #4a3520; border-radius: 2px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; background: transparent; transition: all 0.2s;
+  }
+  .item.checked .checkbox {
+    border-color: #6a9a48; background: rgba(100,154,72,0.2);
+  }
+  .checkmark { display: none; }
+  .item.checked .checkmark { display: block; }
+
+  .item-text {
+    font-size: 17px; color: #c8b898; line-height: 1.4; transition: all 0.2s;
+  }
+  .item.checked .item-text { color: #4a5a38; text-decoration: line-through; }
+
+  .item.hidden { display: none; }
+
+  .complete-msg {
+    display: none; text-align: center; padding: 32px;
+    border-top: 1px solid #2a1e0f; color: #6a9a48;
+    font-size: 13px; letter-spacing: 0.15em; text-transform: uppercase;
+  }
+  .complete-msg.visible { display: block; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="eyebrow">Mexico City · 2026</div>
+    <h1>Packing List</h1>
+    <div class="subhead">Michael Abbott · Delta HL2KV6 · María Del Alma House, Coyoacán</div>
+    <div class="progress-row">
+      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+      <span class="progress-label" id="progressLabel">0/0 packed</span>
+    </div>
+  </div>
+</header>
+
+<div class="filter-bar">
+  <div class="filter-inner">
+    <button class="filter-btn active" onclick="setFilter('all')">All items</button>
+    <button class="filter-btn" onclick="setFilter('remaining')">Remaining only</button>
+  </div>
+</div>
+
+<main id="main"></main>
+
+<script>
+const categories = [
+  { id:"documents", icon:"📋", label:"Documents & Money", items:[
+    "Passport (valid well past June 2026)",
+    "Photo/photocopy of passport on phone",
+    "Delta confirmation HL2KV6 accessible",
+    "Hotel confirmation #6117845914 + PIN 3939",
+    "Frida Kahlo tickets in Fever app (both QR codes)",
+    "Credit card (bank notified for international use)",
+    "Some USD to exchange or withdraw pesos at MEX airport",
+    "PayPal set up for hotel advance payment",
+    "Register with Smart Traveler Enrollment Program (STEP) at step.state.gov for Mexico travel alerts",
+  ]},
+  { id:"electronics", icon:"🔌", label:"Electronics", items:[
+    "Phone charger (no adapter needed — same outlet as US)",
+    "Small power strip or multi-port USB charger",
+    "Portable battery pack",
+    "Earbuds / headphones",
+    "Earplugs (early-morning city noise)",
+    "Camera (optional — phone permitted at Casa Azul, no flash)",
+  ]},
+  { id:"apps", icon:"📱", label:"Apps & Downloads", items:[
+    "Google Maps — Mexico City offline map downloaded",
+    "Google Translate — Spanish offline pack downloaded",
+    "Uber app installed and payment set up",
+    "Fever app with museum tickets verified",
+    "VisitMex app (digital immigration form)",
+    "International phone plan confirmed with carrier",
+  ]},
+  { id:"clothing", icon:"👕", label:"Clothing", items:[
+    "Light shirts / tops (5–6 days)",
+    "Pants / shorts (mix for warm days)",
+    "Light jacket or layer for cool evenings",
+    "Packable rain jacket (June = rainy season)",
+    "Comfortable walking shoes (cobblestones in Coyoacán)",
+    "Second pair of shoes / sandals",
+    "Socks & underwear (6–7 days)",
+    "Swimwear (optional, depending on plans)",
+    "Light scarf (useful in cool museums or evening air)",
+  ]},
+  { id:"health", icon:"💊", label:"Health & Hygiene", items:[
+    "Sunscreen SPF 50+ (7,300 ft elevation = stronger UV)",
+    "Stomach meds (Imodium, Pepto) — dietary change precaution",
+    "Pain reliever / ibuprofen",
+    "Consider altitude sickness meds (consult doctor)",
+    "Hand sanitizer",
+    "Prescription medications (enough for full trip + extra)",
+    "Small first aid kit / band-aids",
+    "Insect repellent",
+    "Toothbrush & toothpaste",
+    "Deodorant",
+    "Razor / grooming essentials",
+  ]},
+  { id:"daypack", icon:"🎒", label:"Day-to-Day Carry", items:[
+    "Small crossbody bag or secure daypack",
+    "Reusable water bottle (refill from bottled water only)",
+    "Snacks for travel day",
+    "Travel neck pillow (6h+ flights)",
+    "Book / reading material for flights and downtime",
+    "Pen (for immigration forms on plane)",
+  ]},
+  { id:"hotel", icon:"🏨", label:"Hotel & Room", items:[
+    "Arrive at hotel after 3:00 PM check-in (or arrange luggage storage)",
+    "Cash ready for hotel — property is cash only",
+    "Small luggage lock",
+    "Sleep mask (ground floor room, patio)",
+  ]},
+];
+
+const checked = {};
+let currentFilter = 'all';
+let totalItems = 0;
+
+function render() {
+  const main = document.getElementById('main');
+  main.innerHTML = '';
+  categories.forEach(cat => {
+    const catChecked = cat.items.filter((_, i) => checked[`${cat.id}-${i}`]).length;
+    const catDone = catChecked === cat.items.length;
+    const div = document.createElement('div');
+    div.className = 'category';
+    div.innerHTML = `
+      <div class="cat-header">
+        <span class="cat-icon">${cat.icon}</span>
+        <span class="cat-label${catDone ? ' done' : ''}">${cat.label}</span>
+        <span class="cat-count">${catChecked}/${cat.items.length}</span>
+      </div>
+    `;
+    cat.items.forEach((text, i) => {
+      const id = `${cat.id}-${i}`;
+      const done = !!checked[id];
+      const hide = currentFilter === 'remaining' && done;
+      const item = document.createElement('div');
+      item.className = `item${done ? ' checked' : ''}${hide ? ' hidden' : ''}`;
+      item.innerHTML = `
+        <div class="checkbox">
+          <svg class="checkmark" width="9" height="7" viewBox="0 0 9 7" fill="none">
+            <path d="M1 3.5L3.5 6L8 1" stroke="#6a9a48" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <span class="item-text">${text}</span>
+      `;
+      item.addEventListener('click', () => {
+        checked[id] = !checked[id];
+        render();
+      });
+      div.appendChild(item);
+    });
+    main.appendChild(div);
+  });
+
+  const completeMsg = document.createElement('div');
+  const allDone = Object.values(checked).filter(Boolean).length === totalItems;
+  completeMsg.className = `complete-msg${allDone ? ' visible' : ''}`;
+  completeMsg.textContent = '✓ All packed — buen viaje, Michael';
+  main.appendChild(completeMsg);
+
+  updateProgress();
+  updateFilterButtons();
+}
+
+function updateProgress() {
+  const checkedCount = Object.values(checked).filter(Boolean).length;
+  const pct = Math.round((checkedCount / totalItems) * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressLabel').textContent = `${checkedCount}/${totalItems} packed`;
+}
+
+function setFilter(f) {
+  currentFilter = f;
+  render();
+}
+
+function updateFilterButtons() {
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.textContent.toLowerCase().includes(currentFilter === 'all' ? 'all' : 'remaining'));
+  });
+}
+
+totalItems = categories.reduce((sum, c) => sum + c.items.length, 0);
+render();
+</script>
+</body>
+</html>
