@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mexico City 2026 — Must-Do List</title>
+    <style>
+        :root {
+            --bg: #fdf6f0;
+            --surface: #ffffff;
+            --surface-alt: #faf5ef;
+            --text: #2c2416;
+            --text-muted: #6b5e4a;
+            --accent: #c44536;
+            --accent-glow: #e07b5a;
+            --gold: #b8860b;
+            --jazz-blue: #1a3a4a;
+            --jazz-blue-light: #2c5f73;
+            --card-shadow: 0 4px 24px rgba(0, 0, 0, 0.07);
+            --card-shadow-hover: 0 12px 36px rgba(0, 0, 0, 0.13);
+            --radius: 18px;
+            --radius-sm: 10px;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --font-display: 'Georgia', 'Palatino Linotype', 'Book Antiqua', 'Palatino', serif;
+            --font-body: 'Inter', 'Segoe UI', 'Helvetica Neue', sans-serif;
+            --border-subtle: #e8dfd3;
+        }
+
+        [data-theme="dark"] {
+            --bg: #1a1510;
+            --surface: #241e16;
+            --surface-alt: #2a2319;
+            --text: #e8dfd3;
+            --text-muted: #b0a592;
+            --accent: #e07b5a;
+            --accent-glow: #f09b7a;
+            --gold: #d4a744;
+            --jazz-blue: #2c5f73;
+            --jazz-blue-light: #3d7d94;
+            --card-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
+            --card-shadow-hover: 0 12px 36px rgba(0, 0, 0, 0.4);
+            --border-subtle: #3a3226;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 17px;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            transition: background-color var(--transition), color var(--transition);
+            min-height: 100vh;
+        }
+
+        /* ── Navigation ─────────────────────────── */
+        .nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--surface);
+            border-bottom: 1px solid var(--border-subtle);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            background: rgba(255, 255, 255, 0.85);
+            transition: all var(--transition);
+            padding: 0 1.5rem;
+        }
+        [data-theme="dark"] .nav {
+            background: rgba(26, 21, 16, 0.88);
+        }
+        .nav-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 60px;
+            gap: 1.5rem;
+        }
+        .nav-logo {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            color: var(--accent);
+            white-space: nowrap;
+        }
+        .nav-links {
+            display: flex;
+            gap: 0.3rem;
+            list-style: none;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            font-weight: 500;
+            padding: 0.45rem 0.8rem;
+            border-radius: 24px;
+            transition: all var(--transition);
+            white-space: nowrap;
+        }
+        .nav-links a:hover,
+        .nav-links a:focus-visible {
+            color: var(--accent);
+            background: var(--surface-alt);
+            outline: none;
+        }
+        .theme-toggle {
+            background: none;
+            border: 1.5px solid var(--border-subtle);
+            border-radius: 50%;
+            width: 38px;
+            height: 38px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--transition);
+            color: var(--text);
+            flex-shrink: 0;
+        }
+        .theme-toggle:hover {
+            border-color: var(--accent);
+            background: var(--surface-alt);
+        }
+
+        /* ── Hero ──────────────────────────────── */
+        .hero {
+            text-align: center;
+            padding: 3.5rem 1.5rem 2.5rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .hero-badge {
+            display: inline-block;
+            background: var(--accent);
+            color: #fff;
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            padding: 0.35rem 1rem;
+            border-radius: 24px;
+            margin-bottom: 1rem;
+        }
+        .hero h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 0.6rem;
+            letter-spacing: -0.01em;
+        }
+        .hero .subtitle {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            max-width: 520px;
+            margin: 0 auto;
+        }
+        .hero .accent-dot {
+            color: var(--accent);
+        }
+
+        /* ── Sections ──────────────────────────── */
+        .main-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1.5rem 4rem;
+        }
+        .section {
+            margin-bottom: 3.5rem;
+        }
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .section-icon {
+            font-size: 2rem;
+            line-height: 1;
+        }
+        .section-header h2 {
+            font-family: var(--font-display);
+            font-size: 1.7rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+        }
+        .section-header .tag {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: var(--accent);
+            background: var(--surface-alt);
+            padding: 0.25rem 0.7rem;
+            border-radius: 16px;
+            border: 1px solid var(--border-subtle);
+        }
+
+        /* ── Cards ─────────────────────────────── */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius);
+            padding: 1.6rem 1.5rem;
+            box-shadow: var(--card-shadow);
+            transition: all var(--transition);
+            position: relative;
+            overflow: hidden;
+            cursor: default;
+        }
+        .card:hover {
+            box-shadow: var(--card-shadow-hover);
+            transform: translateY(-3px);
+            border-color: transparent;
+        }
+        .card-accent-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            border-radius: 3px 0 0 3px;
+        }
+        .card-accent-bar.culinary {
+            background: var(--accent);
+        }
+        .card-accent-bar.jazz {
+            background: var(--jazz-blue-light);
+        }
+        .card h3 {
+            font-family: var(--font-display);
+            font-size: 1.35rem;
+            margin-bottom: 0.35rem;
+            font-weight: 700;
+        }
+        .card .location {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        .card .location svg {
+            width: 15px;
+            height: 15px;
+            flex-shrink: 0;
+            stroke: var(--text-muted);
+        }
+        .card p {
+            font-size: 0.95rem;
+            margin-bottom: 0.7rem;
+            color: var(--text);
+        }
+        .card .detail-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            margin-bottom: 0.4rem;
+            color: var(--text-muted);
+        }
+        .card .detail-row strong {
+            color: var(--text);
+            min-width: 70px;
+            flex-shrink: 0;
+        }
+        .card .pro-tip {
+            margin-top: 0.8rem;
+            padding: 0.65rem 0.9rem;
+            background: var(--surface-alt);
+            border-radius: var(--radius-sm);
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            border-left: 3px solid var(--gold);
+            font-style: italic;
+        }
+        .card .pro-tip::before {
+            content: '💡 ';
+            font-style: normal;
+        }
+        .card .highlight-badge {
+            display: inline-block;
+            background: var(--jazz-blue);
+            color: #fff;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+            margin-bottom: 0.6rem;
+        }
+
+        /* ── Accordion (Cineteca Terrace) ──────── */
+        .accordion-trigger {
+            background: var(--surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius);
+            padding: 1.3rem 1.5rem;
+            width: 100%;
+            text-align: left;
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            transition: all var(--transition);
+            color: var(--text);
+            box-shadow: var(--card-shadow);
+        }
+        .accordion-trigger:hover {
+            box-shadow: var(--card-shadow-hover);
+            border-color: var(--accent);
+        }
+        .accordion-trigger .arrow {
+            transition: transform var(--transition);
+            font-size: 1.4rem;
+            flex-shrink: 0;
+            color: var(--accent);
+        }
+        .accordion-trigger.open .arrow {
+            transform: rotate(180deg);
+        }
+        .accordion-panel {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.45s ease, padding 0.35s ease;
+            background: var(--surface-alt);
+            border-radius: 0 0 var(--radius) var(--radius);
+            margin-top: -6px;
+            border: 1px solid transparent;
+            border-top: none;
+        }
+        .accordion-panel.expanded {
+            max-height: 400px;
+            border-color: var(--border-subtle);
+        }
+        .accordion-panel-inner {
+            padding: 0 1.5rem 1.4rem;
+        }
+        .accordion-panel-inner .detail-row {
+            display: flex;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            margin-bottom: 0.4rem;
+            color: var(--text-muted);
+        }
+        .accordion-panel-inner .detail-row strong {
+            color: var(--text);
+            min-width: 60px;
+        }
+
+        /* ── Table (Logistics) ─────────────────── */
+        .logistics-table-wrap {
+            overflow-x: auto;
+            border-radius: var(--radius);
+            border: 1px solid var(--border-subtle);
+        }
+        .logistics-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+            min-width: 500px;
+        }
+        .logistics-table thead {
+            background: var(--surface-alt);
+        }
+        .logistics-table th {
+            text-align: left;
+            padding: 0.9rem 1.2rem;
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: var(--text-muted);
+            border-bottom: 2px solid var(--border-subtle);
+        }
+        .logistics-table td {
+            padding: 0.85rem 1.2rem;
+            border-bottom: 1px solid var(--border-subtle);
+            vertical-align: top;
+        }
+        .logistics-table tbody tr {
+            transition: background var(--transition);
+        }
+        .logistics-table tbody tr:hover {
+            background: var(--surface-alt);
+        }
+        .logistics-table .item-label {
+            font-weight: 600;
+            color: var(--accent);
+            white-space: nowrap;
+        }
+
+        /* ── Toast / Reminder popup ────────────── */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--jazz-blue);
+            color: #fff;
+            padding: 1rem 1.5rem;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            z-index: 999;
+            opacity: 0;
+            transform: translateY(20px);
+            pointer-events: none;
+            transition: all 0.35s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+        .toast-btn {
+            background: #fff;
+            color: var(--jazz-blue);
+            border: none;
+            padding: 0.35rem 0.9rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.8rem;
+            margin-left: 0.5rem;
+            transition: background var(--transition);
+        }
+        .toast-btn:hover {
+            background: #e8dfd3;
+        }
+
+        /* ── Footer ────────────────────────────── */
+        .footer {
+            text-align: center;
+            padding: 2rem 1.5rem;
+            border-top: 1px solid var(--border-subtle);
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* ── Responsive ────────────────────────── */
+        @media (max-width: 600px) {
+            .nav-inner {
+                height: auto;
+                flex-wrap: wrap;
+                padding: 0.6rem 0;
+                gap: 0.5rem;
+            }
+            .nav-links {
+                gap: 0;
+            }
+            .nav-links a {
+                font-size: 0.75rem;
+                padding: 0.35rem 0.55rem;
+            }
+            .hero {
+                padding: 2rem 1rem 1.5rem;
+            }
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ═══════════ NAVIGATION ═══════════ -->
+    <nav class="nav" aria-label="Main navigation">
+        <div class="nav-inner">
+            <span class="nav-logo">🇲🇽 CDMX 2026</span>
+            <ul class="nav-links">
+                <li><a href="#culinary">🌮 Culinary</a></li>
+                <li><a href="#jazz">🎷 Jazz</a></li>
+                <li><a href="#logistics">📝 Logistics</a></li>
+            </ul>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" title="Toggle dark / light mode">
+                🌙
+            </button>
+        </div>
+    </nav>
+
+    <!-- ═══════════ HERO ═══════════ -->
+    <header class="hero">
+        <span class="hero-badge">June 2026 • Solo Trip</span>
+        <h1>Mexico City <span class="accent-dot">Must‑Do</span> List</h1>
+        <p class="subtitle">
+            A curated guide to essential experiences — rooted in <strong>Coyoacán</strong>,
+            rich in cultural depth, and alive with elite jazz.
+        </p>
+    </header>
+
+    <!-- ═══════════ MAIN CONTENT ═══════════ -->
+    <main class="main-content">
+
+        <!-- ── CULINARY ────────────────────────── -->
+        <section class="section" id="culinary" aria-labelledby="culinary-heading">
+            <div class="section-header">
+                <span class="section-icon">🌮</span>
+                <h2 id="culinary-heading">1. Culinary Highlights</h2>
+                <span class="tag">Street Food Excellence</span>
+            </div>
+            <div class="card-grid">
+                <article class="card">
+                    <div class="card-accent-bar culinary"></div>
+                    <h3>Trinidad Ritual de Sabores</h3>
+                    <div class="location">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="10" r="3"/><path d="M12 2a8 8 0 0 0-8 8c0 6 8 12 8 12s8-6 8-12a8 8 0 0 0-8-8z"/></svg>
+                        Ignacio Allende s/n-Local 123-125, Coyoacán Market
+                    </div>
+                    <p>
+                        A masterclass in modern Mexican street food nestled within the vibrant
+                        <strong>Mercado de Coyoacán</strong>. Internationally recognized for its
+                        sophisticated <strong>vegan options</strong> alongside famous meat selections.
+                    </p>
+                    <div class="detail-row"><strong>Hours</strong> Tue – Sun: 10:30 AM – 6:00 PM (Closed Monday)</div>
+                    <div class="pro-tip">Sundays can see waits of 15+ minutes. Arrive by 1:00 PM for the best selection.</div>
+                </article>
+            </div>
+        </section>
+
+        <!-- ── JAZZ & NIGHTLIFE ────────────────── -->
+        <section class="section" id="jazz" aria-labelledby="jazz-heading">
+            <div class="section-header">
+                <span class="section-icon">🎷</span>
+                <h2 id="jazz-heading">2. Jazz & Nightlife</h2>
+                <span class="tag">World-Class Acoustics</span>
+            </div>
+            <div class="card-grid">
+                <!-- Zinco -->
+                <article class="card" id="zinco-card">
+                    <div class="card-accent-bar jazz"></div>
+                    <span class="highlight-badge">Premier Venue</span>
+                    <h3>Zinco Jazz Club</h3>
+                    <div class="location">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="10" r="3"/><path d="M12 2a8 8 0 0 0-8 8c0 6 8 12 8 12s8-6 8-12a8 8 0 0 0-8-8z"/></svg>
+                        Motolinia 20, Centro Histórico
+                    </div>
+                    <p>
+                        Tucked away in the basement of a former bank vault — an authentic
+                        20th-century speakeasy with velvet curtains and world-class acoustics.
+                    </p>
+                    <div class="detail-row"><strong>Reservation</strong> WhatsApp: +52 55 3936 9590 (highly recommended)</div>
+                    <div class="detail-row"><strong>Walk-ins</strong> Only after 10:00 PM if space permits</div>
+                    <div class="detail-row"><strong>Cover</strong> ~MX$150–$300 (often <em>cash only</em> at door)</div>
+                    <div class="detail-row"><strong>Doors</strong> Usually 9:00 PM — check <em>@zincojazzclub</em> on Instagram</div>
+                    <div class="pro-tip">Reserve via WhatsApp at least 48 hours in advance for weekend sets. Card accepted for food &amp; beverages.</div>
+                </article>
+
+                <!-- Cineteca (Accordion) -->
+                <div>
+                    <button class="accordion-trigger" id="cinetecaTrigger" aria-expanded="false" aria-controls="cinetecaPanel">
+                        🎬 Cineteca Nacional de México — Terrace Jazz
+                        <span class="arrow">▾</span>
+                    </button>
+                    <div class="accordion-panel" id="cinetecaPanel" role="region" aria-labelledby="cinetecaTrigger">
+                        <div class="accordion-panel-inner">
+                            <p style="margin-bottom:0.7rem;">A hidden gem close to home — the Cineteca's outdoor terrace blends spectacular architecture with community-driven live music.</p>
+                            <div class="detail-row"><strong>When</strong> Fridays &amp; Saturdays starting at 7:00 PM</div>
+                            <div class="detail-row"><strong>Cost</strong> Free — open to the public</div>
+                            <div class="detail-row"><strong>Atmosphere</strong> Intimate lighting, craft beers &amp; cocktails on-site</div>
+                            <div class="pro-tip" style="margin-top:0.6rem;">Arrive early to grab a good spot — the terrace fills quickly on warm June evenings.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── LOGISTICS ────────────────────────── -->
+        <section class="section" id="logistics" aria-labelledby="logistics-heading">
+            <div class="section-header">
+                <span class="section-icon">📝</span>
+                <h2 id="logistics-heading">3. Planning & Logistics Summary</h2>
+                <span class="tag">Stay Prepared</span>
+            </div>
+            <div class="logistics-table-wrap">
+                <table class="logistics-table">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Action Required</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="item-label">Zinco Reservation</td>
+                            <td>WhatsApp at least <strong>48 hours in advance</strong> for weekend sets.</td>
+                        </tr>
+                        <tr>
+                            <td class="item-label">Cash Readiness</td>
+                            <td>Keep <strong>MX$500+</strong> in small bills for market tacos &amp; jazz cover charges.</td>
+                        </tr>
+                        <tr>
+                            <td class="item-label">Transit</td>
+                            <td>Use <strong>Uber</strong> from Coyoacán to Centro Histórico (approx. 30–45 mins depending on traffic).</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- Quick-action reminder button -->
+            <div style="text-align:center; margin-top:1.5rem;">
+                <button id="reminderBtn" style="
+                background: var(--accent);
+                color: #fff;
+                border: none;
+                padding: 0.75rem 2rem;
+                border-radius: 30px;
+                font-size: 0.95rem;
+                font-weight: 600;
+                cursor: pointer;
+                letter-spacing: 0.02em;
+                transition: all var(--transition);
+                box-shadow: 0 4px 16px rgba(196,69,54,0.3);
+            ">🔔 Set Zinco Reservation Reminder</button>
+        </div>
+    </section>
+</main>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer class="footer">
+    <p>Mexico City 2026 — Must-Do List &copy; Curated for an unforgettable June solo trip. All details sourced as of document date; verify locally before visiting.</p>
+</footer>
+
+<!-- ═══════════ TOAST ═══════════ -->
+<div class="toast" id="toast" role="status" aria-live="polite">
+    ⏰ Reminder: WhatsApp Zinco 48h before!
+    <button class="toast-btn" id="toastDismiss">Got it</button>
+</div>
+
+<!-- ═══════════ SCRIPTS ═══════════ -->
+<script>
+    (function() {
+        // ── Dark / Light Theme Toggle ────────────
+        const themeToggle = document.getElementById('themeToggle');
+        const htmlElement = document.documentElement;
+
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                htmlElement.setAttribute('data-theme', 'dark');
+                themeToggle.textContent = '☀️';
+                localStorage.setItem('cdmx-theme', 'dark');
+            } else {
+                htmlElement.removeAttribute('data-theme');
+                themeToggle.textContent = '🌙';
+                localStorage.setItem('cdmx-theme', 'light');
+            }
+        }
+
+        // Load saved preference
+        const savedTheme = localStorage.getItem('cdmx-theme');
+        if (savedTheme === 'dark') {
+            setTheme('dark');
+        } else if (savedTheme === 'light') {
+            setTheme('light');
+        } else {
+            // Default: respect OS preference
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                setTheme('dark');
+            } else {
+                setTheme('light');
+            }
+        }
+
+        themeToggle.addEventListener('click', () => {
+            const current = htmlElement.getAttribute('data-theme');
+            setTheme(current === 'dark' ? 'light' : 'dark');
+        });
+
+        // Listen for OS changes
+        if (window.matchMedia) {
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+                if (!localStorage.getItem('cdmx-theme')) {
+                    setTheme(e.matches ? 'dark' : 'light');
+                }
+            });
+        }
+
+        // ── Accordion (Cineteca Terrace) ─────────
+        const trigger = document.getElementById('cinetecaTrigger');
+        const panel = document.getElementById('cinetecaPanel');
+
+        trigger.addEventListener('click', () => {
+            const isOpen = trigger.classList.contains('open');
+            if (isOpen) {
+                trigger.classList.remove('open');
+                panel.classList.remove('expanded');
+                trigger.setAttribute('aria-expanded', 'false');
+            } else {
+                trigger.classList.add('open');
+                panel.classList.add('expanded');
+                trigger.setAttribute('aria-expanded', 'true');
+            }
+        });
+
+        // ── Toast Notification ───────────────────
+        const reminderBtn = document.getElementById('reminderBtn');
+        const toast = document.getElementById('toast');
+        const toastDismiss = document.getElementById('toastDismiss');
+        let toastTimer;
+
+        function showToast() {
+            toast.classList.add('show');
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => {
+                toast.classList.remove('show');
+            }, 5000);
+        }
+
+        reminderBtn.addEventListener('click', () => {
+            showToast();
+            // Subtle animation on button
+            reminderBtn.style.transform = 'scale(0.95)';
+            setTimeout(() => { reminderBtn.style.transform = 'scale(1)'; }, 150);
+        });
+
+        toastDismiss.addEventListener('click', () => {
+            toast.classList.remove('show');
+            clearTimeout(toastTimer);
+        });
+
+        // ── Smooth scroll offset for sticky nav ──
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const target = document.getElementById(targetId);
+                if (target) {
+                    const navHeight = document.querySelector('.nav').offsetHeight;
+                    const top = target.getBoundingClientRect().top + window.pageYOffset -
+                        navHeight - 16;
+                    window.scrollTo({ top, behavior: 'smooth' });
+                }
+            });
+        });
+
+        // ── Keyboard accessibility for accordion ──
+        trigger.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                trigger.click();
+            }
+        });
+
+        console.log('🇲🇽 Mexico City 2026 — Must-Do List ready. Enjoy your trip!');
+    })();
+</script>
+</body>
+</html>
