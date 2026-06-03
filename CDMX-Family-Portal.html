@@ -1,0 +1,1567 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Michael's CDMX Retirement Adventure 🇲🇽</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com">
+    </script>
+    <!-- Google Fonts: Fraunces (expressive display serif) + DM Sans (warm UI sans) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['DM Sans', 'sans-serif'],
+                        serif: ['Fraunces', 'Georgia', 'serif'],
+                    },
+                    colors: {
+                        coyoacan: {
+                            // Casa Azul deep cobalt — primary dark surface & ink
+                            cobalt: '#14264d',
+                            // Warm clay/brick — primary warm accent
+                            terracotta: '#cf552f',
+                            // Cempasúchil marigold
+                            gold: '#e0992f',
+                            // Nopal / agave green
+                            forest: '#557d44',
+                            // Bougainvillea magenta-rose (new accent)
+                            rosa: '#c0356b',
+                            // Brighter talavera tile blue (decorative accent)
+                            azulejo: '#2b5fa6',
+                            // Adobe cream paper base
+                            sand: '#fbf3e6',
+                            // Deep warm aubergine — body ink
+                            charcoal: '#3a2d33'
+                        },
+                        // Warm adobe/clay neutral scale (keeps light↔dark roles intact)
+                        stone: {
+                            50: '#fbf4e8',
+                            100: '#f3e8d6',
+                            200: '#e7d6bd',
+                            300: '#d8c3a4',
+                            400: '#bfa987',
+                            500: '#9c8568',
+                            600: '#705a45',
+                            700: '#574535',
+                            800: '#3a2c20',
+                            900: '#241a12',
+                        },
+                    },
+                    boxShadow: {
+                        // Warm-tinted shadows for an adobe-lit feel
+                        'card': '0 1px 3px rgba(58,40,20,0.05), 0 4px 16px rgba(58,40,20,0.07)',
+                        'card-hover': '0 2px 6px rgba(58,40,20,0.07), 0 8px 28px rgba(58,40,20,0.10)',
+                        'hero': '0 14px 50px rgba(20,38,77,0.30)',
+                        'xl-soft': '0 4px 24px rgba(58,40,20,0.09)',
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        :root {
+            --co-cobalt: #14264d;
+            --co-terracotta: #cf552f;
+            --co-gold: #e0992f;
+            --co-forest: #557d44;
+            --co-rosa: #c0356b;
+            --co-azulejo: #2b5fa6;
+            --co-sand: #fbf3e6;
+        }
+
+        /* ---- Typography: warm, literary, characterful ---- */
+        body { -webkit-font-smoothing: antialiased; }
+        .font-serif {
+            font-optical-sizing: auto;
+            font-variation-settings: "SOFT" 0, "WONK" 0;
+            letter-spacing: -0.01em;
+        }
+        h1.font-serif, h2.font-serif { letter-spacing: -0.02em; }
+
+        /* ---- Warm adobe paper texture beneath everything (very subtle) ---- */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.05;
+            background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2744%27%20height%3D%2744%27%20viewBox%3D%270%200%2044%2044%27%3E%20%3Cg%20fill%3D%27none%27%20stroke%3D%27%23b07a4a%27%20stroke-width%3D%271%27%3E%20%3Cpath%20d%3D%27M22%206%20L26%2018%20L38%2022%20L26%2026%20L22%2038%20L18%2026%20L6%2022%20L18%2018%20Z%27%2F%3E%20%3Ccircle%20cx%3D%270%27%20cy%3D%270%27%20r%3D%272.4%27%2F%3E%3Ccircle%20cx%3D%2744%27%20cy%3D%270%27%20r%3D%272.4%27%2F%3E%3Ccircle%20cx%3D%270%27%20cy%3D%2744%27%20r%3D%272.4%27%2F%3E%3Ccircle%20cx%3D%2744%27%20cy%3D%2744%27%20r%3D%272.4%27%2F%3E%20%3C%2Fg%3E%3C%2Fsvg%3E");
+        }
+        body > * { position: relative; z-index: 1; }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Enhanced card hover effects */
+        .card-lift {
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+        .card-lift:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(58, 40, 20, 0.08), 0 12px 32px rgba(58, 40, 20, 0.12);
+        }
+
+        /* Hero: talavera-tile overlay (replaces the plain dot grid) */
+        .hero-pattern {
+            background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2772%27%20height%3D%2772%27%20viewBox%3D%270%200%2072%2072%27%3E%20%3Cg%20fill%3D%27none%27%20stroke%3D%27%23ffffff%27%20stroke-width%3D%271.1%27%3E%20%3Cpath%20d%3D%27M36%2010%20L41%2031%20L62%2036%20L41%2041%20L36%2062%20L31%2041%20L10%2036%20L31%2031%20Z%27%2F%3E%20%3Ccircle%20cx%3D%2736%27%20cy%3D%2736%27%20r%3D%275.5%27%2F%3E%20%3Ccircle%20cx%3D%2736%27%20cy%3D%2736%27%20r%3D%271.4%27%20fill%3D%27%23ffffff%27%20stroke%3D%27none%27%2F%3E%20%3Ccircle%20cx%3D%270%27%20cy%3D%270%27%20r%3D%274%27%2F%3E%3Ccircle%20cx%3D%2772%27%20cy%3D%270%27%20r%3D%274%27%2F%3E%3Ccircle%20cx%3D%270%27%20cy%3D%2772%27%20r%3D%274%27%2F%3E%3Ccircle%20cx%3D%2772%27%20cy%3D%2772%27%20r%3D%274%27%2F%3E%20%3Ccircle%20cx%3D%270%27%20cy%3D%270%27%20r%3D%271.3%27%20fill%3D%27%23ffffff%27%20stroke%3D%27none%27%2F%3E%3Ccircle%20cx%3D%2772%27%20cy%3D%270%27%20r%3D%271.3%27%20fill%3D%27%23ffffff%27%20stroke%3D%27none%27%2F%3E%20%3Ccircle%20cx%3D%270%27%20cy%3D%2772%27%20r%3D%271.3%27%20fill%3D%27%23ffffff%27%20stroke%3D%27none%27%2F%3E%3Ccircle%20cx%3D%2772%27%20cy%3D%2772%27%20r%3D%271.3%27%20fill%3D%27%23ffffff%27%20stroke%3D%27none%27%2F%3E%20%3C%2Fg%3E%3C%2Fsvg%3E");
+            background-size: 72px 72px;
+        }
+
+        /* Papel picado — festive cut-paper bunting */
+        .papel-banner {
+            height: 30px;
+            background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27176%27%20height%3D%2746%27%20viewBox%3D%270%200%20176%2046%27%3E%20%3Cline%20x1%3D%270%27%20y1%3D%273%27%20x2%3D%27176%27%20y2%3D%273%27%20stroke%3D%27%23a98352%27%20stroke-width%3D%271%27%20opacity%3D%270.7%27%2F%3E%20%3Cpath%20fill%3D%27%23e0992f%27%20fill-rule%3D%27evenodd%27%20d%3D%27M4%203%20L40%203%20L40%2032%20Q%2034.0%2040%2028.0%2032%20Q%2022.0%2040%2016.0%2032%20Q%2010.0%2040%204.0%2032%20L4%203%20Z%20M22.0%209.5%20L27.5%2015%20L22.0%2020.5%20L16.5%2015%20Z%20M8.8%2012%20a2.2%202.2%200%201%200%204.4%200%20a2.2%202.2%200%201%200%20-4.4%200%20Z%20M30.8%2012%20a2.2%202.2%200%201%200%204.4%200%20a2.2%202.2%200%201%200%20-4.4%200%20Z%20M19.4%2026%20a2.6%202.6%200%201%200%205.2%200%20a2.6%202.6%200%201%200%20-5.2%200%20Z%27%2F%3E%20%3Ccircle%20cx%3D%2722.0%27%20cy%3D%273%27%20r%3D%271.4%27%20fill%3D%27%23e0992f%27%2F%3E%20%3Cpath%20fill%3D%27%23c0356b%27%20fill-rule%3D%27evenodd%27%20d%3D%27M48%203%20L84%203%20L84%2032%20Q%2078.0%2040%2072.0%2032%20Q%2066.0%2040%2060.0%2032%20Q%2054.0%2040%2048.0%2032%20L48%203%20Z%20M66.0%209.5%20L71.5%2015%20L66.0%2020.5%20L60.5%2015%20Z%20M52.8%2012%20a2.2%202.2%200%201%200%204.4%200%20a2.2%202.2%200%201%200%20-4.4%200%20Z%20M74.8%2012%20a2.2%202.2%200%201%200%204.4%200%20a2.2%202.2%200%201%200%20-4.4%200%20Z%20M63.4%2026%20a2.6%202.6%200%201%200%205.2%200%20a2.6%202.6%200%201%200%20-5.2%200%20Z%27%2F%3E%20%3Ccircle%20cx%3D%2766.0%27%20cy%3D%273%27%20r%3D%271.4%27%20fill%3D%27%23c0356b%27%2F%3E%20%3Cpath%20fill%3D%27%232b5fa6%27%20fill-rule%3D%27evenodd%27%20d%3D%27M92%203%20L128%203%20L128%2032%20Q%20122.0%2040%20116.0%2032%20Q%20110.0%2040%20104.0%2032%20Q%2098.0%2040%2092.0%2032%20L92%203%20Z%20M110.0%209.5%20L115.5%2015%20L110.0%2020.5%20L104.5%2015%20Z%20M96.8%2012%20a2.2%202.2%200%201%200%204.4%200%20a2.2%202.2%200%201%200%20-4.4%200%20Z%20M118.8%2012%20a2.2%202.2%200%201%200%204.4%200%20a2.2%202.2%200%201%200%20-4.4%200%20Z%20M107.4%2026%20a2.6%202.6%200%201%200%205.2%200%20a2.6%202.6%200%201%200%20-5.2%200%20Z%27%2F%3E%20%3Ccircle%20cx%3D%27110.0%27%20cy%3D%273%27%20r%3D%271.4%27%20fill%3D%27%232b5fa6%27%2F%3E%20%3Cpath%20fill%3D%27%23557d44%27%20fill-rule%3D%27evenodd%27%20d%3D%27M136%203%20L172%203%20L172%2032%20Q%20166.0%2040%20160.0%2032%20Q%20154.0%2040%20148.0%2032%20Q%20142.0%2040%20136.0%2032%20L136%203%20Z%20M154.0%209.5%20L159.5%2015%20L154.0%2020.5%20L148.5%2015%20Z%20M140.8%2012%20a2.2%202.2%200%201%200%204.4%200%20a2.2%202.2%200%201%200%20-4.4%200%20Z%20M162.8%2012%20a2.2%202.2%200%201%200%204.4%200%20a2.2%202.2%200%201%200%20-4.4%200%20Z%20M151.4%2026%20a2.6%202.6%200%201%200%205.2%200%20a2.6%202.6%200%201%200%20-5.2%200%20Z%27%2F%3E%20%3Ccircle%20cx%3D%27154.0%27%20cy%3D%273%27%20r%3D%271.4%27%20fill%3D%27%23557d44%27%2F%3E%20%3C%2Fsvg%3E");
+            background-repeat: repeat-x;
+            background-position: top center;
+            background-size: 176px 30px;
+            filter: drop-shadow(0 2px 1px rgba(0,0,0,0.12));
+        }
+
+        /* Greca / step-fret accent ribbon (Mitla-inspired) under section titles */
+        .greca-accent {
+            height: 10px;
+            background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2740%27%20height%3D%2712%27%20viewBox%3D%270%200%2040%2012%27%3E%20%3Cg%20fill%3D%27none%27%20stroke%3D%27%23cf552f%27%20stroke-width%3D%271.8%27%20stroke-linejoin%3D%27miter%27%3E%20%3Cpath%20d%3D%27M0%2010%20L0%204%20L6%204%20L6%208%20L12%208%20L12%202%20L20%202%27%2F%3E%20%3Cpath%20d%3D%27M20%202%20L20%2010%20L26%2010%20L26%206%20L32%206%20L32%204%20L40%204%27%2F%3E%20%3Cpath%20d%3D%27M0%2011.2%20L40%2011.2%27%2F%3E%20%3C%2Fg%3E%3C%2Fsvg%3E");
+            background-repeat: repeat-x;
+            background-size: 40px 10px;
+            opacity: 0.85;
+        }
+        .greca-accent.gold {
+            background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2740%27%20height%3D%2712%27%20viewBox%3D%270%200%2040%2012%27%3E%20%3Cg%20fill%3D%27none%27%20stroke%3D%27%23e0992f%27%20stroke-width%3D%271.8%27%20stroke-linejoin%3D%27miter%27%3E%20%3Cpath%20d%3D%27M0%2010%20L0%204%20L6%204%20L6%208%20L12%208%20L12%202%20L20%202%27%2F%3E%20%3Cpath%20d%3D%27M20%202%20L20%2010%20L26%2010%20L26%206%20L32%206%20L32%204%20L40%204%27%2F%3E%20%3Cpath%20d%3D%27M0%2011.2%20L40%2011.2%27%2F%3E%20%3C%2Fg%3E%3C%2Fsvg%3E");
+        }
+
+        /* Refined focus rings */
+        *:focus-visible {
+            outline: 2px solid var(--co-terracotta);
+            outline-offset: 2px;
+            border-radius: 4px;
+        }
+
+        /* Smooth page transitions */
+        .day-content {
+            animation: fadeSlideIn 0.35s ease-out;
+        }
+        @keyframes fadeSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Timeline dot pulse for active items */
+        .timeline-dot-active {
+            animation: dotPulse 2.5s ease-in-out infinite;
+        }
+        @keyframes dotPulse {
+            0%,
+            100% {
+                box-shadow: 0 0 0 0 rgba(207, 85, 47, 0.45);
+            }
+            50% {
+                box-shadow: 0 0 0 8px rgba(207, 85, 47, 0);
+            }
+        }
+
+        /* Selection styling */
+        ::selection {
+            background-color: var(--co-rosa);
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body class="bg-coyoacan-sand text-coyoacan-charcoal font-sans selection:bg-coyoacan-rosa selection:text-white">
+
+    <!-- TIME-TRAVEL SIMULATION BAR (For Previewing Dynamic Changes) -->
+    <div class="bg-coyoacan-cobalt border-b border-white/10 text-stone-300 py-2.5 px-4 text-xs relative z-50 shadow-md">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-2">
+            <div class="flex items-center gap-2">
+                <span class="inline-block h-2.5 w-2.5 rounded-full bg-coyoacan-gold animate-pulse shadow-[0_0_8px_rgba(200,150,74,0.5)]"></span>
+                <strong class="text-white">Time-Travel Simulator:</strong>
+                <span class="text-stone-400">Preview how Michael's hub adapts dynamically during his trip!</span>
+            </div>
+            <div class="flex flex-wrap items-center gap-2">
+                <button onclick="setSimulationMode('auto')" id="sim-btn-auto" class="px-2.5 py-1.5 rounded-lg bg-coyoacan-terracotta text-white font-semibold transition-all duration-200 shadow-sm hover:shadow-md hover:brightness-110 text-[11px]">
+                    ⏱️ Auto (Real Time)
+                </button>
+                <button onclick="setSimulationMode('pre')" id="sim-btn-pre" class="px-2.5 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white transition-all duration-200 text-[11px] border border-white/10">
+                    📦 Pre-Trip
+                </button>
+                <button onclick="setSimulationMode('transit-out')" id="sim-btn-transit-out" class="px-2.5 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white transition-all duration-200 text-[11px] border border-white/10">
+                    🛫 Outbound
+                </button>
+                <button onclick="setSimulationMode('cdmx-day2')" id="sim-btn-cdmx-day2" class="px-2.5 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white transition-all duration-200 text-[11px] border border-white/10">
+                    🎷 Day 2 (Friday)
+                </button>
+                <button onclick="setSimulationMode('cdmx-day3')" id="sim-btn-cdmx-day3" class="px-2.5 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white transition-all duration-200 text-[11px] border border-white/10">
+                    🎨 Day 3 (Saturday)
+                </button>
+                <button onclick="setSimulationMode('cdmx-day5')" id="sim-btn-cdmx-day5" class="px-2.5 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white transition-all duration-200 text-[11px] border border-white/10">
+                    🛶 Day 5 (Monday)
+                </button>
+                <button onclick="setSimulationMode('transit-home')" id="sim-btn-transit-home" class="px-2.5 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white transition-all duration-200 text-[11px] border border-white/10">
+                    ✈️ Return
+                </button>
+                <button onclick="setSimulationMode('post')" id="sim-btn-post" class="px-2.5 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white transition-all duration-200 text-[11px] border border-white/10">
+                    🏡 Post-Trip
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAPEL PICADO — festive cut-paper bunting -->
+    <div class="papel-banner w-full relative z-40" aria-hidden="true"></div>
+
+    <!-- HERO HEADER BANNER -->
+    <header class="relative overflow-hidden bg-gradient-to-br from-[#0f1d3d] via-coyoacan-cobalt to-[#1b346a] text-white py-16 md:py-24 px-6 shadow-hero">
+        <!-- Talavera tile overlay -->
+        <div class="absolute inset-0 hero-pattern opacity-[0.18]"></div>
+        <!-- Vibrant glow orbs (bougainvillea, marigold, agave, talavera) -->
+        <div class="absolute bottom-0 right-0 w-72 h-72 bg-coyoacan-rosa rounded-full blur-3xl opacity-30 -mr-16 -mb-16"></div>
+        <div class="absolute top-0 left-0 w-72 h-72 bg-coyoacan-gold rounded-full blur-3xl opacity-25 -ml-16 -mt-16"></div>
+        <div class="absolute top-1/3 right-1/4 w-56 h-56 bg-coyoacan-terracotta rounded-full blur-3xl opacity-20"></div>
+        <div class="absolute top-1/2 left-1/2 w-48 h-48 bg-coyoacan-forest rounded-full blur-3xl opacity-15 -translate-x-1/2 -translate-y-1/2"></div>
+
+        <div class="max-w-6xl mx-auto text-center relative z-10">
+            <span class="inline-block bg-coyoacan-terracotta text-white font-semibold text-xs tracking-widest uppercase px-5 py-2 rounded-full shadow-lg mb-5 border border-coyoacan-gold/40 letter-spacing-0.05">
+                El Primer Acto • Act I of Retirement
+            </span>
+            <h1 class="font-serif text-4xl sm:text-5xl md:text-6xl font-bold mb-4 leading-tight tracking-tight">
+                Michael's <span class="text-coyoacan-gold">CDMX</span> Adventure
+            </h1>
+            <div class="greca-accent gold w-40 mx-auto mb-5 opacity-90"></div>
+            <p id="hero-quote" class="text-lg md:text-xl text-stone-200 font-light max-w-2xl mx-auto mb-8 font-serif italic leading-relaxed">
+                "A solo celebration of work well-done, exploration, and the quiet magic of Mexico City."
+            </p>
+
+            <div class="flex flex-wrap justify-center gap-3 text-sm font-medium">
+                <span class="bg-white/8 px-5 py-2.5 rounded-xl border border-white/15 flex items-center gap-2 backdrop-blur-sm">
+                    📅 June 4 – 10, 2026
+                </span>
+                <span class="bg-white/8 px-5 py-2.5 rounded-xl border border-white/15 flex items-center gap-2 backdrop-blur-sm">
+                    🏡 Base: Coyoacán
+                </span>
+                <span class="bg-white/8 px-5 py-2.5 rounded-xl border border-white/15 flex items-center gap-2 backdrop-blur-sm">
+                    ✈️ Solo Traveler
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <!-- LIVE ADAPTIVE STATE WIDGETS -->
+    <section class="max-w-6xl mx-auto -mt-8 px-4 relative z-20">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+
+            <!-- Left Header Dashboard Widget (Flips from Countdown to Dynamic Adventure focus) -->
+            <div class="md:col-span-7 bg-white p-6 rounded-2xl shadow-xl-soft border border-stone-100 flex flex-col justify-between card-lift" id="dynamic-left-widget">
+                <!-- Fallback content injected by JS -->
+            </div>
+
+            <!-- Right Header Dashboard Widget (Adaptive Live Status / Itinerary Ticker) -->
+            <div class="md:col-span-5 bg-coyoacan-cobalt text-white p-6 rounded-2xl shadow-xl-soft flex flex-col justify-between relative overflow-hidden card-lift" id="dynamic-right-widget">
+                <!-- Fallback content injected by JS -->
+            </div>
+
+        </div>
+    </section>
+
+    <!-- MAIN TRIP EXPLORER Grid -->
+    <main class="max-w-6xl mx-auto px-4 py-12">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+
+            <!-- LEFT HAND PANEL: ITINERARY NAV & SCHEDULE (8 COLS) -->
+            <div class="lg:col-span-8 space-y-8">
+
+                <!-- Section Title -->
+                <div class="pb-5 flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
+                    <div>
+                        <h2 class="font-serif text-3xl font-bold text-coyoacan-cobalt">The Master Itinerary</h2>
+                        <div class="greca-accent w-28 mt-2"></div>
+                    </div>
+                    <p class="text-stone-500 text-sm font-medium">Select a day below to explore Michael's plan</p>
+                </div>
+
+                <!-- Daily Horizontal Tabs Scrollable -->
+                <div class="flex overflow-x-auto pb-3 gap-2.5 no-scrollbar snap-x">
+                    <button onclick="switchDay(4)" id="btn-day-4" class="day-tab-btn snap-start shrink-0 px-4 py-3 rounded-xl flex flex-col items-center min-w-[76px] transition-all duration-200 border bg-coyoacan-cobalt text-white border-coyoacan-cobalt shadow-md">
+                        <span class="text-xs uppercase tracking-wider opacity-80">Thu</span>
+                        <span class="text-xl font-bold">Jun 4</span>
+                    </button>
+                    <button onclick="switchDay(5)" id="btn-day-5" class="day-tab-btn snap-start shrink-0 px-4 py-3 rounded-xl flex flex-col items-center min-w-[76px] transition-all duration-200 border bg-white text-stone-700 border-stone-200 hover:border-coyoacan-cobalt hover:shadow-md">
+                        <span class="text-xs uppercase tracking-wider text-stone-400">Fri</span>
+                        <span class="text-xl font-bold">Jun 5</span>
+                    </button>
+                    <button onclick="switchDay(6)" id="btn-day-6" class="day-tab-btn snap-start shrink-0 px-4 py-3 rounded-xl flex flex-col items-center min-w-[76px] transition-all duration-200 border bg-white text-stone-700 border-stone-200 hover:border-coyoacan-cobalt hover:shadow-md">
+                        <span class="text-xs uppercase tracking-wider text-stone-400">Sat</span>
+                        <span class="text-xl font-bold">Jun 6</span>
+                    </button>
+                    <button onclick="switchDay(7)" id="btn-day-7" class="day-tab-btn snap-start shrink-0 px-4 py-3 rounded-xl flex flex-col items-center min-w-[76px] transition-all duration-200 border bg-white text-stone-700 border-stone-200 hover:border-coyoacan-cobalt hover:shadow-md">
+                        <span class="text-xs uppercase tracking-wider text-stone-400">Sun</span>
+                        <span class="text-xl font-bold">Jun 7</span>
+                    </button>
+                    <button onclick="switchDay(8)" id="btn-day-8" class="day-tab-btn snap-start shrink-0 px-4 py-3 rounded-xl flex flex-col items-center min-w-[76px] transition-all duration-200 border bg-white text-stone-700 border-stone-200 hover:border-coyoacan-cobalt hover:shadow-md">
+                        <span class="text-xs uppercase tracking-wider text-stone-400">Mon</span>
+                        <span class="text-xl font-bold">Jun 8</span>
+                    </button>
+                    <button onclick="switchDay(9)" id="btn-day-9" class="day-tab-btn snap-start shrink-0 px-4 py-3 rounded-xl flex flex-col items-center min-w-[76px] transition-all duration-200 border bg-white text-stone-700 border-stone-200 hover:border-coyoacan-cobalt hover:shadow-md">
+                        <span class="text-xs uppercase tracking-wider text-stone-400">Tue</span>
+                        <span class="text-xl font-bold">Jun 9</span>
+                    </button>
+                    <button onclick="switchDay(10)" id="btn-day-10" class="day-tab-btn snap-start shrink-0 px-4 py-3 rounded-xl flex flex-col items-center min-w-[76px] transition-all duration-200 border bg-white text-stone-700 border-stone-200 hover:border-coyoacan-cobalt hover:shadow-md">
+                        <span class="text-xs uppercase tracking-wider text-stone-400">Wed</span>
+                        <span class="text-xl font-bold">Jun 10</span>
+                    </button>
+                </div>
+
+                <!-- ITINERARY CONTENT CARDS -->
+                <div class="bg-white rounded-2xl shadow-xl-soft border border-stone-100 p-6 md:p-8 card-lift">
+
+                    <!-- DAY 4 CONTENT -->
+                    <div id="itinerary-day-4" class="day-content">
+                        <div class="flex items-center justify-between border-b border-stone-100 pb-5 mb-6">
+                            <div>
+                                <h3 class="font-serif text-2xl font-bold text-coyoacan-cobalt">Touchdown & Cozy Plazas</h3>
+                                <p class="text-sm text-stone-500">Thursday, June 4, 2026</p>
+                            </div>
+                            <span class="bg-orange-50 text-coyoacan-terracotta border border-orange-100 font-semibold px-4 py-1.5 rounded-full text-xs shadow-sm">
+                                Arrival & Base Setup
+                            </span>
+                        </div>
+
+                        <div class="space-y-6 relative before:absolute before:inset-0 before:left-3 before:w-0.5 before:bg-stone-100">
+                            <div class="flex gap-4 relative">
+                                <div class="w-6 h-6 rounded-full bg-coyoacan-cobalt border-4 border-white flex items-center justify-center relative z-10 shadow-sm mt-1 timeline-dot-active"></div>
+                                <div class="flex-grow">
+                                    <span class="text-xs font-semibold text-coyoacan-cobalt">7:16 AM EST</span>
+                                    <h4 class="font-bold text-base mt-0.5">Wheels Up! (Indianapolis - IND)</h4>
+                                    <p class="text-sm text-stone-600 mt-1">Delta Flight 3106 takes off from Indy. Settle in with a good book on the Kindle and look forward to the cobblestones of Coyoacán.</p>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-4 relative">
+                                <div class="w-6 h-6 rounded-full bg-coyoacan-cobalt border-4 border-white flex items-center justify-center relative z-10 shadow-sm mt-1"></div>
+                                <div class="flex-grow">
+                                    <span class="text-xs font-semibold text-coyoacan-cobalt">9:00 AM – 11:25 AM EST</span>
+                                    <h4 class="font-bold text-base mt-0.5">Amex Centurion Lounge Layover (Atlanta - ATL)</h4>
+                                    <p class="text-sm text-stone-600 mt-1">Delta Sky Clubs are unavailable, but Concourse E near Gate E11 Centurion Lounge offers hot breakfast, clean shower suites, and private workspaces using your Amex Platinum.</p>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-4 relative">
+                                <div class="w-6 h-6 rounded-full bg-coyoacan-cobalt border-4 border-white flex items-center justify-center relative z-10 shadow-sm mt-1"></div>
+                                <div class="flex-grow">
+                                    <span class="text-xs font-semibold text-coyoacan-cobalt">1:55 PM CDMX Time</span>
+                                    <h4 class="font-bold text-base mt-0.5">Touchdown in Mexico City! (MEX Terminal 2)</h4>
+                                    <p class="text-sm text-stone-600 mt-1">Clear immigration, stop at an airport Terminal ATM to withdraw pesos with your Betterment Debit Card (vital for street vendors and tips), and book a direct Uber to Coyoacán.</p>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-4 relative">
+                                <div class="w-6 h-6 rounded-full bg-coyoacan-terracotta border-4 border-white flex items-center justify-center relative z-10 shadow-sm mt-1 timeline-dot-active"></div>
+                                <div class="flex-grow">
+                                    <span class="text-xs font-semibold text-coyoacan-terracotta">3:30 PM</span>
+                                    <h4 class="font-bold text-base mt-0.5">Check-in: Maria Del Alma House</h4>
+                                    <p class="text-sm text-stone-600 mt-1">Unpack and settle into your cozy ground-floor patio room at Calle París 220. Your stay is fully pre-paid via PayPal!</p>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-4 relative">
+                                <div class="w-6 h-6 rounded-full bg-coyoacan-forest border-4 border-white flex items-center justify-center relative z-10 shadow-sm mt-1"></div>
+                                <div class="flex-grow">
+                                    <span class="text-xs font-semibold text-coyoacan-forest">Late Afternoon & Evening</span>
+                                    <h4 class="font-bold text-base mt-0.5">Exploring the Heart of Coyoacán</h4>
+                                    <p class="text-sm text-stone-600 mt-1">Take a gentle walk through Jardín Centenario, Plaza Hidalgo, and past the iconic coyote fountain. Enjoy legendary crab/shrimp tostadas at the back of Mercado de Coyoacán.</p>
+                                    <div class="mt-2 inline-flex items-center gap-1.5 bg-stone-100 text-stone-700 px-3 py-1 rounded-full text-xs border border-stone-200">
+                                        📚 <strong>Wildcard Stop:</strong> Centro Cultural Elena Garro (gorgeous greenhouse bookstore & café).
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- DAY 5 CONTENT -->
+                    <div id="itinerary-day-5" class="day-content hidden">
+                        <div class="flex items-center justify-between border-b border-stone-100 pb-5 mb-6">
+                            <div>
+                                <h3 class="font-serif text-2xl font-bold text-coyoacan-cobalt">Historic Heart & Jazz Underground</h3>
+                                <p class="text-sm text-stone-500">Friday, June 5, 2026</p>
+                            </div>
+                            <span class="bg-blue-50 text-coyoacan-cobalt border border-blue-100 font-semibold px-4 py-1.5 rounded-full text-xs shadow-sm">
+                                Architecture & Music
+                            </span>
+                        </div>
+
+                        <div class="space-y-6 relative before:absolute before:inset-0 before:left-3 before:w-0.5 before:bg-stone-100">
+                            <div class="flex gap-4 relative">
+                                <div class="w-6 h-6 rounded-full bg-coyoacan-cobalt border-4 border-white flex items-center justify-center relative z-10 shadow-sm mt-1"></div>
+                                <div class="flex-grow">
+                                    <span class="text-xs font-semibold text-stone-500">8:30 AM</span>
+                                    <h4 class="font-bold text-base mt-0.5">Uber to Centro Histórico</h4>
+                                    <p class="text-sm text-stone-600 mt-1">Commute north to the colonial heart of the city (approx. 30–40 minutes).</p>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-4 relative">
+                                <div class="w-6 h-6 rounded-full bg-amber-700 border-4 border-white flex items-center justify-center relative z-10 shadow-sm mt-1"></div>
+                                <div class="flex-grow">
+                                    <span class="text-xs font-semibold text-amber-800">9:15 AM</span>
+                                    <h4 class="font-bold text-base mt-0.5">Templo Mayor Aztec Ruins</h4>
+                                    <p class="text-sm text-stone-600 mt-1">Walk among the ruins and its multi-story artifact museum. (Entry approx. MX$90).</p>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-4 relative">
+                                <div class="w-6 h-6 rounded-full bg-coyoacan-cobalt border-4 border-white flex items-center justify-center relative z-10 shadow-sm mt-1"></div>
+                                <div class="flex-grow">
+                                    <span class="text-xs font-semibold text-stone-500">11:15 AM</span>
+                                    <h4 class="font-bold text-base mt-0.5">Palacio de Bellas Artes</h4>
+                                    <p class="text-sm text-stone-600 mt-1">Behold legendary mural works by Diego Rivera, Siqueiros, and Orozco in the Art Deco masterpiece. (MX$95).</p>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-4 relative">
+                                <div class="w-6 h-6 rounded-full bg-coyoacan-forest border-4 border-white flex items-center justify-center relative z-10 shadow-sm mt-1"></div>
+                                <div class="flex-grow">
+                                    <span class="text-xs font-semibold text-coyoacan-forest">12:30 PM</span>
+                                    <h4 class="font-bold text-base mt-0.5">Gourmet Feast: Mercado de San Juan</h4>
+                                    <p class="text-sm text-stone-600 mt-1">Famous food market known for exotic specialties, local cheeses, tapas, and incredible fresh seafood lunch counters.</p>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-4 relative">
+                                <div class="w-6 h-6 rounded-full bg-coyoacan-terracotta border-4 border-white flex items-center justify-center relative z-10 shadow-sm mt-1"></div>
+                                <div class="flex-grow">
+                                    <span class="text-xs font-semibold text-coyoacan-terracotta">2:00 PM – 6:30 PM</span>
+                                    <h4 class="font-bold text-base mt-0.5">Torre Latinoamericana & La Ciudadela Crafts Market</h4>
+                                    <p class="text-sm text-stone-600 mt-1">Catch unparalleled 360-degree views of the city valley, then walk to the ultimate artisan market to browse and bargain for textiles, pottery, and gifts.</p>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-4 relative">
+                                <div class="w-6 h-6 rounded-full bg-rose-600 border-4 border-white flex items-center justify-center relative z-10 shadow-sm mt-1"></div>
+                                <div class="flex-grow">
+                                    <span class="text-xs font-semibold text-rose-600">9:00 PM</span>
+                                    <h4 class="font-bold text-base mt-0.5">Zinco Jazz Club</h4>
+                                    <p class="text-sm text-stone-600 mt-1">Live jazz in an underground former bank vault. Superb acoustic space, swanky ambiance. Cover: ~MX$200–300 in CASH ONLY.</p>
+                                    <div class="mt-2 inline-flex items-center gap-1.5 bg-amber-50 text-amber-800 px-3 py-1 rounded-full text-xs border border-amber-200">
+                                        🔔 <strong>Crucial Checklist:</strong> Settle reservation via WhatsApp on June 3!
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- DAY 6 CONTENT -->
+                    <div id="itinerary-day-6" class="day-content hidden">
+                        <div class="flex items-center justify-between border-b border-stone-100 pb-5 mb-6">
+                            <div>
+                                <h3 class="font-serif text-2xl font-bold text-coyoacan-cobalt">Frida, Diego & Southern Strolls</h3>
+                                <p class="text-sm text-stone-500">Saturday, June 6, 2026</p>
+                            </div>
+                            <span class="bg-[#fae3ec] text-coyoacan-rosa border border-[#f3c9d8] font-semibold px-4 py-1.5 rounded-full text-xs shadow-sm">
+                                South Side Icons
+                            </span>
+                        </div>
+
+                        <div class="space-y-6 relative before:absolute before:inset-0 before:left-3 before:w-0.5 before:bg-stone-100">
+                            <div class="flex gap-4 relative">
+                                <div class="w-6 h-6 rounded-full bg-amber-700 border-4 border-white flex items-center justify-center relative z-10 shadow-sm mt-1"></div>
+                                <div class="flex-grow">
+                                    <span class="text-xs font-semibold text-amber-800">Morning Coffee</span>
+                                    <h4 class="font-bold text-base mt-2">Café Avellaneda</h4>
+                                    <p class="text-sm text-stone-600 mt-1">Enjoy a slow single-origin pour-over and a light empanada at this tiny, legendary specialty neighborhood bar.</p>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-4 relative">
+                                <div class="w-6 h-6 rounded-full bg-coyoacan-forest border-4 border-white flex items-center justify-center relative z-10 shadow-sm mt-1"></div>
+                                <div class="flex-grow">
+                                    <span class="text-xs font-semibold text-coyoacan-forest">10:00 AM</span>
+                                    <h4 class="font-bold text-base mt-0.5">Viveros de Coyoacán</h4>
+                                    <p class="text-sm text-stone-600 mt-1">Walk among majestic trees in the neighborhood nursery park, watching locals jog, stretch, and relax.</p>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-4 relative">
+                                <div class="w-6 h-6 rounded-full bg-coyoacan-cobalt border-4 border-white flex items-center justify-center relative z-10 shadow-sm mt-1 timeline-dot-active"></div>
+                                <div class="flex-grow">
+                                    <span class="text-xs font-semibold text-coyoacan-cobalt">1:00 PM (Strict Entry!)</span>
+                                    <h4 class="font-bold text-base mt-0.5">Casa Azul — The Frida Kahlo Museum</h4>
+                                    <p class="text-sm text-stone-600 mt-1">The famous cobalt-blue house. Super strict 15-minute entry window (1:00 PM–1:15 PM) via your Fever app QR code. No exceptions, don't be late!</p>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-4 relative">
+                                <div class="w-6 h-6 rounded-full bg-coyoacan-terracotta border-4 border-white flex items-center justify-center relative z-10 shadow-sm mt-1"></div>
+                                <div class="flex-grow">
+                                    <span class="text-xs font-semibold text-coyoacan-terracotta">2:30 PM</span>
+                                    <h4 class="font-bold text-base mt-0.5">Museo Anahuacalli</h4>
+                                    <p class="text-sm text-stone-600 mt-1">Diego Rivera's volcanic stone temple designed to house his massive pre-Hispanic art collection. Extremely unique atmosphere.</p>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-4 relative">
+                                <div class="w-6 h-6 rounded-full bg-purple-700 border-4 border-white flex items-center justify-center relative z-10 shadow-sm mt-1"></div>
+                                <div class="flex-grow">
+                                    <span class="text-xs font-semibold text-purple-800">4:30 PM – Evening</span>
+                                    <h4 class="font-bold text-base mt-0.5">San Ángel Cobblestones & Jazz Terrace</h4>
+                                    <p class="text-sm text-stone-600 mt-1">Explore upscale cobblestone streets, and at 7:00 PM catch the free open-air jazz session and a local craft beer on the terrace of Cineteca Nacional.</p>
+                                    <div class="mt-2 inline-flex items-center gap-1.5 bg-stone-100 text-stone-700 px-3 py-1 rounded-full text-xs border border-stone-200">
+                                        📚 <strong>Bookstore Stop:</strong> Tlacuilo (Coyoacán's indie literary gem, highly curated and intimate).
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- DAY 7 CONTENT -->
+                    <div id="itinerary-day-7" class="day-content hidden">
+                        <div class="flex items-center justify-between border-b border-stone-100 pb-5 mb-6">
+                            <div>
+                                <h3 class="font-serif text-2xl font-bold text-coyoacan-cobalt">Art, History & Urban Forests</h3>
+                                <p class="text-sm text-stone-500">Sunday, June 7, 2026</p>
+                            </div>
+                            <span class="bg-green-50 text-green-700 border border-green-100 font-semibold px-4 py-1.5 rounded-full text-xs shadow-sm">
+                                Culture & Parks
+                            </span>
+                        </div>
+
+                        <div class="space-y-6 relative before:absolute before:inset-0 before:left-3 before:w-0.5 before:bg-stone-100">
+                            <div class="flex gap-4 relative">
+                                <div class="w-6 h-6 rounded-full bg-coyoacan-forest border-4 border-white flex items-center justify-center relative z-10 shadow-sm mt-1"></div>
+                                <div class="flex-grow">
+                                    <span class="text-xs font-semibold text-coyoacan-forest">8:00 AM</span>
+                                    <h4 class="font-bold text-base mt-0.5">Uber to Bosque de Chapultepec</h4>
+                                    <p class="text-sm text-stone-600 mt-1">Enter early into Section 2 of this massive park to enjoy its peaceful, forested walkways before Sunday crowds arrive.</p>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-4 relative">
+                                <div class="w-6 h-6 rounded-full bg-coyoacan-cobalt border-4 border-white flex items-center justify-center relative z-10 shadow-sm mt-1"></div>
+                                <div class="flex-grow">
+                                    <span class="text-xs font-semibold text-coyoacan-cobalt">9:30 AM – 1:30 PM</span>
+                                    <h4 class="font-bold text-base mt-0.5">National Museum of Anthropology</h4>
+                                    <p class="text-sm text-stone-600 mt-1">Widely hailed as one of the best museums on Earth. Budget 3-4 hours to explore the Aztec Sun Stone and Mayan galleries. (MX$85–90).</p>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-4 relative">
+                                <div class="w-6 h-6 rounded-full bg-coyoacan-forest border-4 border-white flex items-center justify-center relative z-10 shadow-sm mt-1"></div>
+                                <div class="flex-grow">
+                                    <span class="text-xs font-semibold text-coyoacan-forest">1:30 PM</span>
+                                    <h4 class="font-bold text-base mt-0.5 font-sans">Lunch in Leafy Polanco or Roma Norte</h4>
+                                    <p class="text-sm text-stone-600 mt-1">Relax on a sidewalk café and enjoy world-class architecture and dining.</p>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-4 relative">
+                                <div class="w-6 h-6 rounded-full bg-coyoacan-terracotta border-4 border-white flex items-center justify-center relative z-10 shadow-sm mt-1"></div>
+                                <div class="flex-grow">
+                                    <span class="text-xs font-semibold text-coyoacan-terracotta">3:00 PM</span>
+                                    <h4 class="font-bold text-base mt-0.5">Polanco Modern Art Loop</h4>
+                                    <p class="text-sm text-stone-600 mt-1">Visit the eye-catching, aluminum-sheathed Museo Soumaya (always free), and the striking contemporary galleries of Museo Jumex next door (also free!).</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- DAY 8 CONTENT -->
+                    <div id="itinerary-day-8" class="day-content hidden">
+                        <div class="flex items-center justify-between border-b border-stone-100 pb-5 mb-6">
+                            <div>
+                                <h3 class="font-serif text-2xl font-bold text-coyoacan-cobalt">Water Canals & Trendy Strolls</h3>
+                                <p class="text-sm text-stone-500">Monday, June 8, 2026</p>
+                            </div>
+                            <span class="bg-teal-50 text-teal-700 border border-teal-100 font-semibold px-4 py-1.5 rounded-full text-xs shadow-sm">
+                                Floating Garden & Neighborhoods
+                            </span>
+                        </div>
+
+                        <div class="space-y-6 relative before:absolute before:inset-0 before:left-3 before:w-0.5 before:bg-stone-100">
+                            <div class="flex gap-4 relative">
+                                <div class="w-6 h-6 rounded-full bg-amber-700 border-4 border-white flex items-center justify-center relative z-10 shadow-sm mt-1"></div>
+                                <div class="flex-grow">
+                                    <span class="text-xs font-semibold text-amber-800">7:30 AM</span>
+                                    <h4 class="font-bold text-base mt-0.5">El Jarocho Fuel Up</h4>
+                                    <p class="text-sm text-stone-600 mt-1">Morning coffee de olla and pan dulce standing under the canopy of your local neighborhood institution.</p>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-4 relative">
+                                <div class="w-6 h-6 rounded-full bg-coyoacan-forest border-4 border-white flex items-center justify-center relative z-10 shadow-sm mt-1"></div>
+                                <div class="flex-grow">
+                                    <span class="text-xs font-semibold text-coyoacan-forest">9:00 AM – 11:00 AM</span>
+                                    <h4 class="font-bold text-base mt-0.5">Xochimilco Floating Canals (The Serene Way)</h4>
+                                    <p class="text-sm text-stone-600 mt-1">Rent a private, colorful wooden trajinera boat. Launch from **Embarcadero Cuemanco**—the quietest, eco-friendly pier—to drift past ancient Aztec chinampas with birds and mist. Total cost: MX$1,500 for 2 hours (CASH ONLY!).</p>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-4 relative">
+                                <div class="w-6 h-6 rounded-full bg-coyoacan-cobalt border-4 border-white flex items-center justify-center relative z-10 shadow-sm mt-1"></div>
+                                <div class="flex-grow">
+                                    <span class="text-xs font-semibold text-stone-500">12:15 PM</span>
+                                    <h4 class="font-bold text-base mt-0.5">Roma Norte Exploration</h4>
+                                    <p class="text-sm text-stone-600 mt-1">Lunch at Mercado de Medellín (highly authentic and un-touristy), then stroll through Cafebrería El Péndulo—a stunning multi-level bookstore and garden-forest.</p>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-4 relative">
+                                <div class="w-6 h-6 rounded-full bg-coyoacan-forest border-4 border-white flex items-center justify-center relative z-10 shadow-sm mt-1"></div>
+                                <div class="flex-grow">
+                                    <span class="text-xs font-semibold text-coyoacan-forest">4:30 PM</span>
+                                    <h4 class="font-bold text-base mt-0.5">Parque México Condesa Stroll</h4>
+                                    <p class="text-sm text-stone-600 mt-1">Walk the gorgeous Art Deco circular paths, look at the dog-training clubs, and check out the historic building facades.</p>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-4 relative">
+                                <div class="w-6 h-6 rounded-full bg-coyoacan-terracotta border-4 border-white flex items-center justify-center relative z-10 shadow-sm mt-1"></div>
+                                <div class="flex-grow">
+                                    <span class="text-xs font-semibold text-coyoacan-terracotta">8:00 PM</span>
+                                    <h4 class="font-bold text-base mt-0.5">Late Night Tacos al Pastor: El Vilsito</h4>
+                                    <p class="text-sm text-stone-600 mt-1">An auto repair shop by day, it turns into a legendary tacos al pastor hotspot with towering trompos after 9 PM. Absolute CDMX legend. (CASH ONLY!).</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- DAY 9 CONTENT -->
+                    <div id="itinerary-day-9" class="day-content hidden">
+                        <div class="flex items-center justify-between border-b border-stone-100 pb-5 mb-6">
+                            <div>
+                                <h3 class="font-serif text-2xl font-bold text-coyoacan-cobalt">Murals, Peacocks & Last Strolls</h3>
+                                <p class="text-sm text-stone-500">Tuesday, June 9, 2026</p>
+                            </div>
+                            <span class="bg-amber-50 text-amber-700 border border-amber-100 font-semibold px-4 py-1.5 rounded-full text-xs shadow-sm">
+                                South Side Icons & Prep
+                            </span>
+                        </div>
+
+                        <div class="space-y-6 relative before:absolute before:inset-0 before:left-3 before:w-0.5 before:bg-stone-100">
+                            <div class="flex gap-4 relative">
+                                <div class="w-6 h-6 rounded-full bg-coyoacan-cobalt border-4 border-white flex items-center justify-center relative z-10 shadow-sm mt-1"></div>
+                                <div class="flex-grow">
+                                    <span class="text-xs font-semibold text-coyoacan-cobalt">Morning</span>
+                                    <h4 class="font-bold text-base mt-0.5 font-sans">UNAM Ciudad Universitaria</h4>
+                                    <p class="text-sm text-stone-600 mt-1">Witness the giant, iconic stone mosaic murals by Juan O'Gorman covering the Biblioteca Central and explore the volcanic, minimalist landscape of Espacio Escultórico.</p>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-4 relative">
+                                <div class="w-6 h-6 rounded-full bg-coyoacan-rosa border-4 border-white flex items-center justify-center relative z-10 shadow-sm mt-1"></div>
+                                <div class="flex-grow">
+                                    <span class="text-xs font-semibold text-coyoacan-rosa">11:30 AM (Confirmed Tix!)</span>
+                                    <h4 class="font-bold text-base mt-0.5">Museo Dolores Olmedo</h4>
+                                    <p class="text-sm text-stone-600 mt-1">Walk through the spectacular colonial hacienda. View unparalleled paintings by Diego Rivera and Frida Kahlo, surrounded by roaming peacocks and hairless Xoloitzcuintli dogs. (Reopened May 30!).</p>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-4 relative">
+                                <div class="w-6 h-6 rounded-full bg-amber-700 border-4 border-white flex items-center justify-center relative z-10 shadow-sm mt-1"></div>
+                                <div class="flex-grow">
+                                    <span class="text-xs font-semibold text-amber-800">Late Afternoon</span>
+                                    <h4 class="font-bold text-base mt-0.5">Logistics & Souvenirs</h4>
+                                    <p class="text-sm text-stone-600 mt-1">Stop by **Café Negro** to buy single-origin bags of roasted Mexican beans to take home. Settle any incidentals at Maria Del Alma House and pack your bags.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- DAY 10 CONTENT -->
+                    <div id="itinerary-day-10" class="day-content hidden">
+                        <div class="flex items-center justify-between border-b border-stone-100 pb-5 mb-6">
+                            <div>
+                                <h3 class="font-serif text-2xl font-bold text-coyoacan-cobalt">Homeward Bound</h3>
+                                <p class="text-sm text-stone-500">Wednesday, June 10, 2026</p>
+                            </div>
+                            <span class="bg-stone-100 text-stone-700 border border-stone-200 font-semibold px-4 py-1.5 rounded-full text-xs shadow-sm">
+                                Journey Home
+                            </span>
+                        </div>
+
+                        <div class="space-y-6 relative before:absolute before:inset-0 before:left-3 before:w-0.5 before:bg-stone-100">
+                            <div class="flex gap-4 relative">
+                                <div class="w-6 h-6 rounded-full bg-stone-400 border-4 border-white flex items-center justify-center relative z-10 shadow-sm mt-1"></div>
+                                <div class="flex-grow">
+                                    <span class="text-xs font-semibold text-stone-500">6:15 AM</span>
+                                    <h4 class="font-bold text-base mt-0.5">Final Coffee on the Patio</h4>
+                                    <p class="text-sm text-stone-600 mt-1">Enjoy a final quick breakfast at Maria Del Alma House before checking out.</p>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-4 relative">
+                                <div class="w-6 h-6 rounded-full bg-stone-400 border-4 border-white flex items-center justify-center relative z-10 shadow-sm mt-1"></div>
+                                <div class="flex-grow">
+                                    <span class="text-xs font-semibold text-stone-500">7:00 AM</span>
+                                    <h4 class="font-bold text-base mt-0.5">Uber to MEX Airport</h4>
+                                    <p class="text-sm text-stone-600 mt-1">Commute north to Terminal 2 with plenty of buffer time.</p>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-4 relative">
+                                <div class="w-6 h-6 rounded-full bg-coyoacan-cobalt border-4 border-white flex items-center justify-center relative z-10 shadow-sm mt-1"></div>
+                                <div class="flex-grow">
+                                    <span class="text-xs font-semibold text-coyoacan-cobalt">8:30 AM – 11:10 AM</span>
+                                    <h4 class="font-bold text-base mt-0.5">Amex Centurion Lounge MEX (T2 Mezzanine)</h4>
+                                    <p class="text-sm text-stone-600 mt-1">After security, use your Amex Platinum to access the two-level mezzanine lounge for coffee, food, and quiet reading before your flight.</p>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-4 relative">
+                                <div class="w-6 h-6 rounded-full bg-stone-700 border-4 border-white flex items-center justify-center relative z-10 shadow-sm mt-1"></div>
+                                <div class="flex-grow">
+                                    <span class="text-xs font-semibold text-stone-500">4:43 PM EST</span>
+                                    <h4 class="font-bold text-base mt-0.5">ATL Layover (Concourse E Centurion Lounge)</h4>
+                                    <p class="text-sm text-stone-600 mt-1">Clear US Customs in Atlanta. Enjoy a ~4-hour layover. Return to the ATL Concourse E Centurion Lounge to have dinner, catch up on reading, and relax before your final short hop to IND at 8:51 PM.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- SPECIALTY COFFEE & INDIE BOOKSTORES FOCUS SECTION -->
+                <div class="bg-white rounded-2xl shadow-xl-soft border border-stone-100 p-6 md:p-8 card-lift">
+                    <div class="flex justify-between items-center border-b border-stone-100 pb-5 mb-6">
+                        <div>
+                            <h3 class="font-serif text-2xl font-bold text-coyoacan-cobalt">Michael's Curated Trails</h3>
+                            <div class="greca-accent w-24 mt-2"></div>
+                        </div>
+                        <!-- Segmented control -->
+                        <div class="flex bg-stone-100 p-1 rounded-xl">
+                            <button id="toggle-coffee" onclick="switchTrail('coffee')" class="px-4 py-2 rounded-lg text-xs font-semibold transition-all duration-200 bg-white text-coyoacan-cobalt shadow-sm">
+                                ☕ Coffee Spots
+                            </button>
+                            <button id="toggle-books" onclick="switchTrail('books')" class="px-4 py-2 rounded-lg text-xs font-semibold transition-all duration-200 text-stone-500 hover:text-stone-800">
+                                📚 Indie Books
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Coffee Trail Info -->
+                    <div id="trail-coffee" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="bg-stone-50 p-5 rounded-xl border border-stone-100 flex flex-col justify-between card-lift">
+                            <div>
+                                <span class="bg-amber-100 text-amber-800 font-bold text-[10px] px-2.5 py-1 rounded-full uppercase">The Institution</span>
+                                <h4 class="font-bold text-base mt-2.5">Café El Jarocho</h4>
+                                <p class="text-xs text-stone-500 mt-1">Cuauhtémoc 134 • 4-min walk</p>
+                                <p class="text-xs text-stone-600 mt-2 italic leading-relaxed">"Standing-room only, incredible café de olla, abuelitas and travelers in harmony."</p>
+                            </div>
+                            <span class="text-[11px] text-coyoacan-cobalt font-medium mt-4 flex items-center gap-1">✓ Daily Morning Ritual</span>
+                        </div>
+                        <div class="bg-stone-50 p-5 rounded-xl border border-stone-100 flex flex-col justify-between card-lift">
+                            <div>
+                                <span class="bg-blue-100 text-blue-800 font-bold text-[10px] px-2.5 py-1 rounded-full uppercase">The Specialty Geek</span>
+                                <h4 class="font-bold text-base mt-2.5">Café Avellaneda</h4>
+                                <p class="text-xs text-stone-500 mt-1">Higuera 40-A • 7-min walk</p>
+                                <p class="text-xs text-stone-600 mt-2 italic leading-relaxed">"Meticulous single-origin pour overs and delicious empanadas near Casa Azul."</p>
+                            </div>
+                            <span class="text-[11px] text-coyoacan-cobalt font-medium mt-4 flex items-center gap-1">✓ Pre-Frida Warmup (Sat)</span>
+                        </div>
+                        <div class="bg-stone-50 p-5 rounded-xl border border-stone-100 flex flex-col justify-between card-lift">
+                            <div>
+                                <span class="bg-stone-200 text-stone-800 font-bold text-[10px] px-2.5 py-1 rounded-full uppercase">The Roaster</span>
+                                <h4 class="font-bold text-base mt-2.5">Café Negro</h4>
+                                <p class="text-xs text-stone-500 mt-1">Centenario 16 • 5-min walk</p>
+                                <p class="text-xs text-stone-600 mt-2 italic leading-relaxed">"Artsy vibe, supporting small Mexican producers. Amazing aroma in-house."</p>
+                            </div>
+                            <span class="text-[11px] text-coyoacan-cobalt font-medium mt-4 flex items-center gap-1">✓ Souvenir Bean Bags (Tue)</span>
+                        </div>
+                    </div>
+
+                    <!-- Books Trail Info -->
+                    <div id="trail-books" class="grid grid-cols-1 md:grid-cols-3 gap-4 hidden">
+                        <div class="bg-stone-50 p-5 rounded-xl border border-stone-100 flex flex-col justify-between card-lift">
+                            <div>
+                                <span class="bg-purple-100 text-purple-800 font-bold text-[10px] px-2.5 py-1 rounded-full uppercase">Crown Jewel</span>
+                                <h4 class="font-bold text-base mt-2.5">Elena Garro</h4>
+                                <p class="text-xs text-stone-500 mt-1">Coyoacán • Beautiful modern space</p>
+                                <p class="text-xs text-stone-600 mt-2 italic leading-relaxed">"Glass framing massive trees and courtyards, incredibly spacious bookstore."</p>
+                            </div>
+                            <span class="text-[11px] text-coyoacan-cobalt font-medium mt-4 flex items-center gap-1">✓ Perfect for quiet reading</span>
+                        </div>
+                        <div class="bg-stone-50 p-5 rounded-xl border border-stone-100 flex flex-col justify-between card-lift">
+                            <div>
+                                <span class="bg-emerald-100 text-emerald-800 font-bold text-[10px] px-2.5 py-1 rounded-full uppercase">Indie Gem</span>
+                                <h4 class="font-bold text-base mt-2.5">Tlacuilo</h4>
+                                <p class="text-xs text-stone-500 mt-1">Coyoacán • Independent bookstore</p>
+                                <p class="text-xs text-stone-600 mt-2 italic leading-relaxed">"Intimate, highly curated gem of independent print."</p>
+                            </div>
+                            <span class="text-[11px] text-coyoacan-cobalt font-medium mt-4 flex items-center gap-1">✓ Saturday Afternoon Stop</span>
+                        </div>
+                        <div class="bg-stone-50 p-5 rounded-xl border border-stone-100 flex flex-col justify-between card-lift">
+                            <div>
+                                <span class="bg-yellow-100 text-yellow-800 font-bold text-[10px] px-2.5 py-1 rounded-full uppercase">The Forest Experience</span>
+                                <h4 class="font-bold text-base mt-2.5">El Péndulo</h4>
+                                <p class="text-xs text-stone-500 mt-1">Roma Norte • Multi-story cafe-forest</p>
+                                <p class="text-xs text-stone-600 mt-2 italic leading-relaxed">"Vibrant plants spilling from balconies, winding staircases, live music."</p>
+                            </div>
+                            <span class="text-[11px] text-coyoacan-cobalt font-medium mt-4 flex items-center gap-1">✓ Monday Gallery Companion</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- RIGHT HAND PANEL: LOGISTICS, EXPLORABLE AREAS & COPILOT -->
+            <div class="lg:col-span-4 space-y-8">
+
+                <!-- COYOACÁN HOME BASE INSIGHTS -->
+                <div class="bg-gradient-to-br from-coyoacan-cobalt via-[#1a335f] to-[#2a2f4a] text-white rounded-2xl p-6 shadow-xl-soft relative overflow-hidden card-lift">
+                    <div class="absolute inset-0 bg-cover bg-center opacity-10" style="background-image: url('https://images.unsplash.com/photo-1585464231875-d9ef1f5ad396?q=80&w=1000&auto=format&fit=crop');"></div>
+                    <!-- Coyote silhouette (Coyoacán = "place of coyotes") -->
+                    <svg class="absolute -bottom-3 -right-2 w-40 h-40 text-coyoacan-gold opacity-[0.14] pointer-events-none" viewBox="0 0 100 100" fill="currentColor" aria-hidden="true">
+                        <path d="M14 78 C14 70 16 64 20 60 L18 46 C17 42 19 39 22 40 C24 41 25 45 25 49 L27 58 C31 55 37 53 44 53 L66 53 C70 50 72 45 73 39 C73.5 35 75 30 78 28 C79 27 80 28 79.5 30 L77 38 C80 36 84 33 86 29 C87 27 89 28 88 31 C86 37 82 42 77 45 L78 52 C82 54 85 58 86 64 L84 65 C82 60 79 57 75 56 L74 78 C74 80 72 80 71 78 L70 62 L48 62 L47 78 C47 80 45 80 44 78 L43 63 C38 64 33 67 31 72 L30 78 C30 80 28 80 27.5 78 L28 66 C24 69 21 73 20 78 C19.5 80 14 80 14 78 Z M73 39 C74 38 76 38 76 40 C76 42 74 42 73 41 Z"/>
+                    </svg>
+                    <div class="relative z-10">
+                        <span class="text-xs font-bold text-coyoacan-gold uppercase tracking-widest">Neighborhood Highlight</span>
+                        <h3 class="font-serif text-2xl font-bold mt-1.5 mb-2.5">Our Base: Coyoacán</h3>
+                        <div class="greca-accent gold w-20 mb-3 opacity-80"></div>
+                        <p class="text-sm text-stone-200 leading-relaxed mb-4">
+                            Meaning "Place of Coyotes" in Nahuatl, Coyoacán preserves a slower colonial speed. Cobblestones, quiet central parks, and bright pastel courtyards.
+                        </p>
+                        <div class="bg-white/10 p-3.5 rounded-xl border border-coyoacan-gold/20 text-xs leading-relaxed">
+                            <span class="font-semibold text-coyoacan-gold">🏠 Maria Del Alma House:</span> Calle París 220. Just a 4-minute walk to great spots and perfectly centered for a solo retirement getaway.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PRE-TRIP PACKING CHECKLIST -->
+                <div class="bg-white rounded-2xl shadow-xl-soft border border-stone-100 overflow-hidden flex flex-col card-lift">
+                    <div class="p-6 space-y-4">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h4 class="font-serif text-lg font-bold text-coyoacan-cobalt flex items-center gap-2">📋 Pre-Trip Packing Checklist</h4>
+                                <div class="greca-accent w-20 mt-2"></div>
+                            </div>
+                            <span id="checklist-progress" class="text-xs font-bold bg-stone-100 px-3 py-1.5 rounded-full text-stone-600">0/7</span>
+                        </div>
+                        <div class="space-y-3 text-xs">
+                            <label class="flex items-start gap-3 cursor-pointer p-2 rounded-lg hover:bg-stone-50 transition">
+                                <input type="checkbox" id="check-passport" onchange="saveCheckState('passport')" class="mt-0.5 h-4 w-4 rounded border-stone-300 text-coyoacan-terracotta focus:ring-coyoacan-terracotta">
+                                <span>Confirm passport is packed (Valid to Jan 16, 2029)</span>
+                            </label>
+                            <label class="flex items-start gap-3 cursor-pointer p-2 rounded-lg hover:bg-stone-50 transition">
+                                <input type="checkbox" id="check-zinco" onchange="saveCheckState('zinco')" class="mt-0.5 h-4 w-4 rounded border-stone-300 text-coyoacan-terracotta focus:ring-coyoacan-terracotta">
+                                <span class="text-coyoacan-terracotta font-semibold">WhatsApp Zinco Club (Wed Jun 3, 10am-6pm window!)</span>
+                            </label>
+                            <label class="flex items-start gap-3 cursor-pointer p-2 rounded-lg hover:bg-stone-50 transition">
+                                <input type="checkbox" id="check-fever" onchange="saveCheckState('fever')" class="mt-0.5 h-4 w-4 rounded border-stone-300 text-coyoacan-terracotta focus:ring-coyoacan-terracotta">
+                                <span>Double check Fever app QR codes for Casa Azul (Sat 1:00 PM)</span>
+                            </label>
+                            <label class="flex items-start gap-3 cursor-pointer p-2 rounded-lg hover:bg-stone-50 transition">
+                                <input type="checkbox" id="check-rain" onchange="saveCheckState('rain')" class="mt-0.5 h-4 w-4 rounded border-stone-300 text-coyoacan-terracotta focus:ring-coyoacan-terracotta">
+                                <span>Pack the rain jacket (Rainy season commencing!)</span>
+                            </label>
+                            <label class="flex items-start gap-3 cursor-pointer p-2 rounded-lg hover:bg-stone-50 transition">
+                                <input type="checkbox" id="check-betterment" onchange="saveCheckState('betterment')" class="mt-0.5 h-4 w-4 rounded border-stone-300 text-coyoacan-terracotta focus:ring-coyoacan-terracotta">
+                                <span>Betterment ATM Debit notification set for June 4–10</span>
+                            </label>
+                            <label class="flex items-start gap-3 cursor-pointer p-2 rounded-lg hover:bg-stone-50 transition">
+                                <input type="checkbox" id="check-cash" onchange="saveCheckState('cash')" class="mt-0.5 h-4 w-4 rounded border-stone-300 text-coyoacan-terracotta focus:ring-coyoacan-terracotta">
+                                <span>Withdraw cash at MEX T2 ATM for Trajineras & Pastor</span>
+                            </label>
+                            <label class="flex items-start gap-3 cursor-pointer p-2 rounded-lg hover:bg-stone-50 transition">
+                                <input type="checkbox" id="check-step" onchange="saveCheckState('step')" class="mt-0.5 h-4 w-4 rounded border-stone-300 text-coyoacan-terracotta focus:ring-coyoacan-terracotta">
+                                <span>Complete STEP Travel Registration (step.state.gov)</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TRANSIT GUIDE DIAGRAM -->
+                <div class="bg-white rounded-2xl shadow-xl-soft border border-stone-100 p-6 card-lift">
+                    <h3 class="font-serif text-xl font-bold mb-4 text-coyoacan-cobalt flex items-center gap-2">
+                        🗺️ Visual Transit Guide
+                    </h3>
+                    <p class="text-xs text-stone-500 mb-4">Click any neighborhood below to view what Michael is visiting there!</p>
+                    <div class="space-y-2.5">
+                        <button onclick="highlightMap('centro')" class="map-btn w-full text-left p-3.5 rounded-xl border border-stone-100 bg-stone-50 hover:border-coyoacan-cobalt transition-all duration-200 hover:shadow-md">
+                            <div class="flex justify-between items-center">
+                                <span class="font-semibold text-sm text-stone-800">1. Centro Histórico (North)</span>
+                                <span class="text-xs bg-stone-200 px-2.5 py-0.5 rounded-full text-stone-600">Friday</span>
+                            </div>
+                            <span class="block text-[11px] text-stone-500 mt-1">Aztec Ruins, Murals, Zinco Jazz Club</span>
+                        </button>
+                        <button onclick="highlightMap('chapultepec')" class="map-btn w-full text-left p-3.5 rounded-xl border border-stone-100 bg-stone-50 hover:border-coyoacan-cobalt transition-all duration-200 hover:shadow-md">
+                            <div class="flex justify-between items-center">
+                                <span class="font-semibold text-sm text-stone-800">2. Chapultepec & Polanco (West)</span>
+                                <span class="text-xs bg-stone-200 px-2.5 py-0.5 rounded-full text-stone-600">Sunday</span>
+                            </div>
+                            <span class="block text-[11px] text-stone-500 mt-1">National Archaeology Museum, Soumaya</span>
+                        </button>
+                        <button onclick="highlightMap('roma')" class="map-btn w-full text-left p-3.5 rounded-xl border border-stone-100 bg-stone-50 hover:border-coyoacan-cobalt transition-all duration-200 hover:shadow-md">
+                            <div class="flex justify-between items-center">
+                                <span class="font-semibold text-sm text-stone-800">3. Roma & Condesa (Mid-West)</span>
+                                <span class="text-xs bg-stone-200 px-2.5 py-0.5 rounded-full text-stone-600">Monday</span>
+                            </div>
+                            <span class="block text-[11px] text-stone-500 mt-1">El Péndulo, Parque México, El Vilsito</span>
+                        </button>
+                        <button onclick="highlightMap('coyoacan')" class="map-btn w-full text-left p-3.5 rounded-xl border border-stone-100 bg-stone-50 hover:border-coyoacan-cobalt transition-all duration-200 hover:shadow-md">
+                            <div class="flex justify-between items-center">
+                                <span class="font-semibold text-sm text-stone-800">4. Coyoacán Base (South)</span>
+                                <span class="text-xs bg-coyoacan-cobalt text-white px-2.5 py-0.5 rounded-full">All Week</span>
+                            </div>
+                            <span class="block text-[11px] text-stone-500 mt-1">Casa Azul, Viveros, Elena Garro, Local Cafés</span>
+                        </button>
+                        <button onclick="highlightMap('xochimilco')" class="map-btn w-full text-left p-3.5 rounded-xl border border-stone-100 bg-stone-50 hover:border-coyoacan-cobalt transition-all duration-200 hover:shadow-md">
+                            <div class="flex justify-between items-center">
+                                <span class="font-semibold text-sm text-stone-800">5. Xochimilco Canal (Far South)</span>
+                                <span class="text-xs bg-stone-200 px-2.5 py-0.5 rounded-full text-stone-600">Mon/Tue</span>
+                            </div>
+                            <span class="block text-[11px] text-stone-500 mt-1">Trajinera ride, Dolores Olmedo Hacienda</span>
+                        </button>
+                    </div>
+                    <div id="map-info-box" class="mt-4 p-3.5 bg-stone-50 rounded-xl border border-stone-100 text-xs text-stone-600 italic leading-relaxed">
+                        Select a neighborhood above to view transport times and local highlights!
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </main>
+
+    <!-- FOOTER WITH RETIREMENT CELEBRATION -->
+    <div class="papel-banner w-full" aria-hidden="true"></div>
+    <footer class="relative overflow-hidden bg-gradient-to-b from-coyoacan-cobalt to-[#0e1c3a] text-stone-400 py-14 px-6">
+        <div class="absolute inset-0 hero-pattern opacity-[0.08]" aria-hidden="true"></div>
+        <div class="absolute -bottom-6 -left-4 w-44 h-44 bg-coyoacan-rosa rounded-full blur-3xl opacity-20" aria-hidden="true"></div>
+        <div class="absolute -top-8 right-0 w-44 h-44 bg-coyoacan-gold rounded-full blur-3xl opacity-15" aria-hidden="true"></div>
+        <!-- Coyote silhouette -->
+        <svg class="absolute bottom-2 right-6 w-28 h-28 text-coyoacan-gold opacity-[0.13] pointer-events-none hidden sm:block" viewBox="0 0 100 100" fill="currentColor" aria-hidden="true">
+            <path d="M14 78 C14 70 16 64 20 60 L18 46 C17 42 19 39 22 40 C24 41 25 45 25 49 L27 58 C31 55 37 53 44 53 L66 53 C70 50 72 45 73 39 C73.5 35 75 30 78 28 C79 27 80 28 79.5 30 L77 38 C80 36 84 33 86 29 C87 27 89 28 88 31 C86 37 82 42 77 45 L78 52 C82 54 85 58 86 64 L84 65 C82 60 79 57 75 56 L74 78 C74 80 72 80 71 78 L70 62 L48 62 L47 78 C47 80 45 80 44 78 L43 63 C38 64 33 67 31 72 L30 78 C30 80 28 80 27.5 78 L28 66 C24 69 21 73 20 78 C19.5 80 14 80 14 78 Z M73 39 C74 38 76 38 76 40 C76 42 74 42 73 41 Z"/>
+        </svg>
+        <div class="max-w-6xl mx-auto text-center space-y-4 relative z-10">
+            <h3 class="font-serif text-2xl text-white">¡Buen Viaje, Michael!</h3>
+            <div class="greca-accent gold w-32 mx-auto opacity-80"></div>
+            <p class="text-xs max-w-xl mx-auto leading-relaxed text-stone-300">
+                Celebrating your dedication, your incredible achievements, and the grand opening of your retirement chapter. Mexico City is waiting for you with warm sun, fresh tostadas, and historic trails.
+            </p>
+            <div class="text-[10px] text-stone-500 pt-5 border-t border-white/10 inline-block px-6">
+                Assisted by your Dedicated Personal Travel Guide • Mexico City Trip 2026
+            </div>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE JAVASCRIPT ENGINE -->
+    <script>
+        // Set the actual departure date: June 4, 2026 at 7:16 AM Eastern Daylight Time (EDT)
+        // June 4, 2026 at 7:16 AM EST/EDT is June 4, 2026 5:16 AM CDMX time.
+        const departureTime = new Date('June 4, 2026 07:16:00 EDT').getTime();
+        const arrivalTimeCDMX = new Date('June 4, 2026 13:55:00 UTC-6').getTime();
+        const returnDepartureCDMX = new Date('June 10, 2026 11:10:00 UTC-6').getTime();
+        const returnArrivalIND = new Date('June 10, 2026 22:27:00 EDT').getTime();
+
+        // Simulated time state. 'auto' means real system time. Other states hardcode timestamps.
+        let simulationMode = 'auto';
+
+        function getSimulatedCurrentTime() {
+            if (simulationMode === 'auto') {
+                return new Date().getTime();
+            } else if (simulationMode === 'pre') {
+                // Return June 2, 2026, 10:29 PM
+                return new Date('June 2, 2026 22:29:00 EDT').getTime();
+            } else if (simulationMode === 'transit-out') {
+                // Return June 4, 2026, 9:30 AM (At ATL centurion breakfast)
+                return new Date('June 4, 2026 09:30:00 EDT').getTime();
+            } else if (simulationMode === 'cdmx-day2') {
+                // Return June 5, 2026, 10:00 AM (At Templo Mayor ruins)
+                return new Date('June 5, 2026 10:00:00 CST').getTime();
+            } else if (simulationMode === 'cdmx-day3') {
+                // Return June 6, 2026, 13:10 PM (Strict window Frida Kahlo museum!)
+                return new Date('June 6, 2026 13:10:00 CST').getTime();
+            } else if (simulationMode === 'cdmx-day5') {
+                // Return June 8, 2026, 10:00 AM (Gliding through serene Xochimilco)
+                return new Date('June 8, 2026 10:00:00 CST').getTime();
+            } else if (simulationMode === 'transit-home') {
+                // Return June 10, 2026, 13:00 PM (In air returning)
+                return new Date('June 10, 2026 13:00:00 CST').getTime();
+            } else if (simulationMode === 'post') {
+                // Return June 12, 2026
+                return new Date('June 12, 2026 12:00:00 EDT').getTime();
+            }
+        }
+
+        function setSimulationMode(mode) {
+            simulationMode = mode;
+
+            // Highlight buttons
+            const buttons = ['auto', 'pre', 'transit-out', 'cdmx-day2', 'cdmx-day3', 'cdmx-day5', 'transit-home', 'post'];
+            buttons.forEach(btnId => {
+                const btn = document.getElementById(`sim-btn-${btnId}`);
+                if (btn) {
+                    if (btnId === mode) {
+                        btn.className =
+                            "px-2.5 py-1.5 rounded-lg bg-coyoacan-terracotta text-white font-semibold transition-all duration-200 shadow-sm hover:shadow-md hover:brightness-110 text-[11px]";
+                    } else {
+                        btn.className =
+                            "px-2.5 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white transition-all duration-200 text-[11px] border border-white/10";
+                    }
+                }
+            });
+
+            // Re-trigger dynamic UI rendering, syncing the itinerary day to the
+            // selected simulator mode.
+            updateCountdownAndWidgets(true);
+        }
+
+        // Real-Time Clock & Dynamic Engine Switcher
+        function updateCountdownAndWidgets(syncDay = false) {
+            const now = getSimulatedCurrentTime();
+
+            const leftWidget = document.getElementById('dynamic-left-widget');
+            const rightWidget = document.getElementById('dynamic-right-widget');
+            const heroQuote = document.getElementById('hero-quote');
+
+            // 1. PRE-DEPARTURE STATE (Before June 4, 7:16 AM EDT)
+            if (now < departureTime) {
+                heroQuote.innerText =
+                    "\"A solo celebration of work well-done, exploration, and the quiet magic of Mexico City.\"";
+
+                // Calculate Pre-departure Countdown
+                const distance = departureTime - now;
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                leftWidget.innerHTML = `
+                    <div>
+                        <h3 class="text-xs uppercase font-semibold text-stone-400 tracking-wider mb-2 flex items-center gap-2">
+                            <span class="h-2 w-2 rounded-full bg-rose-500 animate-ping"></span> Live Countdown to Departure
+                        </h3>
+                        <h4 class="font-serif text-xl font-semibold mb-4 text-coyoacan-cobalt">IND Airport Outbound (June 4, 2026 • 7:16 AM)</h4>
+                    </div>
+                    <div class="grid grid-cols-4 gap-3 text-center my-2">
+                        <div class="bg-stone-50 p-3 rounded-xl border border-stone-100">
+                            <span class="text-3xl font-bold text-coyoacan-terracotta">${String(days).padStart(2, '0')}</span>
+                            <span class="block text-[10px] uppercase font-semibold text-stone-500 mt-1">Days</span>
+                        </div>
+                        <div class="bg-stone-50 p-3 rounded-xl border border-stone-100">
+                            <span class="text-3xl font-bold text-coyoacan-terracotta">${String(hours).padStart(2, '0')}</span>
+                            <span class="block text-[10px] uppercase font-semibold text-stone-500 mt-1">Hours</span>
+                        </div>
+                        <div class="bg-stone-50 p-3 rounded-xl border border-stone-100">
+                            <span class="text-3xl font-bold text-coyoacan-terracotta">${String(minutes).padStart(2, '0')}</span>
+                            <span class="block text-[10px] uppercase font-semibold text-stone-500 mt-1">Mins</span>
+                        </div>
+                        <div class="bg-stone-50 p-3 rounded-xl border border-stone-100">
+                            <span class="text-3xl font-bold text-coyoacan-terracotta">${String(seconds).padStart(2, '0')}</span>
+                            <span class="block text-[10px] uppercase font-semibold text-stone-500 mt-1">Secs</span>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-stone-100 text-xs text-stone-500 flex justify-between items-center">
+                        <span>Indianapolis (IND) ✈ Atlanta (ATL) ✈ Mexico City (MEX)</span>
+                        <span class="font-medium text-coyoacan-cobalt font-serif italic">Delta Air Lines</span>
+                    </div>
+                `;
+
+                rightWidget.innerHTML = `
+                    <div class="absolute top-0 right-0 p-4 opacity-5">
+                        <svg class="w-32 h-32 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L14 19v-5.5l7 2.5z"/></svg>
+                    </div>
+                    <div class="relative z-10">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-xs uppercase font-semibold text-stone-400 tracking-wider">Where is Michael Right Now?</h3>
+                            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-coyoacan-gold text-stone-900">
+                                Pre-Departure
+                            </span>
+                        </div>
+                        <div class="flex items-center justify-between my-2">
+                            <div>
+                                <span class="text-3xl font-bold tracking-tight">IND</span>
+                                <span class="block text-xs text-stone-400">Indianapolis</span>
+                            </div>
+                            <div class="flex-grow mx-4 flex flex-col items-center relative">
+                                <span class="text-[10px] text-stone-400 mb-1">Pre-Trip Packing</span>
+                                <div class="w-full h-1 bg-white/15 rounded-full overflow-hidden">
+                                    <div class="h-full bg-coyoacan-gold transition-all duration-500 rounded-full" style="width: 15%"></div>
+                                </div>
+                                <svg class="w-4 h-4 text-coyoacan-gold mt-1 transform rotate-90" fill="currentColor" viewBox="0 0 24 24"><path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L14 19v-5.5l7 2.5z"/></svg>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-3xl font-bold tracking-tight">MEX</span>
+                                <span class="block text-xs text-stone-400">CDMX (T2)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-white/10 text-xs text-stone-300 relative z-10">
+                        <p>Michael is completing final pre-departure tasks in Indiana. June 3 WhatsApp window for Zinco Jazz opens tomorrow morning!</p>
+                    </div>
+                `;
+            }
+            // 2. OUTBOUND TRANSIT MODE (June 4 departure to check-in)
+            else if (now >= departureTime && now < arrivalTimeCDMX + (1.5 * 60 * 60 * 1000)) {
+                heroQuote.innerText =
+                    "🛫 Act I of Retirement has officially commenced! Safe travels over the Gulf, Michael.";
+
+                leftWidget.innerHTML = `
+                    <div class="flex flex-col h-full justify-between">
+                        <div>
+                            <span class="inline-block bg-coyoacan-terracotta text-white font-semibold text-xs uppercase px-2.5 py-1 rounded mb-2">
+                                Active Outbound Transit
+                            </span>
+                            <h4 class="font-serif text-2xl font-bold text-coyoacan-cobalt mb-2">Today: Commuting to CDMX</h4>
+                            <p class="text-sm text-stone-600 mb-4">You are currently traveling from Indianapolis to your sweet neighborhood patio base in Coyoacán. Here is what is active:</p>
+                        </div>
+                        <div class="bg-stone-50 p-4 rounded-xl border border-stone-100 flex items-center justify-between text-xs font-semibold">
+                            <span class="text-coyoacan-cobalt">IND ➔ ATL (DL 3106)</span>
+                            <span class="text-stone-400">Layover Concourse E</span>
+                            <span class="text-coyoacan-terracotta">ATL ➔ MEX (DL 361)</span>
+                        </div>
+                    </div>
+                `;
+
+                // Calculate sub-stages for transit
+                const depIND = departureTime;
+                const arrATL = new Date('June 4, 2026 09:00:00 EDT').getTime();
+                const depATL = new Date('June 4, 2026 12:16:00 EDT').getTime();
+                const arrMEX = arrivalTimeCDMX;
+
+                let subBadge = "Transit In Progress";
+                let pct = "25%";
+                let subDesc =
+                    "Flying from Indianapolis to Atlanta (Delta 3106). Layover begins soon!";
+
+                if (now >= depIND && now < arrATL) {
+                    subBadge = "In Flight 🛫";
+                    pct = "30%";
+                    subDesc =
+                        "Cruising on DL 3106 towards Atlanta (ATL). Touchdown expected at 9:00 AM EDT.";
+                } else if (now >= arrATL && now < depATL) {
+                    subBadge = "Centurion Lounge Layover 🍳";
+                    pct = "55%";
+                    subDesc =
+                        "Enjoying hot breakfast and premium coffee inside the spacious Concourse E Centurion Lounge (near Gate E11) at Atlanta Hartsfield-Jackson.";
+                } else if (now >= depATL && now < arrMEX) {
+                    subBadge = "International Flight ✈️";
+                    pct = "75%";
+                    subDesc =
+                        "Cruising south towards Mexico City. Fill out your immigration form with your pen on the flight. CDMX touchdown is at 1:55 PM CST.";
+                } else {
+                    subBadge = "Touchdown in CDMX! 🇲🇽";
+                    pct = "90%";
+                    subDesc =
+                        "Commuting from MEX Terminal 2 directly to Calle París 220 in Coyoacán. Ensure you stop at the ATM inside T2 to grab cash for the week!";
+                }
+
+                rightWidget.innerHTML = `
+                    <div class="relative z-10">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-xs uppercase font-semibold text-stone-400 tracking-wider">Live Travel Status</h3>
+                            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-coyoacan-forest text-white animate-pulse">
+                                ${subBadge}
+                            </span>
+                        </div>
+                        <div class="flex items-center justify-between my-2">
+                            <div>
+                                <span class="text-3xl font-bold tracking-tight">IND</span>
+                                <span class="block text-xs text-stone-400">Indianapolis</span>
+                            </div>
+                            <div class="flex-grow mx-4 flex flex-col items-center relative">
+                                <div class="w-full h-1 bg-white/15 rounded-full overflow-hidden">
+                                    <div class="h-full bg-coyoacan-gold transition-all duration-500 rounded-full" style="width: ${pct}"></div>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-3xl font-bold tracking-tight">MEX</span>
+                                <span class="block text-xs text-stone-400">CDMX (T2)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-white/10 text-xs text-stone-300 relative z-10">
+                        <p>${subDesc}</p>
+                    </div>
+                `;
+            }
+            // 3. CDMX ACTIVE ADVENTURE MODE (June 4 afternoon through June 10 checkout)
+            else if (now >= arrivalTimeCDMX + (1.5 * 60 * 60 * 1000) && now < returnDepartureCDMX) {
+                // Determine which calendar day is active
+                const currentDayNum = getActiveDayNumber(now);
+                const dayDetails = getDayStatusText(currentDayNum, now);
+
+                heroQuote.innerHTML =
+                    `<span class="text-coyoacan-gold font-bold">★ Active Adventure Mode:</span> "${dayDetails.quote}"`;
+
+                leftWidget.innerHTML = `
+                    <div class="flex flex-col h-full justify-between">
+                        <div>
+                            <span class="inline-block bg-coyoacan-forest text-white font-semibold text-xs uppercase px-2.5 py-1 rounded mb-2">
+                                Act I Active • Day ${currentDayNum} of 7
+                            </span>
+                            <h4 class="font-serif text-2xl font-bold text-coyoacan-cobalt mb-2">${dayDetails.title}</h4>
+                            <p class="text-sm text-stone-600 leading-relaxed mb-4">${dayDetails.brief}</p>
+                        </div>
+                        <div class="bg-[#fdeed3] p-3 rounded-xl border border-[#f1d7a6] flex items-center text-xs text-coyoacan-cobalt font-medium">
+                            <span>📍 Current Base: Maria Del Alma House, Coyoacán</span>
+                        </div>
+                    </div>
+                `;
+
+                rightWidget.innerHTML = `
+                    <div class="relative z-10">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-xs uppercase font-semibold text-stone-400 tracking-wider">Where is Michael Right Now?</h3>
+                            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-coyoacan-forest text-white">
+                                CDMX Local Mode
+                            </span>
+                        </div>
+                        
+                        <div class="flex items-center gap-3 my-2.5">
+                            <div class="h-10 w-10 bg-white/10 rounded-full flex items-center justify-center border border-white/20 text-lg">
+                                📍
+                            </div>
+                            <div>
+                                <span class="text-xs text-stone-400 block uppercase font-bold tracking-wider">Current Live Action</span>
+                                <span class="text-sm font-bold text-white block leading-tight">${dayDetails.statusTicker}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-white/10 text-xs text-stone-300 relative z-10 flex justify-between items-center">
+                        <span>Local Time: ${getCDMXLocalString(now)}</span>
+                        <span class="text-coyoacan-gold font-medium">Enjoying Coyoacán base</span>
+                    </div>
+                `;
+
+                // Switch the timeline tab to the active day ONLY when explicitly
+                // syncing (a simulator press or initial load) — never on the
+                // per-second tick, so manual day-tab clicks aren't overridden.
+                if (syncDay) {
+                    switchDay(currentDayNum);
+                }
+            }
+            // 4. HOMEWARD TRANSIT MODE (June 10 departure through landing)
+            else if (now >= returnDepartureCDMX && now < returnArrivalIND) {
+                heroQuote.innerText =
+                    "✈️ Flying back home to Indianapolis. Safe travels, Michael! Celebrating an incredible first chapter of retirement.";
+
+                leftWidget.innerHTML = `
+                    <div class="flex flex-col h-full justify-between">
+                        <div>
+                            <span class="inline-block bg-stone-700 text-stone-100 font-semibold text-xs uppercase px-2.5 py-1 rounded mb-2">
+                                Homeward Journey Active
+                            </span>
+                            <h4 class="font-serif text-2xl font-bold text-coyoacan-cobalt mb-1">Heading back to Indiana</h4>
+                            <p class="text-sm text-stone-600">Checking out of Coyoacán and flying via Atlanta (ATL) back to Indianapolis. Settle in, review your amazing photos, and rest up.</p>
+                        </div>
+                        <div class="bg-stone-50 p-4 rounded-xl border border-stone-100 flex items-center justify-between text-xs font-semibold">
+                            <span class="text-stone-400">CDMX Base Checkout</span>
+                            <span class="text-coyoacan-cobalt">MEX T2 Centurion Mezzanine</span>
+                            <span class="text-coyoacan-terracotta">ATL Concourse E Layover</span>
+                        </div>
+                    </div>
+                `;
+
+                const depMEX = returnDepartureCDMX;
+                const arrATL = new Date('June 10, 2026 16:43:00 EDT').getTime();
+                const depATL = new Date('June 10, 2026 20:51:00 EDT').getTime();
+
+                let subBadge = "Transit In Progress";
+                let pct = "40%";
+                let subDesc =
+                    "Delta flight home from Mexico City Terminal 2 to Atlanta Hartsfield-Jackson (ATL).";
+
+                if (now >= depMEX && now < arrATL) {
+                    subBadge = "International Leg Flight 🛫";
+                    pct = "35%";
+                    subDesc =
+                        "In the air heading to Atlanta. Enjoy your flight and catch up on some reading on your Kindle!";
+                } else if (now >= arrATL && now < depATL) {
+                    subBadge = "ATL Layover ☕";
+                    pct = "70%";
+                    subDesc =
+                        "Having dinner and relaxing at Hartsfield-Jackson ATL Concourse E Centurion Lounge (near Gate E11) using your Platinum card.";
+                } else if (now >= depATL && now < returnArrivalIND) {
+                    subBadge = "Final Hop to IND 🛬";
+                    pct = "90%";
+                    subDesc =
+                        "On Delta flight towards Indianapolis (IND). Landing shortly in Indy. Welcome home!";
+                }
+
+                rightWidget.innerHTML = `
+                    <div class="relative z-10">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-xs uppercase font-semibold text-stone-400 tracking-wider">Live Travel Status</h3>
+                            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-purple-700 text-white animate-pulse">
+                                ${subBadge}
+                            </span>
+                        </div>
+                        <div class="flex items-center justify-between my-2">
+                            <div>
+                                <span class="text-3xl font-bold tracking-tight">MEX</span>
+                                <span class="block text-xs text-stone-400">CDMX</span>
+                            </div>
+                            <div class="flex-grow mx-4 flex flex-col items-center relative">
+                                <div class="w-full h-1 bg-white/15 rounded-full overflow-hidden">
+                                    <div class="h-full bg-coyoacan-gold transition-all duration-500 rounded-full" style="width: ${pct}"></div>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-3xl font-bold tracking-tight">IND</span>
+                                <span class="block text-xs text-stone-400">Indianapolis</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-white/10 text-xs text-stone-300 relative z-10">
+                        <p>${subDesc}</p>
+                    </div>
+                `;
+            }
+            // 5. POST-TRIP MEMORY STATE (After landing back in Indiana)
+            else {
+                heroQuote.innerText =
+                    "🏡 Welcome home, Michael Scott Abbott! Congratulations on an outstanding adventure.";
+
+                leftWidget.innerHTML = `
+                    <div>
+                        <span class="inline-block bg-coyoacan-cobalt text-white font-semibold text-xs uppercase px-2.5 py-1 rounded mb-2">
+                            Retirement Act I: Complete!
+                        </span>
+                        <h4 class="font-serif text-2xl font-bold text-coyoacan-cobalt mb-2">The Adventure Log is Safely Filed</h4>
+                        <p class="text-sm text-stone-600 mb-4 leading-relaxed">Your inaugural celebration of retirement in Mexico City is complete. You explored historical ruins, drank exquisite coffee, spent hours browsing lovely books, and floated down quiet Aztec canals.</p>
+                    </div>
+                    <div class="p-3 bg-stone-50 rounded-xl border border-stone-100 text-xs text-stone-600 italic">
+                        ⭐ Favorite memories locked: The Casa Azul blue walls, El Jarocho's morning mist, the swanky vaults of Zinco Jazz, and the serene trajineras of Cuemanco!
+                    </div>
+                `;
+
+                rightWidget.innerHTML = `
+                    <div class="relative z-10 flex flex-col justify-between h-full">
+                        <div>
+                            <h3 class="text-xs uppercase font-semibold text-stone-400 tracking-wider mb-2">Memory Scrapbook</h3>
+                            <h4 class="font-bold text-white text-base leading-tight">Act I Completed • Coyoacán Base 🇲🇽</h4>
+                        </div>
+                        <div class="my-4 border border-white/10 rounded-xl p-3 bg-white/5 text-[11px] text-stone-300">
+                            "The art of life lies in a constant readjustment to our surroundings."
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-2 border-t border-white/10 text-xs text-stone-400 text-right">
+                        Indianapolis base active 🏡
+                    </div>
+                `;
+            }
+        }
+
+        function getActiveDayNumber(timestamp) {
+            const dateStr = new Date(timestamp).toLocaleDateString('en-US', { timeZone: 'America/Mexico_City' });
+            const dayNum = new Date(dateStr).getDate();
+
+            if (dayNum >= 4 && dayNum <= 10) {
+                return dayNum;
+            }
+            return 4; // Default fallback to first day if outside boundaries
+        }
+
+        function getCDMXLocalString(timestamp) {
+            return new Date(timestamp).toLocaleTimeString('en-US', {
+                timeZone: 'America/Mexico_City',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
+
+        // Generate context-aware text content depending on the active day & hours
+        function getDayStatusText(dayNum, timestamp) {
+            const date = new Date(timestamp);
+            const hours = date.getUTCHours() - 6; // Crude estimate of CDMX hour
+
+            const days = {
+                4: {
+                    title: "Day 1 (Thursday): Touchdown in Coyoacán",
+                    quote: "Coyoacán was Frida's birthplace and haven. Make it yours this afternoon, Michael.",
+                    brief: "Arrive at Maria Del Alma House, check in to your ground-floor patio room, buy some fresh fruit, and explore Jardin Centenario, the iconic coyote fountain, and Mercado de Coyoacán.",
+                    statusTicker: hours < 16 ?
+                        "settling into Maria Del Alma House, Calle París 220" :
+                        "enjoying tostadas at Mercado de Coyoacán and wandering past the coyote fountain!"
+                },
+                5: {
+                    title: "Day 2 (Friday): Historic Murals & Underground Jazz",
+                    quote: "Diego Rivera painted the stories of an empire. Tonight, Zinco plays the soundtrack of retirement.",
+                    brief: "Spend the morning admiring ancient ruins at Templo Mayor and grand murals at Bellas Artes, then transition into a spectacular underground bank vault swanky jazz evening at Zinco Jazz Club.",
+                    statusTicker: hours < 12 ?
+                        "exploring Templo Mayor Aztec ruins and artifact museum" :
+                        hours < 18 ?
+                        "browsing La Ciudadela Crafts Market for handmade treasures" :
+                        "listening to elite live jazz deep inside Zinco's vault!"
+                },
+                6: {
+                    title: "Day 3 (Saturday): Cobalt Walls, Cobblestones & Open Air Jazz",
+                    quote: "Keep your Fever app ready. The Frida Kahlo entry window is absolutely rigid.",
+                    brief: "Start with morning specialty coffee at Café Avellaneda, walk the serene trails of Viveros de Coyoacán, then view the legendary cobalt-blue Casa Azul. End with cobblestones of San Ángel and Cineteca open-air jazz terrace.",
+                    statusTicker: hours < 12 ?
+                        "walking under the canopy of Viveros de Coyoacán park" :
+                        hours < 15 ?
+                        "standing inside Frida Kahlo's Casa Azul (strict entry window!)" :
+                        "sipping craft beer at the open-air jazz terrace of Cineteca Nacional!"
+                },
+                7: {
+                    title: "Day 4 (Sunday): Ancient Forests & Giant Murals",
+                    quote: "Sunday morning belongs to Chapultepec before the grand city wakes up.",
+                    brief: "Explore the massive urban forest of Bosque de Chapultepec, spend hours admiring the staggering Aztec Sun Stone inside the Museum of Anthropology, then complete an art loop in trendy Polanco.",
+                    statusTicker: hours < 13 ?
+                        "standing before the staggering Aztec Sun Stone in the Anthropology Museum" :
+                        "exploring contemporary exhibitions at Museo Jumex next to Soumaya"
+                },
+                8: {
+                    title: "Day 5 (Monday): Mist, Water Canals & Auto Shop Tacos",
+                    quote: "The quiet backwaters of Xochimilco show CDMX's ancient floating heritage.",
+                    brief: "Drink café de olla at El Jarocho, then board a private colorful trajinera from Embarcadero Cuemanco. Spend the afternoon strolling Roma Norte, then treat yourself to pastor tacos at El Vilsito auto-repair shop.",
+                    statusTicker: hours < 11 ?
+                        "gliding on a wooden trajinera past Aztec chinampas in Xochimilco!" :
+                        hours < 18 ?
+                        "browsing the plant-filled multi-story spiral shelves of Cafebrería El Péndulo" :
+                        "munching legendary late-night tacos al pastor under the neon of El Vilsito!"
+                },
+                9: {
+                    title: "Day 6 (Tuesday): Volcanic Masterpieces & Roaming Peacocks",
+                    quote: "We check out UNAM's giant library murals and relax alongside roaming peacocks.",
+                    brief: "Witness the mosaic murals at UNAM, tour the stunning hacienda of Dolores Olmedo surrounded by peacocks and xolo dogs (reopened May 30!). End by picking up souvenir coffee beans at Café Negro.",
+                    statusTicker: hours < 11 ?
+                        "strolling past UNAM Central Library mosaic murals" :
+                        hours < 14 ?
+                        "admiring Frida paintings alongside roaming peacocks at Dolores Olmedo" :
+                        "buying single-origin souvenir coffee beans at Café Negro"
+                },
+                10: {
+                    title: "Day 7 (Wednesday): Homeward Bound to Indy",
+                    quote: "Savor a final coffee de olla. It's time to head home with a heart full of memories.",
+                    brief: "Check out of Maria Del Alma House early, Uber to MEX Terminal 2, and unwind inside the Centurion Lounge near Gate K before boarding your Delta flight back to Atlanta.",
+                    statusTicker: hours < 9 ?
+                        "checking out of Coyoacán and Ubering to MEX Terminal 2" :
+                        "enjoying breakfast inside the MEX Terminal 2 Centurion Lounge mezzanine"
+                }
+            };
+
+            return days[dayNum] || days[4];
+        }
+
+        // Itinerary Switcher logic
+        function switchDay(day) {
+            // Hide all content areas
+            const contents = document.querySelectorAll('.day-content');
+            contents.forEach(content => content.classList.add('hidden'));
+
+            // Show active day
+            const targetContent = document.getElementById(`itinerary-day-${day}`);
+            if (targetContent) {
+                targetContent.classList.remove('hidden');
+            }
+
+            // Style buttons correctly
+            const buttons = document.querySelectorAll('.day-tab-btn');
+            buttons.forEach(btn => {
+                btn.className =
+                    "day-tab-btn snap-start shrink-0 px-4 py-3 rounded-xl flex flex-col items-center min-w-[76px] transition-all duration-200 border bg-white text-stone-700 border-stone-200 hover:border-coyoacan-cobalt hover:shadow-md";
+                const topText = btn.querySelector('.text-xs');
+                if (topText) topText.className = "text-xs uppercase tracking-wider text-stone-400";
+            });
+
+            const activeBtn = document.getElementById(`btn-day-${day}`);
+            if (activeBtn) {
+                activeBtn.className =
+                    "day-tab-btn snap-start shrink-0 px-4 py-3 rounded-xl flex flex-col items-center min-w-[76px] transition-all duration-200 border bg-coyoacan-cobalt text-white border-coyoacan-cobalt shadow-md";
+                const activeTop = activeBtn.querySelector('.text-xs');
+                if (activeTop) activeTop.className = "text-xs uppercase tracking-wider text-white/80";
+            }
+        }
+
+        // Specialty Trails Tab Switcher (Coffee vs Books)
+        function switchTrail(trailType) {
+            const coffeeBtn = document.getElementById('toggle-coffee');
+            const booksBtn = document.getElementById('toggle-books');
+            const coffeeTrail = document.getElementById('trail-coffee');
+            const booksTrail = document.getElementById('trail-books');
+
+            if (trailType === 'coffee') {
+                coffeeBtn.className =
+                    "px-4 py-2 rounded-lg text-xs font-semibold transition-all duration-200 bg-white text-coyoacan-cobalt shadow-sm";
+                booksBtn.className =
+                    "px-4 py-2 rounded-lg text-xs font-semibold transition-all duration-200 text-stone-500 hover:text-stone-800";
+                coffeeTrail.classList.remove('hidden');
+                booksTrail.classList.add('hidden');
+            } else {
+                booksBtn.className =
+                    "px-4 py-2 rounded-lg text-xs font-semibold transition-all duration-200 bg-white text-coyoacan-cobalt shadow-sm";
+                coffeeBtn.className =
+                    "px-4 py-2 rounded-lg text-xs font-semibold transition-all duration-200 text-stone-500 hover:text-stone-800";
+                booksTrail.classList.remove('hidden');
+                coffeeTrail.classList.add('hidden');
+            }
+        }
+
+        // Visual Transit Map Visualizer interactive panel
+        function highlightMap(neighborhood) {
+            const infoBox = document.getElementById('map-info-box');
+
+            const data = {
+                centro: "<strong>🚕 Centro Histórico Guide:</strong> Friday outing. Approx. 35 mins via Uber from Coyoacán. <strong>Sights:</strong> Aztec ruins of Templo Mayor, Palacio de Bellas Artes murals, swanky vaults of Zinco Jazz Club.",
+                chapultepec: "<strong>🌳 Chapultepec & Polanco Guide:</strong> Sunday outing. Approx. 30 mins via Uber. <strong>Sights:</strong> Bosque walk, stunning National Museum of Anthropology, contemporary Museo Jumex & Soumaya.",
+                roma: "<strong>☕ Roma & Condesa Guide:</strong> Monday afternoon loop. Highly walkable, leafy. <strong>Sights:</strong> Lunch at un-touristy Mercado de Medellín, plants at Cafebrería El Péndulo, Parque México, late-night pastor at El Vilsito.",
+                coyoacan: "<strong>🏡 Coyoacán (Home Base):</strong> Local neighborhood exploration on Thurs, Sat, and Tues. 100% walkable. <strong>Sights:</strong> Viveros nursery, Frida's Casa Azul, Café Avellaneda pour-overs, Elena Garro bookstore.",
+                xochimilco: "<strong>🛶 Xochimilco Canals:</strong> Monday morning outing. Grab an Uber straight to Embarcadero Cuemanco (serene nature reserve dock) to bypass tourist party boats and drift among historic chinampas."
+            };
+
+            infoBox.innerHTML = data[neighborhood];
+            infoBox.className =
+                "mt-4 p-3.5 bg-[#fdeed3] text-coyoacan-cobalt rounded-xl border border-[#f1d7a6] text-xs transition-all duration-150 leading-relaxed";
+        }
+
+        // Interactive Checklist State Persistent Logic
+        const checkItems = ['passport', 'zinco', 'fever', 'rain', 'betterment', 'cash', 'step'];
+
+        function saveCheckState(id) {
+            const element = document.getElementById(`check-${id}`);
+            if (element) {
+                localStorage.setItem(`cdmx_check_${id}`, element.checked);
+            }
+            updateChecklistProgress();
+        }
+
+        function loadCheckStates() {
+            checkItems.forEach(id => {
+                const savedState = localStorage.getItem(`cdmx_check_${id}`);
+                const element = document.getElementById(`check-${id}`);
+                if (element && savedState !== null) {
+                    element.checked = savedState === 'true';
+                }
+            });
+            updateChecklistProgress();
+        }
+
+        function updateChecklistProgress() {
+            let checkedCount = 0;
+            checkItems.forEach(id => {
+                const element = document.getElementById(`check-${id}`);
+                if (element && element.checked) {
+                    checkedCount++;
+                }
+            });
+            const progressSpan = document.getElementById('checklist-progress');
+            if (progressSpan) {
+                progressSpan.innerText = `${checkedCount}/${checkItems.length}`;
+            }
+        }
+
+        // Initialize UI Elements & Load Checklists
+        window.onload = function() {
+            setInterval(() => updateCountdownAndWidgets(false), 1000);
+            updateCountdownAndWidgets(true);
+            loadCheckStates();
+        };
+    </script>
+</body>
+</html>
